@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Pronouns and Names Tester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+    <link rel="icon" href="icon.png">
+    <meta charset="UTF-8">
+    <meta name='author' content='***REMOVED***'>
+    <meta name='viewport' content='width=device-width'>
+    <meta name='keywords' content='pronouns, names, pronoun, name, test, testing, neopronouns'>
+    <meta name='color-scheme' content='dark'>
+    <meta name='description' content="Pronuons and names tester is a tool designed for helping people to find pronouns and/or names they're comfortable with using. Created with LGBTQ+ community in mind, but can be used by anyone, because you don't have to be queer to feel like your pronouns or name don't quite fit you.">
+    <style>
+        :root {
+            --font: 'Comic Sans MS', 'Delius', cursive;
+        }
+        * {
+            color: rgb(206, 206, 206);
+            background-color:rgb(43, 43, 43);
+            font-family: var(--font);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+        ::selection {
+            background-color:rgb(194, 178, 74);
+            color: rgb(50, 50, 50);
+        }
+        .all {
+            margin-top: 80px;
+            margin-bottom: 80px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .button {
+            font-weight: bold;
+            font-size: medium;
+            padding: 5px 30px;
+            border-radius: 2px;
+            border-width: 4px;
+            margin: 30px 10px;
+        }
+        .button:active {
+            padding: 6px 29px 4px 31px;
+            margin: 29px 9px 31px 11px;
+        }
+        .smallButton {
+            font-weight: bold;
+            font-size: small;
+            padding: 4px 20px;
+            border-radius: 2px;
+            border-width: 3px;
+            margin: 15px 10px;
+        }
+        .smallButton:active {
+            padding: 5px 19px 3px 21px;
+            margin: 14px 9px 16px 11px;
+        }
+        .bigButton {
+            font-weight: bold;
+            font-size: large;
+            padding: 8px 60px;
+            border-radius: 2px;
+            border-width: 5px;
+            margin: 40px 10px;
+        }
+        .bigButton:active {
+            padding: 9px 59px 7px 61px;
+            margin: 39px 9px 41px 11px;
+        }
+        .expandButton {
+            text-decoration: underline;
+            font-weight: bold;
+            font-size: medium;
+            border-width: 0;
+            margin: 15px 10px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .expandButton:hover {
+            color: white;
+        }
+        .expandButton:active {
+            color: rgb(128, 128, 128);
+        }
+        .fontButton {
+            text-decoration: underline;
+            border-width: 0;
+            margin: 15px 10px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+        .fontButton:hover {
+            color: white;
+        }
+        .fontButton:active {
+            color: rgb(128, 128, 128);
+        }
+        .green {
+            background-color:green;
+        }
+        .green:hover {
+            background-color: rgb(0, 165, 0);
+            color: white;
+        }
+        .green:active {
+            background-color:rgb(0, 90, 0);
+            color: rgb(173, 173, 173);
+        }
+        .blue {
+            background-color: rgb(13, 41, 134);
+        }
+        .blue:hover {
+            background-color: rgb(16, 78, 170);
+            color: white;
+        }
+        .blue:active {
+            background-color: rgb(13, 42, 95);
+            color: rgb(173, 173, 173);
+        }
+        .violet {
+            background-color: rgb(128, 28, 175);
+        }
+        .violet:hover {
+            background-color: rgb(183, 30, 230);
+            color: white;
+        }
+        .violet:active {
+            background-color: rgb(102, 14, 124);
+            color: rgb(173, 173, 173);
+        }
+        .rose {
+            background-color:rgb(179, 46, 119);
+        }
+        .rose:hover {
+            background-color: rgb(224, 58, 150);
+            color: white;
+        }
+        .rose:active {
+            background-color: rgb(104, 23, 67);
+            color: rgb(173, 173, 173);
+        }
+        .gray {
+            background-color: rgba(61, 61, 61);
+        }
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+        }
+        .left {
+            text-align: left;
+        }
+        .rounded {
+            border-radius: 10px;
+        }
+        .margin {
+            margin: 15px 10px;
+        }
+        .text {
+            margin: 15px auto;
+            max-width: 1000px;
+        }
+        h3 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        textarea {
+            display: block;
+            margin: 30px auto;
+            width: 95%;
+            max-width: 800px;
+        }
+        select {
+            display: block;
+            margin: 15px auto;
+        }
+    </style>
+</head>
+<script language='JavaScript'>
+    let namesCount = 1;
+    let setsCount = 1;
+    let br = document.createElement('br');
+    let name;
+    let subjectPronoun, objectPronoun, possesiveDeterminer, possesivePronoun, reflexivePronoun;
+    let plural = [];
+    let is = ['is', 'are'];
+    let has = ['has', 'have'];
+    let was = ['was', 'were'];
+    let s = ['s', ''];
+    let does = ['does', 'do'];
+    let lastPlural = 0;
+    let editorEnabled = false;
+    let elementsBackup = [];
+    try {if(!localStorage.getItem('names')){
+         localStorage.setItem('names', `Josh, Billy, Cookie, Sophie, Shadow, Lisa, Carmel, Dennis, \
+ Sally, Arrow, Spencer, Jessie, Dino, Cloud, Star, Moon, Vicky, Claire, Jack, Alex, \
+ James, Kyle, Drew, Taylor, Kennedy, Jordan, Avery, Ryan, Cameron, Logan, Amari, \
+ Ariel, Ash, Carson, Casey, Corey, Emery, Fenix, Finnegan, Flash, Glenn, Galaxy, \
+ Garnet, Gavin, Harper, Hayden, Hunter, Haylen, Hao, Jaden, Jace, Kai, Karter, \
+ Kane, Kade, Landon, Lyric, Max, Morgan, Makoto, Mani, Nuru, Nell, Noe, \
+ Oakley, Otzar, Oakes, Omid, Phoenix, Pax, Pemberley, Quinby, Quincy, \
+ Quant, Reagan, Remy, Riley, River, Rory, Sam, Sawyer, Skylar, Tait, Terrin, \
+ Teegan, Umber, Utah, Vahn, Valentine, Valo, Vermont, Vero, Waneta, Waverly, \
+ Xerxes, Xia, Xen, Xavi, Yale, Yardley, Yarden, Zane, Zeal, Zasha, Zene, Jasmine, \
+ Dark, Hope, Winter, Berry, Spring, Rain, Flower, Leaf, Sunshine, Sunrise, Storm, \
+ Ian, Snow, Atumn, Summer`);
+    }
+    }
+    catch {
+        alert("Local storage is unavaible. Page may not work properly. Turn off the private mode or try to acces it \
+ through a newer browser.")
+    }
+    let namesSuggestions;
+    uncodenames();
+    let namesBackup = [];
+    if(!localStorage.getItem('pronouns')){
+    localStorage.setItem('pronouns',`she, her, her, hers, herself | \
+he, him, his, his, himself | \
+they, them, their, theirs, themself | xe, xem, xyr, xyrs, xemself | \
+ve, ver, vis, vers, verself | ze, zir, zir, zirs, zirself | \
+fae, faer, faer, faers, faerself | it, it, its, its, itself | \
+one, one, one's, one's, oneself | bun, bun, buns, buns, bunself | \
+faun, faun, fauns, fauns, faunself | thon, thon, thons, thon's, thonself | \
+e, em, es, ems, emself | ae, aer, aer, aers, aerself | \
+co, co, cos, cos, coself | vi, vir, vis, virs, virself | \
+file, file, files, files, fileself | gem, gem, gems, gems, gemself | \
+puff, puff, puffs, puffs, puffself | kit, kit, kits, kits, kitself | \
+ne, nem, nir, nirs, nemself | ey, em, eir, eirs, emself | \
+ai, ain, aire, aires, aiself | meow, mew, mews, mews, meowself | \
+💜, 💜, 💜s, 💜s, 💜self | 💚, 💚, 💚s, 💚s, 💚self | \
+🖤, 🖤, 🖤s, 🖤s, 🖤self | 🦊, 🦊, 🦊s, 🦊s, 🦊self | \
+🦕, 🦕, 🦕s, 🦕s, 🦕self | 💎, 💎, 💎s, 💎s, 💎self | \
+ey, eym, eyr, eyrs, eymself | ix, ix, ixs, ixs, ixself`);
+    }
+    let pronounsSuggestions;
+    uncodepronouns();
+    let pronounsBackup = [];
+
+    /*
+    '-' - uppercase
+    1 - name
+    2 - subject pronoun
+    3 - object pronoun
+    4 - possesive determiner
+    5 - possesive pronoun
+    6 - reflexive pronoun
+    7 - is
+    8 - has
+    9 - was
+    10 - s
+    11 - does
+    */
+    let fillers;
+
+    if(!localStorage.getItem('sentencesnames')){
+    localStorage.setItem('sentencesnames',`"I've met with ",, 1,, " today. " | \
+-1,, " is my best friend. " | \
+"Do you know ",, 1,, "? " | \
+"This is ",, 1,, ", who we talked about last week. Don't act like you don't remember it, you've \
+literally asked me about ",, 3,, " like ten times. But don't worry, I won't tell ",, 3,, ". " | \
+"I've heard you have a crush on my friend, ",, 1,, "? " | \
+"I can't belive somebody could say something bad about ",, 1,, "! " | \
+-1,, " lives here. " | "This is our neighbours child, ",, 1,, ". " | \
+"What can I tell you about ",, 1,, "? " | \
+"You've really never met ",, 1,, " before? " | \
+"Let me tell you something about ",, 1,, ". " | \
+"I'm meeting with ",, 1,, " tonight, I'm a little nervous about it. Oh, I haven't told you anything about ",, 1,, "? " | \
+"If only I could spend this time with ",, 1,, " instead of wasting it on my homework... " | \
+"I've heard you were talking with somebody about ",, 1,, ". So you know ",, 3,, " too? " | \
+"You wanted to know something about ",, 1,, ", right? " | \
+"This is ",, 1,, ", I haven't told you anything about ",, 3,, " yet, have I? "`);
+    }
+    let sentencesnames;
+    uncodesentencesnames();
+    let sentencesnamesBackup = [];
+
+    if(!localStorage.getItem('sentencessubject')){
+        localStorage.setItem('sentencessubject', `-2,, " ",, 7,, " really cool. " | \
+-2,, " ",, 7,, " a part of LGBTA community. " | \
+-2,, " ",, 8,, " so beautiful eyes! " | \
+"Every time ",, 2,, " laugh",, 10,, ", I can't help but laugh with ",, 3,, ". " | \
+-2,, " fully support",, 10,, " my gender, I'm so thankful to ",, 3,, " for that. " | \
+-2,, " ",, 7,, " 100% valid, don't listen to people, who will tell you otherwise. " | \
+-2,, " struggle",, 10,, " some with finding ",, 4,, " identity, but I'm sure ",, 2,, " will figure everything out, sooner or later. " | \
+-2,, " hate",, 10,, " going to school almost as much as I do. It's awful, that we have to still deal with this terrible place. " | \
+-2,, " ",, 7,, " kinda introverted, but it doesn't mean ",, 2,, " ",, 11,, "n't like talking, ",, 2,, \
+" just ",, 8,, " to get to know you better. " | -2,, " still ",, 7,, "n't exactly sure, what orientation ",, 2,, \
+" ",, 7,, ". We are both on the stage of discovering things about ourselves yet. " | \
+-2,, " love",, 10,, " cats so much, that I'm sometimes thinking I'm gonna buy ",, 3,, \
+" one just to see, how happy ",, 2,, " would be. "`);
+    }
+    let sentencessubject;
+    uncodesentencessubject();
+    let sentencessubjectBackup = [];
+
+    if(!localStorage.getItem('sentencesobject')){
+        localStorage.setItem('sentencesobject', `"I can't wait to meet with ",, 3,, " again. " | \
+"I can talk to ",, 3,, " for hours and I would never get bored. " | \
+-2,, " ",, 8,, " a very complicated personality and that's beutiful, because you always discover new things about ",, 3,, ". " | \
+"I can introduce ",, 3,, " to you, I only need to ask ",, 1,, ", when ",, 2,, " ",, 8,, " some time to meet with you. " | \
+"I'm in love with ",, 3,, ", but please, don't tell anybody about it. " | -2,, " love",, 10,, " ice creams. If you'd want to take ",, 3,, \
+" to a date and didn't know, where you should go, take ",, 3,, " for ice creams. It's always a good option. "`);
+    }
+    let sentencesobject;
+    uncodesentencesobject();
+    let sentencesobjectBackup = [];
+
+    if(!localStorage.getItem('sentencesdeterminer')){
+        localStorage.setItem('sentencesdeterminer', `"I'm amazed with ",, 4,, " skills. \
+You have no idea, how many things ",, 1,, " can do! " | -4,, " smile always brightens up my day. " | \
+"Have you ever seen ",, 4,, " drawings? You should ask ",, 3,, " to show you some, ",, 2,, " ",, 7,, " really talented. " | \
+-2,, " always complain",, 10,, " about ",, 4,, " body, but don't listen to ",, 3,, ", ",, 2,, " ",, 7,, " beautiful. ",, -2,, \
+" just ",, 8,, " low self-esteem. " | "I'm going to buy ",, 3,, " pride flag for ",, 4,, " birthday, ",, 2,, " gonna love it. " | \
+"Remember to not to use ",, 4,, " preffered pronouns around ",, 4,, " parents, ",, 2,, " didn't come out to them yet. "`);
+    }
+    let sentencesdeterminer;
+    uncodesentencesdeterminer();
+    let sentencesdeterminerBackup = [];
+
+    if(!localStorage.getItem('sentencespossesive')){
+        localStorage.setItem('sentencespossesive', `"This plushie is ",, 5,, ", isn't it cute? " | \
+"This notebook is ",, 5,, ", ",, 1,, " must have forgotten it. " | \
+"I'm always laughing at ",, 4,, " jokes. It's hard to find a person with such a great sense of humor like ",, 5,, ". " | \
+"This pen is ",, 5,, ", please remind me that I have to give it back to ",, 1,, ". " | \
+-2,, " often say",, 10,, " ",, 2,, " want",, 10,, " to have hair like me, but in my opinion ",, 5,, " are way much better than mine. " | \
+"If you think my room is nice, you should see ",, 5,, ". It's amazing, I love the way ",, 2,, " designed it. "`);
+    }
+    let sentencespossesive;
+    uncodesentencespossesive();
+    let sentencespossesiveBackup = [];
+
+    if(!localStorage.getItem('sentencesreflexive')){
+        localStorage.setItem('sentencesreflexive', `-2,, " ",, 8,, " made cookies for me for ",, 6,, \
+", that was so wholesome of ",, 3,, ". " | -2,, " ",, 7,, " testing new pronouns for ",, 6,, " right now. " | \
+"Recently we were doing a project together, but I've got sick and ",, 2,, " had to do almost all of the work for ",, \
+6,, ", I still feel bad because of it. " | "If you happened to talk with ",, 3,, ", please remind ",, 3,, " ",, 2,, " should love ",, \
+6,, ". ",, -2,, " constantly forget",, 10,, " about it. " | \
+"I hope ",, 2,, " will learn how to fully be ",, 6,, ". ",, -2,, " still ",, 8,, " problems with that. " | \
+"I wish ",, 2,, " will find environment in which ",, 2,, " can fully express ",, 6,, ", now ",, 2,, " can't really open up. " | \
+"You should talk with ",, 3,, ", ",, 2,, " will tell you more things about ",, 6,, " than I did. " | \
+-2,, " ",, 7,, " not always honest about ",, 6,, ", because ",, 1,, " is scared of what other people will think of ",, 3,, ". " | \
+-2,, " ",, 7,, " stressed all the time, I wish ",, 2,, " gived ",, 6,, " more time to relax. " | \
+"I belive ",, 2,, " should accept ",, 6,, " more. " | -2,, " like",, 10,, " to spend much time just with ",, 6,, ". "`);
+    }
+    let sentencesreflexive;
+    uncodesentencesreflexive();
+    let sentencesreflexiveBackup = [];
+
+    function uncodenames(){
+        let list = localStorage.getItem('names');
+        namesSuggestions = list.split(', ');
+    }
+
+    function uncodepronouns(){
+        let list = localStorage.getItem('pronouns');
+        pronounsSuggestions = list.split(' | ');
+        for(let i = 0; i < pronounsSuggestions.length; i ++){
+            pronounsSuggestions[i] = pronounsSuggestions[i].split(', ');
+        }
+    }
+    
+    function uncodesentencesnames(){
+        let list = localStorage.getItem('sentencesnames');
+        sentencesnames = list.split(' | ');
+        for(let i = 0; i < sentencesnames.length; i ++){
+            sentencesnames[i] = sentencesnames[i].split(',, ');
+            for(let j = 0; j < sentencesnames[i].length; j ++){
+                if(sentencesnames[i][j][0] == '"'){
+                    sentencesnames[i][j] = sentencesnames[i][j].slice(1, sentencesnames[i][j].length - 1);
+                }
+                else{
+                    sentencesnames[i][j] = parseInt(sentencesnames[i][j]);
+                }
+            }
+        }
+    }
+    
+    function uncodesentencessubject(){
+        let list = localStorage.getItem('sentencessubject');
+        sentencessubject = list.split(' | ');
+        for(let i = 0; i < sentencessubject.length; i ++){
+            sentencessubject[i] = sentencessubject[i].split(',, ');
+            for(let j = 0; j < sentencessubject[i].length; j ++){
+                if(sentencessubject[i][j][0] == '"'){
+                    sentencessubject[i][j] = sentencessubject[i][j].slice(1, sentencessubject[i][j].length - 1);                }
+                else{
+                    sentencessubject[i][j] = parseInt(sentencessubject[i][j]);
+                }
+            }
+        }
+    }
+    
+    function uncodesentencesobject(){
+        let list = localStorage.getItem('sentencesobject');
+        sentencesobject = list.split(' | ');
+        for(let i = 0; i < sentencesobject.length; i ++){
+            sentencesobject[i] = sentencesobject[i].split(',, ');
+            for(let j = 0; j < sentencesobject[i].length; j ++){
+                if(sentencesobject[i][j][0] == '"'){
+                    sentencesobject[i][j] = sentencesobject[i][j].slice(1, sentencesobject[i][j].length - 1);                }
+                else{
+                    sentencesobject[i][j] = parseInt(sentencesobject[i][j]);
+                }
+            }
+        }
+    }
+    
+    function uncodesentencesdeterminer(){
+        let list = localStorage.getItem('sentencesdeterminer');
+        sentencesdeterminer = list.split(' | ');
+        for(let i = 0; i < sentencesdeterminer.length; i ++){
+            sentencesdeterminer[i] = sentencesdeterminer[i].split(',, ');
+            for(let j = 0; j < sentencesdeterminer[i].length; j ++){
+                if(sentencesdeterminer[i][j][0] == '"'){
+                    sentencesdeterminer[i][j] = sentencesdeterminer[i][j].slice(1, sentencesdeterminer[i][j].length - 1);                }
+                else{
+                    sentencesdeterminer[i][j] = parseInt(sentencesdeterminer[i][j]);
+                }
+            }
+        }
+    }
+    
+    function uncodesentencespossesive(){
+        let list = localStorage.getItem('sentencespossesive');
+        sentencespossesive = list.split(' | ');
+        for(let i = 0; i < sentencespossesive.length; i ++){
+            sentencespossesive[i] = sentencespossesive[i].split(',, ');
+            for(let j = 0; j < sentencespossesive[i].length; j ++){
+                if(sentencespossesive[i][j][0] == '"'){
+                    sentencespossesive[i][j] = sentencespossesive[i][j].slice(1, sentencespossesive[i][j].length - 1);                }
+                else{
+                    sentencespossesive[i][j] = parseInt(sentencespossesive[i][j]);
+                }
+            }
+        }
+    }
+    
+    function uncodesentencesreflexive(){
+        let list = localStorage.getItem('sentencesreflexive');
+        sentencesreflexive = list.split(' | ');
+        for(let i = 0; i < sentencesreflexive.length; i ++){
+            sentencesreflexive[i] = sentencesreflexive[i].split(',, ');
+            for(let j = 0; j < sentencesreflexive[i].length; j ++){
+                if(sentencesreflexive[i][j][0] == '"'){
+                    sentencesreflexive[i][j] = sentencesreflexive[i][j].slice(1, sentencesreflexive[i][j].length - 1);                }
+                else{
+                    sentencesreflexive[i][j] = parseInt(sentencesreflexive[i][j]);
+                }
+            }
+        }
+    }
+
+    function upperCase(string){
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function random(array){
+        let index = Math.floor(Math.random() * array.length);
+        if(array[0] === 0){
+            if(index !== array.length - 1){
+                index += 1;
+            }
+            return array[index];
+        }
+        if(typeof(array[index]) === 'string'){
+            lastPlural = plural[index];
+        }
+        return array[index];
+    }
+
+    function buildSentence(array){
+        let outcome = '';
+        for(let i = 0; i < array.length; i += 1){
+            if(typeof(array[i]) === 'number'){
+                if(array[i] < 0){
+                    if(array[i] < -6){
+                        outcome += upperCase(fillers[array[i] * -1][lastPlural]);
+                    }
+                    else{
+                        outcome += upperCase(random(fillers[array[i] * -1]));
+                    }
+                }
+                else{
+                    if(array[i] > 6){
+                        outcome += fillers[array[i]][lastPlural];
+                    }
+                    else{
+                        outcome += random(fillers[array[i]]);
+                    }
+                }
+            }
+            else{
+                outcome += array[i];
+            }
+        }
+        return outcome;
+    }
+
+    function testResults(form){
+        name = [];
+        name.push(0);
+        for(let i = 1; i <= namesCount; i += 1){
+            eval(`if(form.name${i}.value){
+            name.push(form.name${i}.value)}`);
+        }
+        if(name.length === 1){
+            name.push('this person');
+            name.push('that person');
+            name.push('this individual');
+            name.push('that individual');
+            name.push('this human being');
+            name.push('that human being');
+        }
+        subjectPronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.subjectPronoun${i}.value){
+                subjectPronoun.push(form.subjectPronoun${i}.value)}`);
+        }
+        if(subjectPronoun.length === 0){
+            for(let i = 1; i < name.length; i += 1){
+                subjectPronoun.push(name[i]);
+            }
+        }
+        objectPronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.objectPronoun${i}.value){
+                objectPronoun.push(form.objectPronoun${i}.value)}`);
+        }
+        if(objectPronoun.length === 0){
+            for(let i = 1; i < name.length; i += 1){
+                objectPronoun.push(name[i]);
+            }
+        }
+        possesiveDeterminer = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.possesiveDeterminer${i}.value){
+                possesiveDeterminer.push(form.possesiveDeterminer${i}.value)}`);
+        }
+        if(possesiveDeterminer.length === 0){
+            for(let i = 1; i < name.length; i += 1){
+                possesiveDeterminer.push(name[i] + "'s");
+            }
+        }
+        possesivePronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.possesivePronoun${i}.value){
+                possesivePronoun.push(form.possesivePronoun${i}.value)}`);
+        }
+        if(possesivePronoun.length === 0){
+            for(let i = 1; i < name.length; i += 1){
+                possesivePronoun.push(name[i] + "'s");
+            }
+        }
+        reflexivePronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.reflexivePronoun${i}.value){
+                reflexivePronoun.push(form.reflexivePronoun${i}.value)}`);
+        }
+        if(reflexivePronoun.length === 0){
+            for(let i = 1; i < name.length; i += 1){
+                reflexivePronoun.push(name[i] + 'self');
+            }
+        }
+        plural = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.subjectPronoun${i}.value){
+                plural.push(Number(form.plural${i}.value))}`);
+        }
+        if(plural.length < subjectPronoun.length){
+            for(let i = plural.length; i < subjectPronoun.length; i++){
+                plural.push(0);
+            }
+        }
+        fillers = [0, name, subjectPronoun, objectPronoun, possesiveDeterminer, possesivePronoun, reflexivePronoun,
+is, has, was, s, does];
+        let result = buildSentence(random(sentencesnames)) + buildSentence(random(sentencessubject)) 
+        + buildSentence(random(sentencesobject)) + buildSentence(random(sentencesdeterminer)) 
+        + buildSentence(random(sentencespossesive)) + buildSentence(random(sentencesreflexive));
+        alert(result);
+    }
+
+    let easterEggOrSomething = "How are you doing, fellow programmer? Hope you're having a great day and you'll find some \
+inspiration in this chaos, if you're here to take a look on the source code. Generally speaking, this isn't the \
+best example of code, I wrote it without having any previous experience with more than \
+half of the things I was doing here. That was fun."
+    console.log(easterEggOrSomething);
+
+    function addName(){
+        namesCount += 1;
+        let input = document.createElement('input');
+        input.setAttribute('name', `name${namesCount}`);
+        input.setAttribute('class', 'gray rounded margin');
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'rose smallButton');
+        button.setAttribute('onClick', `fillName(${namesCount})`);
+        let txt = document.createTextNode('Random');
+        button.appendChild(txt);
+        let button2 = document.createElement('button');
+        button2.setAttribute('type', 'button');
+        button2.setAttribute('class', 'rose smallButton');
+        button2.setAttribute('onClick', `clearName(${namesCount})`);
+        let buttontxt2 = document.createTextNode('Clear');
+        button2.appendChild(buttontxt2);
+        document.getElementById('names').append(input, button, button2, br.cloneNode());
+        input.focus();
+    }
+    function addSet(){
+        setsCount += 1;
+        let table = document.createElement('table');
+
+        let tr1 = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let div1 = document.createElement('div');
+        div1.setAttribute('class', 'left margin');
+        let txt1 = document.createTextNode('Subject pronoun:');
+        div1.appendChild(txt1);
+        td1.appendChild(div1);
+        let td2 = document.createElement('td');
+        let input1 = document.createElement('input');
+        input1.setAttribute('name', `subjectPronoun${setsCount}`);
+        input1.setAttribute('class', 'gray rounded margin');
+        input1.setAttribute('autocapitalize', 'off');
+        td2.appendChild(input1);
+        tr1.append(td1, td2);
+
+        let tr2 = document.createElement('tr');
+        let td3 = document.createElement('td');
+        let div2 = document.createElement('div');
+        div2.setAttribute('class', 'left margin');
+        let txt2 = document.createTextNode('Object pronoun:');
+        div2.appendChild(txt2);
+        td3.appendChild(div2);
+        let td4 = document.createElement('td');
+        let input2 = document.createElement('input');
+        input2.setAttribute('name', `objectPronoun${setsCount}`);
+        input2.setAttribute('class', 'gray rounded margin');
+        input2.setAttribute('autocapitalize', 'off');
+        td4.appendChild(input2);
+        tr2.append(td3, td4);
+
+        let tr3 = document.createElement('tr');
+        let td5 = document.createElement('td');
+        let div3 = document.createElement('div');
+        div3.setAttribute('class', 'left margin');
+        let txt3 = document.createTextNode('Possesive determiner:');
+        div3.appendChild(txt3);
+        td5.appendChild(div3);
+        let td6 = document.createElement('td');
+        let input3 = document.createElement('input');
+        input3.setAttribute('name', `possesiveDeterminer${setsCount}`);
+        input3.setAttribute('class', 'gray rounded margin');
+        input3.setAttribute('autocapitalize', 'off');
+        td6.appendChild(input3);
+        tr3.append(td5, td6);
+
+        let tr4 = document.createElement('tr');
+        let td7 = document.createElement('td');
+        let div4 = document.createElement('div');
+        div4.setAttribute('class', 'left margin');
+        let txt4 = document.createTextNode('Possesive pronoun:');
+        div4.appendChild(txt4);
+        td7.appendChild(div4);
+        let td8 = document.createElement('td');
+        let input4 = document.createElement('input');
+        input4.setAttribute('name', `possesivePronoun${setsCount}`);
+        input4.setAttribute('class', 'gray rounded margin');
+        input4.setAttribute('autocapitalize', 'off');
+        td8.appendChild(input4);
+        tr4.append(td7, td8);
+
+        let tr5 = document.createElement('tr');
+        let td9 = document.createElement('td');
+        let div5 = document.createElement('div');
+        div5.setAttribute('class', 'left margin');
+        let txt5 = document.createTextNode('Reflexive pronoun:');
+        div5.appendChild(txt5);
+        td9.appendChild(div5);
+        let td10 = document.createElement('td');
+        let input5 = document.createElement('input');
+        input5.setAttribute('name', `reflexivePronoun${setsCount}`);
+        input5.setAttribute('class', 'gray rounded margin');
+        input5.setAttribute('autocapitalize', 'off');
+        td10.appendChild(input5);
+        tr5.append(td9, td10);
+
+        table.append(tr1, tr2, tr3, tr4, tr5);
+
+        let h = document.createElement('h3');
+        h.setAttribute('class', 'margin');
+        let txt = document.createTextNode(`Set ${setsCount}:`);
+        h.appendChild(txt);
+
+        let divSelect = document.createElement('div');
+        divSelect.setAttribute('class', 'margin');
+        let txtSelect = document.createTextNode('This pronoun set is:');
+        divSelect.appendChild(txtSelect);
+        // divSelect.appendChild(br.cloneNode());
+        let select = document.createElement('select');
+        select.setAttribute('name', `plural${setsCount}`);
+        select.setAttribute('class', 'gray rounded');
+        let option1 = document.createElement('option');
+        option1.setAttribute('value', '0');
+        let txtopt1 = document.createTextNode('singular');
+        option1.appendChild(txtopt1);
+        let option2 = document.createElement('option');
+        option2.setAttribute('value', '1');
+        let txtopt2 = document.createTextNode('plural');
+        option2.appendChild(txtopt2);
+        select.append(option1, option2);
+
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'violet smallButton');
+        button.setAttribute('onClick', `autofill(${setsCount}, this.form.subjectPronoun${setsCount}.value)`);
+        let buttontxt = document.createTextNode('Autofill');
+        button.appendChild(buttontxt);
+
+        let button2 = document.createElement('button');
+        button2.setAttribute('type', 'button');
+        button2.setAttribute('class', 'violet smallButton');
+        button2.setAttribute('onClick', `fillPronouns(${setsCount})`);
+        let buttontxt2 = document.createTextNode('Random');
+        button2.appendChild(buttontxt2);
+
+        let button3 = document.createElement('button');
+        button3.setAttribute('type', 'button');
+        button3.setAttribute('class', 'violet smallButton');
+        button3.setAttribute('onClick', `clearSet(${setsCount})`);
+        let buttontxt3 = document.createTextNode('Clear');
+        button3.appendChild(buttontxt3);
+
+        document.getElementById('sets').append(h, table, button, button2, button3, divSelect, select, br.cloneNode());
+        input1.focus();
+    }
+
+    function autofill(set, subject){
+        let form = document.getElementById('form');
+        if(!subject){
+            return;
+        }
+        for(let i = 0; i < pronounsSuggestions.length; i += 1){
+            if(pronounsSuggestions[i][0] === subject){
+                eval(`form.objectPronoun${set}.value = pronounsSuggestions[i][1];
+                form.possesiveDeterminer${set}.value = pronounsSuggestions[i][2];
+                form.possesivePronoun${set}.value = pronounsSuggestions[i][3];
+                form.reflexivePronoun${set}.value = pronounsSuggestions[i][4];`);
+                return;
+            }
+        }
+        eval(`form.objectPronoun${set}.value = subject;
+        form.possesiveDeterminer${set}.value = subject + 's';
+        form.possesivePronoun${set}.value = subject + 's';
+        form.reflexivePronoun${set}.value = subject + 'self';`);
+    }
+
+    function fillPronouns(set){
+        if(pronounsSuggestions.length === 0){
+            return;
+        }
+        let idx = Math.floor(Math.random() * pronounsSuggestions.length);
+        let rand = pronounsSuggestions[idx];
+        eval(`form.subjectPronoun${set}.value = rand[0];
+        form.objectPronoun${set}.value = rand[1];
+        form.possesiveDeterminer${set}.value = rand[2];
+        form.possesivePronoun${set}.value = rand[3];
+        form.reflexivePronoun${set}.value = rand[4];`);
+    }
+
+    function fillName(name){
+        if(namesSuggestions.length === 0){
+            return;
+        }
+        let idx = Math.floor(Math.random() * namesSuggestions.length);
+        eval(`form.name${name}.value = namesSuggestions[idx];`);
+    }
+
+    function clearSet(set){
+        eval(`form.subjectPronoun${set}.value = '';
+        form.objectPronoun${set}.value = '';
+        form.possesiveDeterminer${set}.value = '';
+        form.possesivePronoun${set}.value = '';
+        form.reflexivePronoun${set}.value = '';`);
+    }
+
+    function clearName(name){
+        eval(`form.name${name}.value = '';`);
+    }
+
+    let ep = document.createElement('p');
+    ep.setAttribute('class', 'text');
+    ep.append(document.createTextNode("Welcome to the editor mode! Here you can modify data we use for testing, if \
+you want to make outcomes be more personalised and improve your experience. \
+All changes will be saved directly in your browser, so you won't be able to acces \
+them through other one or from different device. Make sure you don't use private mode, because it may clear your data after \
+you close the page. It's (supposedly) possible for Safari to do the same thing after some period of time, \
+so have that in mind if you're \
+using this browser. If you're wondering why some symbols won't appear in inputs, no matter how many times you click them, \
+that's because we use them for coding informations and you could accidentaly break the page if we let you use them."));
+
+    let epAboutNeos = document.createElement('p');
+    epAboutNeos.setAttribute('class', 'text');
+    let aAboutNeos1 = document.createElement('a');
+    aAboutNeos1.setAttribute('href', 
+'https://www.rollingstone.com/culture/culture-features/neopronouns-they-them-pronoun-alternative-1190069/');
+    aAboutNeos1.setAttribute('target', '_blank');
+    aAboutNeos1.append(document.createTextNode('neopronouns'));
+    let aAboutNeos2 = document.createElement('a');
+    aAboutNeos2.setAttribute('href', 'https://mermaidsuk.org.uk/news/neopronouns-101/');
+    aAboutNeos2.setAttribute('target', '_blank');
+    aAboutNeos2.append(document.createTextNode('neopronouns'));
+    let aAboutNeos3 = document.createElement('a');
+    aAboutNeos3.setAttribute('href', 'https://pronoun.fandom.com/wiki/Nounself_Pronouns');
+    aAboutNeos3.setAttribute('target', '_blank');
+    aAboutNeos3.append(document.createTextNode('nounself pronouns'));
+    let aAboutNeos4 = document.createElement('a');
+    aAboutNeos4.setAttribute('href', 'https://pronoun.fandom.com/wiki/Emojiself_Pronouns');
+    aAboutNeos4.setAttribute('target', '_blank');
+    aAboutNeos4.append(document.createTextNode('emojiself pronouns'));
+    epAboutNeos.append(document.createTextNode("You are here by accident, don't understand what pronoun sets are \
+and our suggestions seem weird to you? Read this broad article about "), aAboutNeos1, 
+document.createTextNode(' or this shorter one also about '), aAboutNeos2, document.createTextNode(", definition and history of "),
+aAboutNeos3, document.createTextNode(" and description of "), aAboutNeos4, document.createTextNode('.'));
+
+    let eh1 = document.createElement('h2');
+    eh1.setAttribute('class', 'text');
+    let ens = document.createTextNode('Suggested names:');
+    eh1.appendChild(ens);
+    let ebuttonN = document.createElement('button');
+    ebuttonN.setAttribute('type', 'button');
+    ebuttonN.setAttribute('class', 'expandButton');
+    ebuttonN.setAttribute('onClick', 'showNames()');
+    let ensb = document.createTextNode('show');
+    ebuttonN.appendChild(ensb);
+    let namesShown = false;
+    let namesParagrph = document.createElement('p');
+    namesParagrph.setAttribute('class', 'text');
+    let namesTable = document.createElement('table');
+    for(let i = 0; i < namesSuggestions.length; i += 1){
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        td1.append(document.createTextNode(namesSuggestions[i]));
+        let td2 = document.createElement('td');
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'rose smallButton');
+        button.setAttribute('onClick', `removeName('${namesSuggestions[i]}')`);
+        button.append(document.createTextNode('Delete'));
+        td2.append(button);
+        tr.append(td1, td2);
+        namesTable.append(tr);
+    }
+    let namesInput = document.createElement('input');
+    namesInput.setAttribute('class', 'gray rounded margin');
+    namesInput.setAttribute('name', 'namesInput');
+    namesInput.oninput = checkIfValid;
+    let namesButton = document.createElement('button');
+    namesButton.setAttribute('type', 'button');
+    namesButton.setAttribute('class', 'rose smallButton');
+    namesButton.setAttribute('onClick', 'addToNames(namesInput.value)');
+    namesButton.appendChild(document.createTextNode('Add'));
+
+    let ebuttonN2 = document.createElement('button');
+    ebuttonN2.setAttribute('type', 'button');
+    ebuttonN2.setAttribute('class', 'expandButton');
+    ebuttonN2.setAttribute('onClick', 'scrollElement("namesInput")');
+    let ensb3 = document.createTextNode('\u2193 bottom \u2193');
+    ebuttonN2.appendChild(ensb3);
+
+    let ebuttonN3 = document.createElement('button');
+    ebuttonN3.setAttribute('type', 'button');
+    ebuttonN3.setAttribute('class', 'expandButton');
+    ebuttonN3.setAttribute('onClick', 'scrollElement("ebuttonN")');
+    let ensb4 = document.createTextNode('\u2191 top \u2191');
+    ebuttonN3.appendChild(ensb4);
+
+    let namesP = document.createElement('p');
+    namesP.append(ebuttonN2, namesTable, namesInput, namesButton, br.cloneNode(), ebuttonN3);
+
+
+    let eh2 = document.createElement('h2');
+    eh2.setAttribute('class', 'text');
+    let eps = document.createTextNode('Suggested pronouns sets:');
+    eh2.appendChild(eps);
+
+    let ebuttonP = document.createElement('button');
+    ebuttonP.setAttribute('type', 'button');
+    ebuttonP.setAttribute('class', 'expandButton');
+    ebuttonP.setAttribute('onClick', 'showPronouns()');
+    let epb = document.createTextNode('show');
+    ebuttonP.appendChild(epb);
+
+    let pronounsShown = false;
+    let pronounsParagraph = document.createElement('p');
+    pronounsParagraph.setAttribute('class', 'text');
+    let pronounsTable = document.createElement('table');
+    for(let i = 0; i < pronounsSuggestions.length; i += 1){
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let set = `${pronounsSuggestions[i][0]}/${pronounsSuggestions[i][1]}/${pronounsSuggestions[i][2]}\
+/${pronounsSuggestions[i][3]}/${pronounsSuggestions[i][4]}`;
+        let txt = document.createTextNode(set);
+        td1.append(txt);
+        let td2 = document.createElement('td');
+        let setInLocal = `${pronounsSuggestions[i][0]}, ${pronounsSuggestions[i][1]}, ${pronounsSuggestions[i][2]}, \
+${pronounsSuggestions[i][3]}, ${pronounsSuggestions[i][4]}`;
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'violet smallButton');
+        button.setAttribute('onClick', `removeSet(\`${set}\`, \`${setInLocal}\`)`);
+        button.append(document.createTextNode('Delete'));
+        td2.append(button);
+        tr.append(td1, td2);
+        pronounsTable.append(tr);
+    }
+
+    let inputsTable = document.createElement('table');
+    let trEmpty = document.createElement('tr');
+    trEmpty.append(br.cloneNode());
+    inputsTable.append(trEmpty);
+    let inputsP = [];
+    let inputTxtP = ['Subject pronoun:', 'Object pronoun:', 'Possesive determiner:', 'Possesive pronoun:', 'Reflexive pronoun:'];
+    for(let i = 0; i < 5; i += 1){
+        inputsP.push('');
+        inputsP[i] = document.createElement('input');
+        inputsP[i].setAttribute('class', 'gray rounded margin');
+        inputsP[i].setAttribute('name', `pronounInput${i}`);
+        inputsP[i].setAttribute('autocapitalize', 'off');
+        inputsP[i].oninput = checkIfValid;
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let div = document.createElement('div');
+        div.setAttribute('class', 'left margin');
+        let txt = document.createTextNode(inputTxtP[i]);
+        div.appendChild(txt);
+        td1.appendChild(div);
+        let td2 = document.createElement('td');
+        td2.appendChild(inputsP[i]);
+        tr.append(td1, td2);
+        inputsTable.append(tr);
+    }
+    let inputsAddButton = document.createElement('button');
+    inputsAddButton.setAttribute('type', 'button');
+    inputsAddButton.setAttribute('class', 'violet smallButton');
+    inputsAddButton.setAttribute('onClick', 'addToPronouns()');
+    let epib = document.createTextNode('Add');
+    inputsAddButton.appendChild(epib);
+    
+    let inputsAutofillButton = document.createElement('button');
+    inputsAutofillButton.setAttribute('type', 'button');
+    inputsAutofillButton.setAttribute('class', 'violet smallButton');
+    inputsAutofillButton.setAttribute('onClick', 'autofillEditor(inputsP[0].value)');
+    let epib2 = document.createTextNode('Autofill');
+    inputsAutofillButton.appendChild(epib2);
+
+    let pForButtons = document.createElement('p');
+    pForButtons.append(inputsAutofillButton, inputsAddButton);
+
+    let pWithLinksPS = document.createElement('p');
+    let linksTextPS = document.createTextNode('If you need some ideas, check here:')
+    pWithLinksPS.setAttribute('class', 'text');
+    let a3 = document.createElement('a');
+    a3.setAttribute('href', 'https://mogai.miraheze.org/wiki/Pronoun/List');
+    a3.setAttribute('target', '_blank');
+    a3.append(document.createTextNode('pronouns'));
+    let a4 = document.createElement('a');
+    a4.setAttribute('href', 'https://pronoun.fandom.com/wiki/Category:Pronouns');
+    a4.setAttribute('target', '_blank');
+    a4.append(document.createTextNode('pronouns'));
+    pWithLinksPS.append(document.createTextNode('If you need some ideas, check this '), a4, 
+document.createTextNode(" list or that "), a3, document.createTextNode(" list."));
+    
+    let ebuttonP2 = document.createElement('button');
+    ebuttonP2.setAttribute('type', 'button');
+    ebuttonP2.setAttribute('class', 'expandButton');
+    ebuttonP2.setAttribute('onClick', 'scrollElement("inputsP[2]")');
+    let epb3 = document.createTextNode('\u2193 bottom \u2193'); //↓
+    ebuttonP2.appendChild(epb3);
+
+    let ebuttonP3 = document.createElement('button');
+    ebuttonP3.setAttribute('type', 'button');
+    ebuttonP3.setAttribute('class', 'expandButton');
+    ebuttonP3.setAttribute('onClick', 'scrollElement("ebuttonP")');
+    let epb4 = document.createTextNode('\u2191 top \u2191'); //↑
+    ebuttonP3.appendChild(epb4);
+
+    let pronounsP = document.createElement('p');
+    pronounsP.append(ebuttonP2, pronounsTable, inputsTable, pForButtons, 
+    pWithLinksPS, ebuttonP3);
+
+    let sentencesParagraph = document.createElement('p');
+
+    let eh3 = document.createElement('h2');
+    eh3.setAttribute('class', 'text');
+    let epts = document.createTextNode('Testing sentences:');
+    eh3.appendChild(epts);
+    sentencesParagraph.appendChild(eh3);
+
+    let sentencesShown = false;
+    let ebuttonTS = document.createElement('button');
+    ebuttonTS.setAttribute('type', 'button');
+    ebuttonTS.setAttribute('class', 'expandButton');
+    ebuttonTS.setAttribute('onClick', 'showSentences()');
+    let etsb = document.createTextNode('show');
+    ebuttonTS.appendChild(etsb);
+    let etsb2 = document.createTextNode('hide');
+    sentencesParagraph.append(ebuttonTS, br.cloneNode());
+    
+    let ebuttonTS2 = document.createElement('button');
+    ebuttonTS2.setAttribute('type', 'button');
+    ebuttonTS2.setAttribute('class', 'expandButton');
+    ebuttonTS2.setAttribute('onClick', 'scrollElement("addingSentencesP")');
+    let etsb3 = document.createTextNode('\u2193 bottom \u2193');
+    ebuttonTS2.appendChild(etsb3);
+
+    let ebuttonTS3 = document.createElement('button');
+    ebuttonTS3.setAttribute('type', 'button');
+    ebuttonTS3.setAttribute('class', 'expandButton');
+    ebuttonTS3.setAttribute('onClick', 'scrollElement("ebuttonTS")');
+    let etsb4 = document.createTextNode('\u2191 top \u2191');
+    ebuttonTS3.appendChild(etsb4);
+
+    plural = [0];
+    fillers = [0, ['Jake'], ['xe'], ['xem'], ['xyr'], ['xyrs'], ['xemself'], is, has, was, s, does];
+    let namesh = document.createElement('h3');
+    let nameshtxt = document.createTextNode('Sentences including name:');
+    namesh.appendChild(nameshtxt);
+    let sentencesnamesP = document.createElement('p');
+
+    for(let i = 0; i < sentencesnames.length; i += 1){
+        let p = document.createElement('p');
+        p.setAttribute('class', 'text');
+        let sentence = buildSentence(sentencesnames[i]);
+        let txt = document.createElement('p');
+        txt.append(document.createTextNode(sentence));
+        let namesB = document.createElement('button');
+        namesB.setAttribute('type', 'button');
+        namesB.setAttribute('class', 'blue smallButton');
+        namesB.setAttribute('onClick', `removeSentence('names', "${sentence}")`);
+        namesB.append(document.createTextNode('Delete'));
+        p.append(txt, namesB);
+        sentencesnamesP.append(p);
+    }
+
+    let subjecth = document.createElement('h3');
+    let subjecthtxt = document.createTextNode('Sentences including subject pronoun:');
+    subjecth.appendChild(subjecthtxt);
+    let sentencessubjectP = document.createElement('p');
+
+    for(let i = 0; i < sentencessubject.length; i += 1){
+        let p = document.createElement('p');
+        p.setAttribute('class', 'text');
+        let sentence = buildSentence(sentencessubject[i]);
+        let txt = document.createElement('p');
+        txt.append(document.createTextNode(sentence));
+        let subjectB = document.createElement('button');
+        subjectB.setAttribute('type', 'button');
+        subjectB.setAttribute('class', 'blue smallButton');
+        subjectB.setAttribute('onClick', `removeSentence('subject', "${sentence}")`);
+        subjectB.append(document.createTextNode('Delete'));
+        p.append(txt, subjectB);
+        sentencessubjectP.append(p);
+    }
+
+    let objecth = document.createElement('h3');
+    let objecthtxt = document.createTextNode('Sentences including object pronoun:');
+    objecth.appendChild(objecthtxt);
+    let sentencesobjectP = document.createElement('p');
+
+    for(let i = 0; i < sentencesobject.length; i += 1){
+        let p = document.createElement('p');
+        p.setAttribute('class', 'text');
+        let sentence = buildSentence(sentencesobject[i]);
+        let txt = document.createElement('p');
+        txt.append(document.createTextNode(sentence));
+        let objectB = document.createElement('button');
+        objectB.setAttribute('type', 'button');
+        objectB.setAttribute('class', 'blue smallButton');
+        objectB.setAttribute('onClick', `removeSentence('object', "${sentence}")`);
+        objectB.append(document.createTextNode('Delete'));
+        p.append(txt, objectB);
+        sentencesobjectP.append(p);
+    }
+
+    let determinerh = document.createElement('h3');
+    let determinerhtxt = document.createTextNode('Sentences including possesive determiner:');
+    determinerh.appendChild(determinerhtxt);
+    let sentencesdeterminerP = document.createElement('p');
+
+    for(let i = 0; i < sentencesdeterminer.length; i += 1){
+        let p = document.createElement('p');
+        p.setAttribute('class', 'text');
+        let sentence = buildSentence(sentencesdeterminer[i]);
+        let txt = document.createElement('p');
+        txt.append(document.createTextNode(sentence));
+        let determinerB = document.createElement('button');
+        determinerB.setAttribute('type', 'button');
+        determinerB.setAttribute('class', 'blue smallButton');
+        determinerB.setAttribute('onClick', `removeSentence('determiner', "${sentence}")`);
+        determinerB.append(document.createTextNode('Delete'));
+        p.append(txt, determinerB);
+        sentencesdeterminerP.append(p);
+    }
+
+    let possesiveh = document.createElement('h3');
+    let possesivehtxt = document.createTextNode('Sentences including possesive pronoun:');
+    possesiveh.append(possesivehtxt);
+    let sentencespossesiveP = document.createElement('p');
+
+    for(let i = 0; i < sentencespossesive.length; i += 1){
+        let p = document.createElement('p');
+        p.setAttribute('class', 'text');
+        let sentence = buildSentence(sentencespossesive[i]);
+        let txt = document.createElement('p');
+        txt.append(document.createTextNode(sentence));
+        let possesiveB = document.createElement('button');
+        possesiveB.setAttribute('type', 'button');
+        possesiveB.setAttribute('class', 'blue smallButton');
+        possesiveB.setAttribute('onClick', `removeSentence('possesive', "${sentence}")`);
+        possesiveB.append(document.createTextNode('Delete'));
+        p.append(txt, possesiveB);
+        sentencespossesiveP.append(p);
+    }
+
+    let reflexiveh = document.createElement('h3');
+    let reflexivehtxt = document.createTextNode('Sentences including reflexive pronoun:');
+    reflexiveh.append(reflexivehtxt);
+    let sentencesreflexiveP = document.createElement('p');
+
+    for(let i = 0; i < sentencesreflexive.length; i += 1){
+        let p = document.createElement('p');
+        p.setAttribute('class', 'text');
+        let sentence = buildSentence(sentencesreflexive[i]);
+        let txt = document.createElement('p');
+        txt.append(document.createTextNode(sentence));
+        let reflexiveB = document.createElement('button');
+        reflexiveB.setAttribute('type', 'button');
+        reflexiveB.setAttribute('class', 'blue smallButton');
+        reflexiveB.setAttribute('onClick', `removeSentence('reflexive', "${sentence}")`);
+        reflexiveB.append(document.createTextNode('Delete'));
+        p.append(txt, reflexiveB);
+        sentencesreflexiveP.append(p);
+    }
+
+    let addingSentencesP = document.createElement('p');
+    addingSentencesP.setAttribute('class', 'text');
+    let adstxt = document.createTextNode(`Write new testing sentences about yourself, but as you were named Jake \
+and used xe/xem/xyr/xyrs/xemself pronouns. Every name, pronoun and verbs 'does', 'has', 'is' and 'was' coming directly after \
+pronouns write all in capital letters. After verbs ending with letter 's', if they are also related to personal pronouns, \
+put symbol '#' without a space before it. The same symbol put before words in capital letters, if they are on the begining \
+of the sentence. \
+To avoid tests feeling artifical always make sentences on names list a form of introduction \
+and never give similiar informations in sentences on different lists. \
+Make sure you haven't done any spelling mistakes.`);
+    let imoutofvariableideashelp = document.createTextNode("Here's an example:");
+    let exampleSentence = document.createTextNode(`#JAKE works with us too. #XE DOESn't have time to talk with you right now, \
+I'll introduce you to XEM later. Do you see, how our boss looks at XEM when XE gives# a speech? Even she is impressed with \
+XYR ideas.`);
+    addingSentencesP.append(adstxt, br.cloneNode(), br.cloneNode(), imoutofvariableideashelp,
+    br.cloneNode(), br.cloneNode(), exampleSentence);
+    
+    let area = document.createElement('textarea');
+    area.setAttribute('class', 'gray rounded');
+    area.setAttribute('cols', '75');
+    area.setAttribute('rows', '5');
+    area.oninput = renderForUser;
+    let anotherunnameabletext = document.createTextNode('And here you will see, how your sentences will look like for Ash, who \
+uses they/them pronouns:')
+    let renderedSentence = document.createTextNode('');
+    renderedSP = document.createElement('p');
+    renderedSP.setAttribute('class', 'text');
+    renderedSP.append(renderedSentence);
+    let chooseList = document.createTextNode('Choose a list you want to add your sentence to:');
+    let chooseListP = document.createElement('p');
+    chooseListP.setAttribute('class', 'text');
+    chooseListP.append(chooseList);
+    let sentenceToAdd;
+    let codedFillers = [0, 'JAKE', 'XE', 'XEM', 'XYR', 'XYRS', 'XEMSELF', 'IS', 'HAS', 'WAS', 's#', 'DOES']
+
+    function renderForUser(){
+        let sentence = area.value;
+        if(sentence[sentence.length - 1] === '|' || sentence[sentence.length - 1] === '$' 
+        || sentence.slice(sentence.length - 2, sentence.length) === ',,' ){
+            area.value = sentence.slice(0, sentence.length - 1);
+            return;
+        }
+        if(sentence[sentence.length - 1] !== ' '){
+            sentence += ' ';
+        }
+        sentenceToAdd = [];
+        let sliceBegining = 0;
+        for(let i = 0; i < sentence.length; i += 1){
+            for(let j = codedFillers.length - 1; j > 0 ; j -= 1){
+                if(i + codedFillers[j].length <= sentence.length &&
+                 sentence.slice(i, i + codedFillers[j].length) === codedFillers[j]){
+                    if(i !== 0){
+                        sentenceToAdd.push(sentence.slice(sliceBegining, i));
+                    }
+                    sentenceToAdd.push(j);
+                    i += codedFillers[j].length - 1; 
+                    sliceBegining = i + 1;
+                    break;
+                 }
+                if(i + codedFillers[j].length + 1 <= sentence.length &&
+                 sentence.slice(i, i + codedFillers[j].length + 1) === '#' + codedFillers[j]){
+                    if(i !== 0){
+                        sentenceToAdd.push(sentence.slice(sliceBegining, i));
+                    }
+                    sentenceToAdd.push(-j);
+                    i += codedFillers[j].length; 
+                    sliceBegining = i + 1;
+                    break;
+                 }
+            }
+        }
+        if(sliceBegining < sentence.length){
+            sentenceToAdd.push(sentence.slice(sliceBegining));
+        }
+        plural = [1];
+        fillers = [0, ['Ash'], ['they'], ['them'], ['their'], ['theirs'], ['themself'], is, has, was, s, does];
+        renderedSentence.textContent = buildSentence(sentenceToAdd);
+    }
+
+    let addingSelect = document.createElement('select');
+    addingSelect.setAttribute('class', 'gray rounded');
+    let selectTextes = ['names list', 'subject pronouns list', 'object pronouns list', 'possesive determiners list',
+    'possesive pronouns list', 'reflexive pronouns list'];
+    let selectValues = ['names', 'subject', 'object', 'determiner', 'possesive', 'reflexive'];
+    let options = [];
+    for(let i = 0; i < 6; i += 1){
+        options.push('');
+        options[i] = document.createElement('option');
+        options[i].setAttribute('value', selectValues[i]);
+        let txt = document.createTextNode(selectTextes[i]);
+        options[i].append(txt);
+        addingSelect.append(options[i]);
+    }
+    let addSentenceButton = document.createElement('button');
+    addSentenceButton.setAttribute('type', 'button');
+    addSentenceButton.setAttribute('class', 'blue button');
+    addSentenceButton.setAttribute('onclick', 'AddToSentences(addingSelect.value, sentenceToAdd)');
+    let addButtonTxt = document.createTextNode('Add');
+    addSentenceButton.append(addButtonTxt);
+
+    let sentencesP = document.createElement('p');
+    sentencesP.append(namesh, sentencesnamesP, subjecth, sentencessubjectP, objecth, sentencesobjectP,
+            determinerh, sentencesdeterminerP, possesiveh, sentencespossesiveP, reflexiveh, sentencesreflexiveP,
+            addingSentencesP, area, anotherunnameabletext, renderedSP, br.cloneNode(), chooseListP, 
+            addingSelect, addSentenceButton);
+
+    let undoP = document.createElement('p');
+    undoP.setAttribute('class', 'text');
+    undoP.append(document.createTextNode("If you didn't want to delete something you've just deleted, click here \
+(ctrl + z works as well):"));
+    let undoButton = document.createElement('button');
+    undoButton.setAttribute('type', 'button');
+    undoButton.setAttribute('class', 'green button');
+    undoButton.setAttribute('onClick', 'undo()');
+    undoBT = document.createTextNode('Undo');
+    undoButton.append(undoBT);
+
+    let copyP = document.createElement('p');
+    let cp = document.createElement('p');
+    cp.setAttribute('class', 'text');
+    cp.append(document.createTextNode("If you want to move your data to a different device or browser, click 'copy data' \
+button. It will copy to your clipboard some code with information about all changes that you've made. \
+On android your clipboard may have too small capacity, so \
+if button seems to not work or code you have in clipboard doesn't end with words 'code is complete', \
+click 'render code' button. It will allow you to copy code manually in smaller parts."));
+    let copyB = document.createElement('button');
+    copyB.setAttribute('class', 'green button');
+    copyB.setAttribute('type', 'button');
+    copyB.setAttribute('onclick', 'copyData()');
+    copyB.append(document.createTextNode('Copy data'));
+    let renderB = document.createElement('button');
+    renderB.setAttribute('class', 'green button');
+    renderB.setAttribute('type', 'button');
+    renderB.setAttribute('onclick', 'renderCode()');
+    renderB.append(document.createTextNode('Render code'));
+    let renderArea = document.createElement('textarea');
+    renderArea.setAttribute('class', 'gray rounded');
+    renderArea.setAttribute('rows', '30');
+    copyP.append(cp, copyB, renderB);
+
+    let pasteP = document.createElement('p');
+    pasteP.setAttribute('class', 'text');
+    pasteP.append(document.createTextNode("If you already have code copied from the other browser/device, paste it below. \
+But have in mind, that replacing data will overwrite all changes that you've made here. And don't paste here anything, \
+which wasn't supposed to be here, such action may break the page. We will refresh the page after you \
+click the button."));
+    let pasteArea = document.createElement('textarea');
+    pasteArea.setAttribute('class', 'gray rounded');
+    pasteArea.setAttribute('rows', '10');
+    let pasteB = document.createElement('button');
+    pasteB.setAttribute('class', 'green button');
+    pasteB.setAttribute('type', 'button');
+    pasteB.setAttribute('onclick', 'pasteData(pasteArea.value)');
+    pasteB.append(document.createTextNode('Replace data'));
+
+    let ep2 = document.createElement('p');
+    ep2.setAttribute('class', 'text');
+    let etxt2 = document.createTextNode("This button will restart the page to it's initial settings. This means you'll lose all \
+changes that you've already done and this action is irreversible. Developer has no idea, why would you want to do that and \
+even why they've made this an option. We advice you to not to use it. (Don't be afraid, that you would accidentaly delete \
+everything, we'll ask you for confirmation when you click it)");
+    ep2.append(etxt2);
+    let resetButton = document.createElement('button');
+    resetButton.setAttribute('type', 'button');
+    resetButton.setAttribute('class', 'green button');
+    resetButton.setAttribute('onClick', 'reset()');
+    resettxt = document.createTextNode('Reset to default');
+    resetButton.appendChild(resettxt);
+    let ep3 = document.createElement('p');
+    ep3.setAttribute('class', 'text');
+    let etxt3 = document.createTextNode("If you're annoyed by the ads or want to use this page also when you're offline, \
+right-click anywhere on the background and choose 'save as' option on your computer \
+or find download button in menu of the browser on your mobile. We advise you not to save few (updated or the same) \
+versions of it on the same device, cause it may cause some weird stuff to happen with the stored data.");
+    ep3.append(etxt3);
+    let epAboutContact = document.createElement('p');
+    epAboutContact.setAttribute('class', 'text');
+    epAboutContact.append(document.createTextNode("You find this website useful? Something here annoys you so much, \
+that you are thinking about stoping using it because of that? Something works as it wasn't supposed to or doesn't work at all? \
+There are any grammatical or spelling mistakes? Or you have a few ideas on how this page could be improved? \
+Please, give developer some feedback \
+at PronounsAndNamesTester@gmail.com. Every message means a world to him and to the future of this website."));
+
+    let editor = document.createElement('p');
+    editor.append(ep, epAboutNeos, eh1, ebuttonN, namesParagrph, eh2, ebuttonP, pronounsParagraph,
+            sentencesParagraph, undoP, undoButton, copyP, pasteP, pasteArea, pasteB, 
+            ep2, resetButton, ep3, epAboutContact);
+
+    function editorMode(){
+        if(!editorEnabled){
+            document.getElementById('editor').append(editor);
+            editorEnabled = true;
+            document.getElementById('editorbutton').scrollIntoView({block: 'start', behavior: 'smooth'});
+            return;
+        }
+        document.getElementById('editor').removeChild(editor);
+        editorEnabled = false;
+    }
+    function showNames(){
+        if(!namesShown){
+            ensb.textContent = 'hide';
+            namesParagrph.append(namesP);
+            namesShown = true;
+            return;
+        }
+        ensb.textContent = 'show';
+        namesParagrph.removeChild(namesP);
+        namesShown = false;
+    }
+    function showPronouns(){
+        if(!pronounsShown){
+            epb.textContent = 'hide';
+            pronounsParagraph.append(pronounsP);
+            pronounsShown = true;
+            return;
+        }
+        epb.textContent = 'show';
+        pronounsParagraph.removeChild(pronounsP);
+        pronounsShown = false;
+    }
+    function removeName(name){
+        BackUp();
+        let index;
+        for(let i = 0; i < namesTable.childNodes.length; i += 1){
+            if(namesTable.childNodes[i].childNodes[0].textContent === name){
+                index = i;
+                break;
+            }
+        }
+        elementsBackup.push([namesTable.childNodes[index], "namesTable", namesTable.childNodes[index + 1]]);
+        namesTable.removeChild(namesTable.childNodes[index]);
+        namesSuggestions.splice(index, 1);
+        let list = localStorage.getItem('names');
+        for(let i = 0; i < list.length - (name.length + 1); i += 1){
+            if(list.slice(i, i + name.length + 2) === `, ${name}` || list.slice(i, i + name.length + 2) === `${name}, `){
+                list = list.slice(0, i) + list.slice(i + name.length + 2);
+                break;
+            }
+        }
+        localStorage.setItem('names', list);
+    }
+    function addToNames(name){
+        if(!name){
+            return;
+        }
+        for(let i = 0; i < namesSuggestions.length; i += 1){
+            if(namesSuggestions[i] === name){
+                namesInput.value = '';
+                return;
+            }
+        }
+        namesSuggestions.push(name);
+        let list = localStorage.getItem('names');
+        list += `, ${name}`;
+        localStorage.setItem('names', list);
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let txt = document.createTextNode(name);
+        td1.append(txt);
+        let td2 = document.createElement('td');
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'rose smallButton');
+        button.setAttribute('onClick', `removeName('${name}')`);
+        button.append(document.createTextNode('Delete'));
+        td2.append(button);
+        tr.append(td1, td2);
+        namesTable.append(tr);
+        namesInput.value = '';
+    }
+    function removeSet(setInTable, set){
+        BackUp();
+        let index;
+        for(let i = 0; i < pronounsTable.childNodes.length; i += 1){
+            if(pronounsTable.childNodes[i].childNodes[0].textContent === setInTable){
+                index = i;
+                break;
+            }
+        }
+        elementsBackup.push([pronounsTable.childNodes[index], 'pronounsTable', pronounsTable.childNodes[index + 1]]);
+        pronounsTable.removeChild(pronounsTable.childNodes[index]);
+        pronounsSuggestions.splice(index, 1);
+        let list = localStorage.getItem('pronouns');
+        for(let i = 0; i < list.length - (set.length + 2); i += 1){
+            if(list.slice(i, i + set.length + 3) === ` | ${set}` || list.slice(i, i + set.length + 3) === `${set} | `){
+                list = list.slice(0, i) + list.slice(i + set.length + 3);
+                break;
+            }
+        }
+        localStorage.setItem('pronouns', list);
+    }
+
+    function addToPronouns(){
+        for(let i = 0; i < 5; i += 1){
+            if(!inputsP[i].value){
+                return;
+            }
+        }
+        let set = 
+        `${inputsP[0].value}, ${inputsP[1].value}, ${inputsP[2].value}, ${inputsP[3].value}, ${inputsP[4].value}`;
+        let list = localStorage.getItem('pronouns');
+
+        for(let i = 0; i < list.length - (set.length + 3); i += 1){
+            if(list.slice(i, i + set.length + 3) === ` | ${set}` || list.slice(i, i + set.length + 3) === `${set} | `){
+                return;
+            }
+        }
+
+        list += ` | ${set}`;
+        localStorage.setItem('pronouns', list);
+        uncodepronouns();
+
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let txt = document.createTextNode(`${inputsP[0].value}/${inputsP[1].value}/${inputsP[2].value}\
+/${inputsP[3].value}/${inputsP[4].value}`);
+        td1.append(txt);
+        let td2 = document.createElement('td');
+        button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'violet smallButton');
+        button.setAttribute('onClick', `removeSet(\`${txt.textContent}\`, \`${set}\`)`);
+        button.append(document.createTextNode('Delete'));
+        td2.append(button);
+        tr.append(td1, td2);
+        pronounsTable.append(tr);
+
+        for(let i = 0; i < 5; i += 1){
+            inputsP[i].value = '';
+         }
+    }
+
+    function autofillEditor(subject){
+        if(!subject){
+            return;
+        }
+        for(let i = 0; i < pronounsSuggestions.length; i += 1){
+            if(pronounsSuggestions[i][0] === subject){
+                for(let j = 1; j < 5; j += 1){
+                    eval(`inputsP[j].value = pronounsSuggestions[i][j];`);
+                }
+                return;
+            }
+        }
+        eval(`inputsP[1].value = subject;
+        inputsP[2].value = subject + 's';
+        inputsP[3].value = subject + 's';
+        inputsP[4].value = subject + 'self';`);
+    }
+
+    function removeSentence(list, sentence){
+        BackUp();
+        let index;
+        eval(`for(let i = 0; i < sentences${list}P.childNodes.length; i += 1){
+            if(sentences${list}P.childNodes[i].childNodes[0].textContent === sentence){
+                elementsBackup.push([sentences${list}P.childNodes[i], 'sentences${list}P', sentences${list}P.childNodes[i + 1]]);
+                sentences${list}P.removeChild(sentences${list}P.childNodes[i]);
+                index = i;
+                break;
+            }
+        }
+        let unbuildedS = '';
+        if(typeof(sentences${list}[index][0]) === 'string'){
+            unbuildedS += '"' + sentences${list}[index][0] + '"';
+        }
+        else{
+            unbuildedS += sentences${list}[index][0];
+        }
+        for(let i = 1; i < sentences${list}[index].length; i += 1){
+            if(typeof(sentences${list}[index][i]) === 'string'){
+                unbuildedS += ',, "' + sentences${list}[index][i] + '"';
+            }
+            else{
+                unbuildedS += ',, ' + sentences${list}[index][i];
+            }
+        }
+        let sentencesList = localStorage.getItem('sentences${list}');
+        for(let i = 0; i < sentencesList.length; i += 1){
+            if(sentencesList.slice(i, i + unbuildedS.length + 3) === ' | ' + unbuildedS ||
+             sentencesList.slice(i, i + unbuildedS.length + 3) === unbuildedS + ' | '){
+                 sentencesList = sentencesList.slice(0, i) + sentencesList.slice( i + unbuildedS.length + 3);
+                 break;
+             }
+        }
+        sentences${list}.splice(index, 1);
+        localStorage.setItem('sentences${list}', sentencesList);`);
+    }
+
+    function AddToSentences(list, sentence){
+        if(sentence){
+            let index, notOnList = true;
+            eval(`for(let i = 0; i < sentences${list}P.childNodes.length; i += 1){
+                if(sentences${list}[i] === sentence){
+                    notOnList = false;
+                    break;
+                }
+            }
+            if(notOnList){
+                sentences${list}.push(sentence);
+                let unbuildedS = '';
+                if(typeof(sentence[0]) === 'string'){
+                    unbuildedS += '"' + sentence[0] + '"';
+                }
+                else{
+                    unbuildedS += sentence[0];
+                }
+                for(let i = 1; i < sentence.length; i += 1){
+                    if(typeof(sentence[i]) === 'string'){
+                        unbuildedS += ',, "' + sentence[i] + '"';
+                    }
+                    else{
+                        unbuildedS += ',, ' + sentence[i];
+                    }
+                }
+                let sentencesList = localStorage.getItem('sentences${list}');
+                sentencesList += ' | ' + unbuildedS;
+                localStorage.setItem('sentences${list}', sentencesList);
+                area.value = '';
+                renderedSentence.textContent = '';
+                plural = [0];
+                fillers = [0, ['Jake'], ['xe'], ['xem'], ['xyr'], ['xyrs'], ['xemself'], is, has, was, s, does];
+                let p = document.createElement('p');
+                p.setAttribute('class', 'text');
+                let sntc = buildSentence(sentences${list}[sentences${list}.length - 1]);
+                let txt = document.createElement('p');
+                txt.setAttribute('class', 'text');
+                txt.append(document.createTextNode(sntc));
+                let button = document.createElement('button');
+                button.setAttribute('type', 'button');
+                button.setAttribute('class', 'blue smallButton');
+                button.setAttribute('onclick', 'removeSentence("${list}", "' + sntc + '")');
+                button.append(document.createTextNode('Delete'));
+                p.append(txt, button);
+                sentences${list}P.append(p);
+            }`);
+        }
+    }
+
+    function BackUp(){
+        let keys = ['names', 'pronouns', 'sentencesnames', 'sentencessubject', 'sentencesobject',
+        'sentencesdeterminer', 'sentencespossesive', 'sentencesreflexive'];
+        for(let i = 0; i < keys.length; i += 1){
+            eval(`${keys[i]}Backup.push(localStorage.getItem('${keys[i]}'));`);
+        }
+    }
+
+    window.addEventListener('keydown', keyPressed);
+    window.addEventListener('keyup', keyUnpressed);
+    let controlPressed = false;
+    let zUnpressed = true;
+
+    function keyPressed(key){
+        if(key.code === 'KeyZ'){
+            if(controlPressed && zUnpressed){
+                undo();
+                zUnpressed = false;
+                return;
+            }
+        }
+        if(key.code === 'ControlLeft' || key.code === 'ControlRight' ){
+            controlPressed = true;
+        }
+    }
+
+    function keyUnpressed(key){
+        if(key.code === 'ControlLeft' || key.code === 'ControlRight' ){
+            controlPressed = false;
+        }
+        if(key.code === 'KeyZ'){
+            zUnpressed = true;
+        }
+    }
+
+    function undo(){
+        if(namesBackup.length !== 0){
+            let keys = ['names', 'pronouns', 'sentencesnames', 'sentencessubject', 'sentencesobject',
+            'sentencesdeterminer', 'sentencespossesive', 'sentencesreflexive'];
+            for(let i = 0; i < keys.length; i += 1){
+                eval(`localStorage.setItem('${keys[i]}', ${keys[i]}Backup.pop());
+                uncode${keys[i]}();`);
+            }
+        }
+        if(elementsBackup.length !== 0){
+            let ln = elementsBackup.length - 1;
+            eval(`${elementsBackup[ln][1]}.insertBefore(elementsBackup[ln][0], elementsBackup[ln][2]);`);
+            elementsBackup.pop();
+            window.scrollBy(0, 40);
+        }
+    }
+
+    function reset(){
+        if(confirm("Are you sure, that you want to do this? ALL changes that you've made will be lost FOREVER.")){
+            if(confirm("Are you really, REALLY sure? You have fair reasons for this, right?")){
+                if(confirm("This is the last one, we promise. But we have to know, if you won't change your mind. \
+Do you want to reset EVERYTHING?")){
+                    localStorage.clear();
+                    document.location.reload();
+                }
+            }
+        }
+    }
+
+    function scrollElement(element){
+        try{
+            eval(`${element}.scrollIntoView({block: 'center', behavior: 'smooth'});`);
+        }
+        catch{
+            try{
+                eval(`${element}.scrollIntoView();`);
+            }
+            catch{
+                alert("We are sorry, it seems like your browser doesn't support the feature we need \
+to make this button work properly.");
+            }
+        }
+    }
+
+    function showSentences(){
+        if(!sentencesShown){
+            sentencesParagraph.append(ebuttonTS2, sentencesP, ebuttonTS3);
+            etsb.textContent = 'hide';
+            sentencesShown = true;
+            return;
+        }
+        etsb.textContent = 'show';
+        sentencesParagraph.removeChild(ebuttonTS2);
+        sentencesParagraph.removeChild(sentencesP);
+        sentencesParagraph.removeChild(ebuttonTS3);
+        sentencesShown = false;
+    }
+
+    let fonts = ["'Comic Sans MS', 'Delius', cursive", "'Trebuchet MS', sans-serif", "'Lucida Bright', serif",
+    "'Courier New', monospaced", "'Brush Script MT', script"];
+    if(!localStorage.getItem('font')){
+        localStorage.setItem('font', 0);
+    }
+    document.documentElement.style.setProperty('--font', fonts[localStorage.getItem('font')]);
+
+    function changeFont(){
+        let f = parseInt(localStorage.getItem('font'));
+        f += 1;
+        if(f === fonts.length){
+            f = 0;
+        }
+        document.documentElement.style.setProperty('--font', fonts[f]);
+        localStorage.setItem('font', f);
+    }
+
+    function copyData(){
+        let code = '';
+        let keys = ['names', 'pronouns', 'sentencesnames', 'sentencessubject', 'sentencesobject',
+        'sentencesdeterminer', 'sentencespossesive', 'sentencesreflexive'];
+        for(let i = 0; i < keys.length; i ++){
+            code += `${localStorage.getItem(keys[i])}$`;
+        }
+        code += 'code is complete';
+        navigator.clipboard.writeText(code);
+        return code;
+    }
+
+    function renderCode(){
+        let code = copyData();
+        if(renderArea.value === code){
+            renderArea.value = '';
+            copyP.removeChild(renderArea);
+            return;
+        }
+        copyP.append(renderArea);
+        renderArea.value = code;
+    }
+
+    function pasteData(code){
+        BackUp();
+        if(confirm("Are you sure you want to do this? You will lost ALL of the changes you've made here.")){
+            if(confirm("Are you really, REALLY sure? This action CANNOT be undone.")){
+                let keys = ['names', 'pronouns', 'sentencesnames', 'sentencessubject', 'sentencesobject',
+                'sentencesdeterminer', 'sentencespossesive', 'sentencesreflexive'];
+                try{
+                    let codes = code.split('$');
+                    for(let i = 0; i < keys.length; i ++){
+                        localStorage.setItem(keys[i], codes[i]);
+                        eval(`uncode${keys[i]}();`);
+                        if(i > 1){    
+                            plural = [1];
+                            fillers = [0, ['Ash'], ['they'], ['them'], ['their'], ['theirs'], ['themself'],
+                            is, has, was, s, does];
+                            eval(`for(let j = 0; j < ${keys[i]}.length; j++){
+                                buildSentence(${keys[i]}[j]);
+                            }`)
+                        }
+                    }
+                    document.location.reload();
+                }
+                catch{
+                    alert("We are sorry, something is wrong with code and we cannot update your changes. \
+Make sure that you've pasted actual, website generated code. If you keep seeing this message, \
+contact the developer.");
+                    for(let i = 0; i < keys.length; i += 1){
+                        eval(`localStorage.setItem('${keys[i]}', ${keys[i]}Backup.pop());
+                        eval('uncode${keys[i]}();')`);
+                    }
+                    pasteArea.value = '';
+                }
+            }
+        }
+    }
+
+    function checkIfValid(input){
+        let text = input.target.value;
+        if(text[text.length - 1] === '|' || text[text.length - 1] === '$'){
+            input.target.value = text.slice(0, text.length - 1);
+        }
+    }
+
+</script>
+
+<body>
+    <div class='all'>
+    <form method='get' id='form'>
+        <button type='button' class='fontButton' onclick='changeFont()'>Change font</button>
+        <h2 class='text'>Input all names you want to test/your names: </h2>
+        <input name='name1' class='gray rounded margin'>
+        <button type='button' class='rose smallButton' onclick='fillName(1)'>Random</button>
+        <button type='button' class='rose smallButton' onclick='clearName(1)'>Clear</button><br>
+        <p id='names'> </p>
+        <button type='button' class='rose button' onClick='addName()'>Add next</button>
+        <h2 class='text'>Input all pronoun sets you want to test/your pronoun sets: </h2><br>
+        <h3 class='text'>Set 1:</h3>
+        <table>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Subject pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='subjectPronoun1' class='gray rounded margin' autocapitalize='off'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Object pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='objectPronoun1' class='gray rounded margin' autocapitalize='off'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Possesive determiner:
+                    </div>
+                </td>
+                <td>
+                    <input name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Possesive pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='possesivePronoun1' class='gray rounded margin' autocapitalize='off'>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Reflexive pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off'>
+                </td>
+            </tr>
+        </table>
+        <button type='button' class='violet smallButton' onclick='autofill(1, this.form.subjectPronoun1.value)'>Autofill</button>
+        <button type='button' class='violet smallButton' onclick='fillPronouns(1)'>Random</button>
+        <button type='button' class='violet smallButton' onclick='clearSet(1)'>Clear</button>
+        <div class='margin'>This pronoun set is:<br> </div> 
+        <select name='plural1' class='gray rounded'>
+            <option value='0'>singular</option>
+            <option value='1'>plural</option>
+        </select>
+        <p id='sets'> </p>
+        <button type='button' class='violet button' onClick='addSet()'>Add next</button><br>
+        <input type='button' class='blue bigButton' value='Test' onClick='testResults(this.form)'>
+    </form>
+    <script language="JavaScript">
+        function resetPage(){
+            localStorage.clear();
+            document.location.reload();
+        }
+        function tryEditor(){
+            try{
+                editorMode();
+            }
+            catch{
+                let p = document.createElement('p');
+                p.setAttribute('class', 'text');
+                p.appendChild(document.createTextNode("We came across unexpected problems. \
+If page previously worked, \
+try reseting it to default or contact the developer at PronounsAndNamesTester@gmail.com."));
+                let b = document.createElement('button');
+                b.setAttribute('type', 'button');
+                b.setAttribute('class', 'green button');
+                b.setAttribute('onclick', 'resetPage()');
+                b.append(document.createTextNode('Reset'));
+                document.getElementById('editor').append(p, b);
+                b.scrollIntoView();
+            }
+        }
+    </script>
+    <button id='editorbutton' type='button' class='green button' onClick='tryEditor()'>Editor mode</button><br>
+    <p id='editor'> </p>
+    <p id="useless" class="text">If buttons don't work, try accesing the page from different browser.</p>
+</div>   
+<script language="JavaScript">
+
+    if(localStorage.getItem('font')){
+        document.getElementById("useless").parentNode.removeChild(document.getElementById("useless"));
+    }
+
+</script>
+</body>
+</html>
