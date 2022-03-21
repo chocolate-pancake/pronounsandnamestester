@@ -1,2 +1,2 @@
-# I don't know how this works yet
-Somebody send help or something
+# Here will apear desription of the project
+When I'll find some motivation and ideas to write it
