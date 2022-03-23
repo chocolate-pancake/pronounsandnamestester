@@ -12,7 +12,7 @@
     <meta name='keywords' content='pronouns, names, pronoun, name, test, testing, neopronouns'>
     <meta name='color-scheme' content='dark'>
     <meta name='description' content="Pronuons and names tester is a tool designed for helping people to find pronouns and/or names they're comfortable with using. Created with LGBTQ+ community in mind, but can be used by anyone. Provides a possibility for personalising testing sentences and trying out unlimited amount of sets and names at once.">
-     <style>
+    <style>
         :root {
             --font: 'Comic Sans MS', 'Delius', cursive;
         }
@@ -1328,10 +1328,19 @@ There are any grammatical or spelling mistakes? Or you have a few ideas on how t
 Please, give developer some feedback \
 at PronounsAndNamesTester@gmail.com. Every message means a world to him and to the future of this website."));
 
+    let epAboutResp = document.createElement('p');
+    epAboutResp.setAttribute('class', 'text');
+    let ar = document.createElement('a');
+    ar.setAttribute('target', '_blank');
+    ar.setAttribute('href', 'https://github.com/chocolate-pancake/pronounsandnamestester');
+    ar.append(document.createTextNode("source code on github"));
+    epAboutResp.append(document.createTextNode("If you want to know how anything on that website works, you can check it's "),
+    ar, document.createTextNode("."));
+
     let editor = document.createElement('p');
     editor.append(ep, epAboutNeos, eh1, ebuttonN, namesParagrph, eh2, ebuttonP, pronounsParagraph,
             sentencesParagraph, undoP, undoButton, copyP, pasteP, pasteArea, pasteB, 
-            ep2, resetButton, ep3, epAboutContact);
+            ep2, resetButton, ep3, epAboutContact, epAboutResp);
 
     function editorMode(){
         if(!editorEnabled){
