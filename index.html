@@ -8,7 +8,7 @@
     <meta name="google-site-verification" content="q-8wwwElJqlzTkg7-weRqdAmbtPzEC05LV1lgdt-O0w" />
     <link rel="icon" href="icon.png">
     <meta charset="UTF-8">
-    <meta name='author' content='***REMOVED***'>
+    <meta name='author' content='The Rainbow Chaos System'>
     <meta name='viewport' content='width=device-width'>
     <meta name='keywords' content='pronouns, names, pronoun, name, test, testing, neopronouns'>
     <meta name='color-scheme' content='dark'>
@@ -1657,7 +1657,14 @@ at PronounsAndNamesTester@gmail.com. Every message means a world to him and to t
             if(confirm("Are you really, REALLY sure? You have fair reasons for this, right?")){
                 if(confirm("This is the last one, we promise. But we have to know, if you don't change your mind. \
 Do you want to reset EVERYTHING?")){
-                    localStorage.clear();
+                    localStorage.removeItem('names');
+                    localStorage.removeItem('pronouns');
+                    localStorage.removeItem('sentencesnames');
+                    localStorage.removeItem('sentencessubject');
+                    localStorage.removeItem('sentencesobject');
+                    localStorage.removeItem('sentencesdeterminer');
+                    localStorage.removeItem('sentencespossesive');
+                    localStorage.removeItem('sentencesreflexive');
                     document.location.reload();
                 }
             }
