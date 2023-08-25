@@ -2502,21 +2502,21 @@ async function deleteGroup(){
             try{
                 let codes = code.split('$$');
                 for(let i = 0; i < keys.length; i ++){
-                    localStorage.setItem(keys[i], codes[i]);
+                    localStorage.setItem(storageKeys[i], codes[i]);
                     uncodes.get(keys[i]);
                     if(i > 1){    
                         plural = [1];
                         fillers = [0, ['Ash'], ['they'], ['them'], ['their'], ['theirs'], ['themself'],
                         is, has, was, s, es, ies];
-                        for(let j = 0; j < sentencesLists.get(keys[i]).length; j++){
-                            buildSentence(sentencesLists.get(keys[i])[j]);
+                        for(let j = 0; j < sentencesLists.get(keys[i].slice(9)).length; j++){
+                            buildSentence(sentencesLists.get(keys[i].slice(9))[j]);
                         }
                     }
                 }
                 document.location.reload();
             }
             catch{
-                notify("We are sorry, something is wrong with code and we cannot update your changes. Make sure that you've pasted actual, website generated code. If you keep seeing this message, contact the developers.");
+                notify("We are sorry, something is wrong with this code and we cannot update your changes. Make sure that you've pasted actual, website generated code. If you keep seeing this message, contact the developers.");
                 for(let i = 0; i < keys.length; i += 1){
                     localStorage.setItem(storageKeys[i], backups.get(keys[i]).pop());
                     uncodes.get(keys[i]);
