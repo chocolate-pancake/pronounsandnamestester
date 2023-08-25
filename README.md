@@ -1,1 +1,0 @@
-This is an old project. I know, we've done this like a year ago, but we've learned so much since then and we don't even want to look at all the things in the code we've done in the worst way possible. So yeah, you've been warned.
