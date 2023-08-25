@@ -1,0 +1,2938 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Pronouns and Names Tester</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+    <link rel="icon" href="new-icon.png">
+    <meta charset="UTF-8">
+    <meta name='author' content='The Rainbow Chaos System'>
+    <meta name='viewport' content='width=device-width'>
+    <meta name='keywords' content='pronouns, names, pronoun, name, test, testing, neopronouns'>
+    <meta name='color-scheme' content='dark'>
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://chocolate-pancake.github.io/pronounsandnamestester/new-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Pronouns and Names Tester">
+    <meta property="og:url" content="https://chocolate-pancake.github.io/pronounsandnamestester/">
+    <meta name="twitter:title" property="og:title" content="Pronouns and Names Tester">
+    <meta name='description' content="A tool that allows you to personalise testing sentences and try out unlimited amount of pronoun sets and names at once, to help you find the perfect ones for you. Created with trans, non-binary and gender non-conforming folks in mind, but can be used by anyone. ">
+    <meta name='twitter:description' property="og:description" content="A tool that allows you to personalise testing sentences and try out unlimited amount of pronoun sets and names at once, to help you find the perfect ones for you. Created with trans, non-binary and gender non-conforming folks in mind, but can be used by anyone. ">
+    <style>
+
+        :root {
+            --font: 'Comic Sans MS', 'Delius', cursive;
+            --useless-display: block;
+            --visibility: hidden;
+            --alert-visibility: hidden;
+            --confirm-visibility: hidden;
+            --group-display: none;
+            --editor-display: none;
+            --render-display: none;
+            --a-button-display: block;
+        }
+
+        * {
+            color: rgb(206, 206, 206);
+            background-color:rgb(35, 35, 35);
+            font-family: var(--font);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: auto;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            border: 2px solid transparent;
+            background-color: transparent;
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(60, 60, 60);
+            border-radius: 40px;
+        }
+
+        #useless {
+            display: var(--useless-display);
+        }
+
+        ::selection {
+            /* background-color:rgb(194, 178, 74);             */
+            background-color: rgb(92, 3, 33);
+            /* color: rgb(50, 50, 50); */
+        }
+
+        header {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            border-bottom: 1px solid white;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        #logo-banner {
+            display: flex;
+            align-items: center;
+        }
+        
+        #logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 30px;
+        }
+
+        #title {
+            display: none;
+        }
+
+        main {
+            margin-top: 80px;
+            margin-bottom: 60px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .button {
+            font-weight: bold;
+            font-size: medium;
+            padding: 5px 30px;
+            border-radius: 2px;
+            border-width: 4px;
+            margin: 30px 10px;
+        }
+
+        .button:active {
+            padding: 6px 29px 4px 31px;
+            margin: 29px 9px 31px 11px;
+        }
+
+        .smallButton {
+            font-weight: bold;
+            font-size: small;
+            padding: 4px 20px;
+            border-radius: 2px;
+            border-width: 3px;
+            margin: 15px 10px;
+        }
+
+        .smallButton:active {
+            padding: 5px 19px 3px 21px;
+            margin: 14px 9px 16px 11px;
+        }
+
+        .bigButton {
+            font-weight: bold;
+            font-size: large;
+            padding: 8px 60px;
+            border-radius: 2px;
+            border-width: 5px;
+            margin: 40px 10px;
+        }
+
+        .bigButton:active {
+            padding: 9px 59px 7px 61px;
+            margin: 39px 9px 41px 11px;
+        }
+
+        .expandButton {
+            text-decoration: underline;
+            font-weight: bold;
+            font-size: medium;
+            border-width: 0;
+            margin: 15px 10px;
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .expandButton:hover {
+            color: white;
+        }
+
+        .expandButton:active {
+            color: rgb(128, 128, 128);
+        }
+
+        .fontButton {
+            font-weight: bold;
+            font-size: medium;
+            padding: 5px 15px;
+            border-radius: 2px;
+            border-width: 4px;
+            height: max-content;
+            /* text-decoration: underline;
+            border-width: 0; */
+            /* margin: 15px 10px; */
+            /* background-color: rgba(0, 0, 0, 0); */
+        }
+
+        .fontButton:hover {
+            color: white;
+        }
+
+        .fontButton:active {
+            color: rgb(128, 128, 128);
+        }
+
+        #aria-button {
+            display: var(--a-button-display);
+            position: absolute;
+            left: -1000px;
+        }
+
+        #aria-button:focus, #aria-button:focus-visible {
+            position: static;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .button, .smallButton, .bigButton, .fontButton, .expandButton {
+            cursor: pointer;
+        }
+
+        .green {
+            background-color:rgb(3, 100, 8);
+        }
+
+        .green:hover, .green:focus {
+            background-color: rgb(1, 130, 1);
+            color: white;
+        }
+
+        .green:active {
+            background-color:rgb(0, 73, 0);
+            color: rgb(173, 173, 173);
+        }
+
+        .blue {
+            background-color: rgb(13, 41, 134);
+        }
+
+        .blue:hover, .blue:focus {
+            background-color: rgb(16, 78, 170);
+            color: white;
+        }
+
+        .blue:active {
+            background-color: rgb(13, 42, 95);
+            color: rgb(173, 173, 173);
+        }
+
+        .violet {
+            background-color: rgb(103, 18, 143);
+        }
+
+        .violet:hover, .violet:focus {
+            background-color: rgb(136, 16, 173);
+            color: white;
+        }
+
+        .violet:active {
+            background-color: rgb(75, 7, 92);
+            color: rgb(173, 173, 173);
+        }
+
+        .rose {
+            background-color:rgb(137, 29, 88);
+        }
+
+        .rose:hover, .rose:focus {
+            background-color: rgb(181, 42, 118);
+            color: white;
+        }
+
+        .rose:active {
+            background-color: rgb(89, 13, 55);
+            color: rgb(173, 173, 173);
+        }
+
+        .gray {
+            background-color: rgba(60, 60, 60);
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+        }
+
+        .set-title {
+            margin-top: 2rem;
+        }
+
+        #pronouns-table td {
+            max-width: 60vw;
+            overflow-wrap: break-word;
+        }
+
+        .left {
+            text-align: left;
+        }
+
+        .rounded {
+            border-radius: 10px;
+        }
+
+        .margin {
+            margin: 15px 10px;
+        }
+
+        .text {
+            margin: 15px auto;
+            max-width: 1000px;
+        }
+
+        h3 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            display: block;
+            margin: 30px auto;
+            width: 95%;
+            max-width: 800px;
+        }
+
+        #renderArea {
+            display: var(--render-display);
+        }
+
+        select {
+            display: block;
+            margin: 15px auto;
+            cursor: pointer;
+        }
+
+        #group-select {
+            font-size: medium;
+            border-radius: 20px;
+        }
+
+        div.group {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .group {
+            display: var(--group-display);
+        }
+
+        #editor {
+            display: var(--editor-display);
+        }
+
+        footer {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            border-top: 1px solid white;
+            margin-bottom: 30px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        
+        .links {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .links a {
+            display: block;
+        }
+
+        address {
+            font-style: normal;
+        }
+
+        .pop-up {
+            min-height: 70vh;
+            border: solid 1px;
+            border-left-color: white;
+            border-top-color: white;
+            border-right-color: black;
+            border-bottom-color: black;
+            border-radius: 10px;
+            padding: 0.75em;
+            background-color: rgb(50, 50, 50);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: min(700px, 90vw);
+            min-width: min(700px, 90vw);
+            box-shadow:  20px 30px 10px 5px rgba(0, 0, 0, 0.5);
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .pop-up::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pop-up p {
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+
+        #alert {
+            min-height: 25vh;
+            visibility: var(--alert-visibility);
+            z-index: 400;
+        }
+
+        #alert button {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 80%;
+            bottom: 5%;
+        }
+
+        #confirm-dialog {
+            min-height: 25vh;
+            visibility: var(--confirm-visibility);
+            z-index: 500;
+        }
+
+        #cancel {
+            background-color: rgb(30, 30, 30);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 40%;
+            bottom: 5%;
+        }
+
+        #cancel:hover, #cancel:focus {
+            background-color: rgb(50, 50, 50);
+        }
+
+        #cancel:active {
+            background-color: rgb(20, 20, 20);
+        }
+
+        #confirm {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 70%;
+            bottom: 5%;
+        }
+
+        .chatbox {
+            box-sizing: border-box;
+            text-align: left;
+            visibility: var(--visibility);
+            z-index: 300;
+        }
+
+        .chatbox p {
+            text-align: left;
+        }
+
+        .close {
+            position: absolute;
+            left: -1000px;
+            margin: 0;
+        }
+
+        .close:focus, .close:focus-visible, .close:active {
+            transform: translate(-50%, -50%);
+            left: 70%;
+            bottom: 10%;
+        }
+ 
+        .chatbox.try {
+            visibility: hidden;
+            top:30%;
+            left:50%;
+            min-height: 0px;
+            max-height: 1.8em;
+            border-top: 0px;
+            border-bottom: 0px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .shadow {
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.4);
+            margin: 0px 0px;
+        }
+
+        #chatbox-shadow {
+            visibility: var(--visibility);
+            z-index: 200;
+        }
+
+        #alert-shadow {
+            visibility: var(--alert-visibility);
+            z-index: 350;
+        }
+
+        #confirm-shadow {
+            visibility: var(--confirm-visibility);
+            z-index: 450;
+        }
+
+
+        @media (min-width: 670px) {
+            #title {
+                display: inline;
+            }
+
+            header {
+                justify-content: space-between;
+            }
+
+            .pop-up {
+                min-height: 250px;
+            }
+
+            #alert, #confirm-dialog {
+                min-height: 200px;
+            }
+
+            .close:focus, .close:focus-visible, .close:active {
+                bottom: 0%;
+            }
+
+            #cancel {
+                left: 60%;
+            }
+
+            #confirm {
+                left: 80%;
+            }
+        }
+
+    </style>
+</head>
+<script language='JavaScript'>
+    document.documentElement.style.setProperty("--useless-display", "none");
+
+//-------------------------------------
+// displaying text
+
+    let skipped = true;
+    let escaped = true;
+    let finished = false;
+
+    let lastFocus;
+
+
+    function skipForward(){
+        skipped = true;
+        if(finished){
+            exit();
+        }
+    }
+
+    function exit() {
+        escaped = true;
+        document.documentElement.style.setProperty('--visibility', 'hidden');
+        document.querySelector('header').removeAttribute('inert');
+        document.querySelector('main').removeAttribute('inert');
+        document.querySelector('footer').removeAttribute('inert');
+        if(lastFocus){
+            lastFocus.focus();
+        }
+    }
+
+    async function write(sentence){
+        let chatbox = document.getElementById("chatbox");
+        let trying = document.querySelector(".try");
+        lastFocus = document.activeElement;
+        document.documentElement.style.setProperty('--visibility', 'visible');
+        document.querySelector('header').setAttribute('inert', 'true');
+        document.querySelector('main').setAttribute('inert', 'true');
+        document.querySelector('footer').setAttribute('inert', 'true');
+
+        escaped = false
+        skipped = false;
+        finished = false;
+        if(window.matchMedia("(prefers-reduced-motion)").matches || ms === 0){
+            chatbox.childNodes[1].textContent = sentence;
+            finished = true;
+            chatbox.firstChild.focus();
+            return;
+        }
+
+
+        trying.firstChild.textContent = sentence.split(' ')[0];
+        while(chatbox.childNodes.length > 2){
+            chatbox.removeChild(chatbox.childNodes[2]);
+        }
+        chatbox.childNodes[1].textContent = '';
+        word = 0;
+        child = 1;
+        move = false;
+        for(let x = 0; x < sentence.length; x++){
+
+            if(sentence[x] === ' '){
+                word ++;
+                trying.firstChild.textContent += ' ' + sentence.split(' ')[word];
+                if(move){
+                    chatbox.childNodes[1].textContent += chatbox.childNodes[child].textContent;
+                    child = 1;
+                    chatbox.removeChild(chatbox.childNodes[2]);
+                    move = false;
+                }
+                else if(trying.scrollHeight > trying.clientHeight){
+                    child = 2;
+                    chatbox.append(document.createElement('p'));
+                    words = trying.firstChild.textContent.split(' ');
+                    trying.firstChild.textContent = words[words.length - 1];
+                    move = true;
+                }
+            }
+
+            if(escaped){
+                return;
+            }
+            if(!skipped){
+                await new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            chatbox.childNodes[child].textContent += sentence[x];
+
+        }
+
+        finished = true;
+        chatbox.firstChild.focus();
+        return;
+    }
+
+
+
+
+//----------------------------------
+//alerts and confirms
+
+
+
+    function closeAlert() {
+        document.documentElement.style.setProperty('--alert-visibility', 'hidden');
+        document.querySelector('header').removeAttribute('inert');
+        document.querySelector('main').removeAttribute('inert');
+        document.querySelector('footer').removeAttribute('inert');
+        if(lastFocus){
+            lastFocus.focus();
+        }
+    }
+
+    function notify(text){
+        let alert = document.getElementById("alert");
+        lastFocus = document.activeElement;
+        alert.firstChild.textContent = text;
+        document.documentElement.style.setProperty('--alert-visibility', 'visible');
+        document.querySelector('header').setAttribute('inert', 'true');
+        document.querySelector('main').setAttribute('inert', 'true');
+        document.querySelector('footer').setAttribute('inert', 'true');
+        document.getElementById('ok').focus();
+    }
+
+    let confirmed = false;
+    let answered = false;
+
+    function closeConfirm(){
+        document.documentElement.style.setProperty('--confirm-visibility', 'hidden');
+        document.querySelector('header').removeAttribute('inert');
+        document.querySelector('main').removeAttribute('inert');
+        document.querySelector('footer').removeAttribute('inert');
+        if(lastFocus){
+            lastFocus.focus();
+        }
+    }
+
+    function cancel(){
+        confirmed = false;
+        answered = true;
+        closeConfirm();
+    }
+
+    function confirmAction(){
+        confirmed = true;
+        answered = true;
+        closeConfirm();
+    }
+
+    async function getConfirmation(text){
+        answered = false;
+        let confirm = document.getElementById("confirm-dialog");
+        lastFocus = document.activeElement;
+        confirm.firstChild.textContent = text;
+        document.documentElement.style.setProperty('--confirm-visibility', 'visible');
+        document.querySelector('header').setAttribute('inert', 'true');
+        document.querySelector('main').setAttribute('inert', 'true');
+        document.querySelector('footer').setAttribute('inert', 'true');
+        document.getElementById('confirm').focus();
+        while(!answered){
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+        return confirmed;
+    }
+
+//----------------------------------------------------
+//get data from storage
+
+    if(!sessionStorage.getItem('editorDisplay')){
+        sessionStorage.setItem('editorDisplay', 'none');
+    }
+    document.documentElement.style.setProperty('--editor-display', sessionStorage.getItem('editorDisplay'));
+    let editorEnabled = sessionStorage.getItem('editorDisplay') === 'block';
+
+
+    if(!localStorage.getItem('ms')){
+        localStorage.setItem('ms', '20');
+    }
+    let ms = parseInt(localStorage.getItem('ms'));
+    if(localStorage.getItem('animation-disabled') === 'true'){
+        document.documentElement.style.setProperty('--a-button-display', 'none');
+    }
+
+
+    
+        
+    let keys = ['names', 'pronouns', 'sentencesnames', 'sentencessubject', 'sentencesobject', 'sentencesdeterminer', 'sentencespossesive', 'sentencesreflexive'];
+    let storageKeys = ['namesNew', 'pronounsNew', 'sentencesNamesNew', 'sentencesSubjectNew', 'sentencesObjectNew', 'sentencesDeterminerNew', 'sentencesPossesiveNew', 'sentencesReflexiveNew'];
+
+
+
+    let namesCount = 1;
+    let setsCount = 1;
+    let br = document.createElement('br');
+    let name;
+    let subjectPronoun, objectPronoun, possesiveDeterminer, possesivePronoun, reflexivePronoun;
+    let plural = [];
+    let is = ['is', 'are'];
+    let has = ['has', 'have'];
+    let was = ['was', 'were'];
+    let s = ['s', ''];
+    let es = ['es', ''];
+    let ies = ['ies', 'y'];
+    let lastPlural = 0;
+    let elementsBackup = [];
+
+    let storage = true;
+    let currentGroup;
+    let groups = [];
+
+    let defaultNames = `default$Alex, Amari, Arbor, Arden, Ariel, Aries, Arrow, Artemis, Ash, Aster, Atumn, Avery, Azriel, Basil, Berry, Bex, Billy, Bix, Blair, Blake, Bowie, Brecken, Bryn, Cal, Cameron, Carmel, Carson, Cedar, Casey, Charlie, Claire, Cloud, Cookie, Corey, Cove, Dakota, Dark, Demi, Dennis, Dino, Drew, Dune, Dusty, Ellery, Ellis, Emerson, Emery, Ender, Everest, Fallon, Fenix, Finch, Finley, Finnegan, Fio, Flash, Flower, Frankie, Frey, Galaxy, Garland, Garnet, Gavin, Gentry, Gianni, Gift, Glenn, Golden, Greer, Hale, Hao, Hart, Harper, Hayden, Haylen, Hollis, Hope, Hunter, Ian, Iman, Indigo, Indy, Ira, Jaden, Jace, Jack, James, Jamie, Jasmine, Jessie, Jett, Jordan, Josh, Jude, Juniper, Kai, Kane, Kade, Karter, Kennedy, Kingsley, Kit, Koda, Kyle, Landon, Lark, Leaf, Lennon, Link, Lisa, Logan, Lowen, Lux, Lyric, Max, Makoto, Mani, Marlowe, Milan, Moon, Morgan, Moss, Murphy, Natale, Nature, Nazareth, Nell, Night, Noe, Noel, Nova, Nuru, Oakes, Oakley, Omid, Onyx, Otzar, Pan, Paris, Parker, Pax, Pemberley, Perry, Peyton, Phoenix, Pim, Pixel, Poe, Poet, Psalm, Puck, Quant, Quest, Quill, Quinby, Quincy, Quinn, Rain, Reagan, Remi, Remy, Ridley, Riley, Rio, River, Robin, Rory, Rowan, Royal, Rumi, Ryan, Sage, Salem, Sally, Sam, Sawyer, Sayer, Shadow, Shiloh, Scout, Skylar, Summer, Sutton, Snow, Sophie, Spencer, Spring, Star, Storm, Sunrise, Sunshine, Tait, Tatum, Taylor, Teegan, Tempest, Temple, Terrin, Tide, Udak, Umber, Urban, Utah, Vahn, Valentine, Vale, Valo, Veer, Vermont, Vero, Vesper, Vicky, Viper, Waneta, Waverly, Winter, Wisdom, Wren, Wylie, Xavi, Xen, Xerxes, Xia, Yael, Yale, Yarden, Yardley, Yuri, Zaire, Zane, Zasha, Zeal, Zealand, Zen, Zene, Zenith, Zephyr, Zohar, Zuri$template$Alex`;
+    try {if(!localStorage.getItem('namesNew')){
+        if(localStorage.getItem('names')){
+            localStorage.setItem('namesNew', `custom$` + localStorage.getItem('names') + '$' + defaultNames);
+        }
+        else{
+            localStorage.setItem('namesNew', defaultNames);
+        }
+    }
+    }
+    catch {
+        storage = false;
+    }
+    let namesSuggestions = new Map();
+    uncodenames();
+    for (const [key, value] of namesSuggestions){
+        groups.push(key);
+    }
+    if(!sessionStorage.getItem('currentGroup')){
+        sessionStorage.setItem('currentGroup', groups[0]);
+    }
+    currentGroup = sessionStorage.getItem('currentGroup');
+    let namesBackup = [];
+
+    let defaultPronouns = `default$she, her, her, hers, herself, 0 | he, him, his, his, himself, 0 | they, them, their, theirs, themself, 1 | it, it, its, its, itself, 0 | one, one, one's, one's, oneself, 0 | thon, thon, thons, thon's, thonself, 0 | xe, xem, xyr, xyrs, xemself, 0 | xe, xim, xis, xis, ximself, 0 | xe, xim, xir, xirs, ximself, 0 | ve, ver, vis, vers, verself, 0 | ze, zir, zir, zirs, zirself, 0 | e, em, es, ems, emself, 0 | e, em, es, ems, emself, 1 | ae, aer, aer, aers, aerself, 0 | co, co, cos, cos, coself, 0 | vi, vir, vis, virs, virself, 0 | ne, nem, nir, nirs, nemself, 0 | ey, em, eir, eirs, emself, 0 | ey, em, eir, eirs, emself, 1 | ey, eym, eyr, eyrs, eymself, 0 | ey, eym, eyr, eyrs, eymself, 1 | xey, xem, xeir, xeirs, xemself, 0 | xey, xem, xeir, xeirs, xemself, 1 | vey, vem, veir, veirs, vemself, 0 | vey, vem, veir, veirs, vemself, 1 | ix, ix, ixs, ixs, ixself, 0 | han, han, hans, hans, hanself, 0 | he, he, hes, hes, heself, 0 | hei, heim, heir, heir, heimself, 0 | hy, hym, hys, hys, hymself, 0 | jee, jem, jeir, jeirs, jemself, 0 | she, shim, shis, shis, shimself, 0 | shey, shem, sheir, sheirs, shemself, 0 | se, sim, ser, sers, serself, 0 | cy, cyr, cyr, cyrs, cyrself, 0 | tee, tor, tors, tors, torself, 0 | te, tem, ter, ters, temself, 0 | sye, sym, syr, syrs, symself, 0 | shy, hyr, hyr, hyrs, hyrself, 0 | shi, hir, hir, hirs, hirself, 0 | thit, thit, thits, thits, thitself, 0 | vae, vaer, vaer, vaers, vaerself, 0 | zae, zaer, zaer, zaers, zaerself, 0 | fae, faer, faer, faers, faerself, 0 | bun, bun, buns, buns, bunself, 0 | faun, faun, fauns, fauns, faunself, 0 | file, file, files, files, fileself, 0 | gem, gem, gems, gems, gemself, 0 | puff, puff, puffs, puffs, puffself, 0 | kit, kit, kits, kits, kitself, 0 | ai, ain, aire, aires, aiself, 0 | meow, mew, mews, mews, meowself, 0 | star, star, stars, stars, starself, 0 | lea, leaf, leafs, leafs, leafself, 0 | fey, fem, feir, feirs, femself, 0 | fae, faem, faer, faers, femself, 0 | bloom, bloom, blooms, blooms, bloomself, 0 | fade, fade, fades, fades, fadeself, 0 | fla, flare, flares, flares, flareself, 0 | flo, flow, flows, flows, flowerself, 0 | fluff, fluff, fluffs, fluffs, fluffself, 0 | fog, fog, fogs, fogs, fogself, 0 | fra, frost, fros, fros, frostself, 0 | fur, fur, furs, furs, furself, 0 | cat, cat, cats, cats, catself, 0 | cherry, cherry, cherries, cherries, cherryself, 0 | ic, ice, isse, issi, iceself, 0 | corn, corn, corns, corns, cornself, 0 | cactus, cactus, cactuses, cactuses, cactusself, 0 | bug, bug, bugs, bugs, bugself, 0 | dar, dark, darks, darks, darkself, 0 | dem, demon, demons, demons, demonself, 0 | dragon, dragon, dragons, dragons, dragonself, 0 | dream, dream, dreams, dreams, dreamself, 0 | lun, lun, luns, luns, lunself, 0 | moon, moon, moon, moons, moonself, 0 | paw, paw, paws, paws, pawself, 0 | sno, snow, snows, snows, snowself, 0 | woof, woof, woofs, woofs, woofself, 0 | rai, rain, rains, rains, rainself, 0 | 💜, 💜, 💜s, 💜s, 💜self, 0 | 💚, 💚, 💚s, 💚s, 💚self, 0 | 🖤, 🖤, 🖤s, 🖤s, 🖤self, 0 | 💙, 💙, 💙s, 💙s, 💙self, 0 | 💛, 💛, 💛s, 💛s, 💛self, 0 | 🦊, 🦊, 🦊s, 🦊s, 🦊self, 0 | 🦕, 🦕, 🦕s, 🦕s, 🦕self, 0 | 🐬, 🐬, 🐬s, 🐬s, 🐬self, 0 | 🦝, 🦝, 🦝s, 🦝s, 🦝self, 0 | 🐾, 🐾, 🐾s, 🐾s, 🐾self, 0 | 🍪, 🍪, 🍪s, 🍪s, 🍪self, 0 | 🍕, 🍕, 🍕s, 🍕s, 🍕self, 0 | 🍬, 🍬, 🍬s, 🍬s, 🍬self, 0 | 🍧, 🍧, 🍧s, 🍧s, 🍧self, 0 | 🎂, 🎂, 🎂s, 🎂s, 🎂self, 0 | 🍭, 🍭, 🍭s, 🍭s, 🍭self, 0 | 🍉, 🍉, 🍉s, 🍉s, 🍉self, 0 | 🍓, 🍓, 🍓s, 🍓s, 🍓self, 0 | 🥝, 🥝, 🥝s, 🥝s, 🥝self, 0 | 🍇, 🍇, 🍇s, 🍇s, 🍇self, 0 | 🌑, 🌑, 🌑s, 🌑s, 🌑self, 0 | 🪐, 🪐, 🪐s, 🪐s, 🪐self, 0 | 🗻, 🗻, 🗻s, 🗻s, 🗻self, 0 | ☁, ☁, ☁s, ☁s, ☁self, 0 | 🌈, 🌈, 🌈s, 🌈s, 🌈self, 0 | 🔥, 🔥, 🔥s, 🔥s, 🔥self, 0 | 💧, 💧, 💧s, 💧s, 💧self, 0 | ❄, ❄, ❄s, ❄s, ❄self, 0 | 🌊, 🌊, 🌊s, 🌊s, 🌊self, 0 | 🌌, 🌌, 🌌s, 🌌s, 🌌self, 0 | 🌪, 🌪, 🌪s, 🌪s, 🌪self, 0 | 🌠, 🌠, 🌠s, 🌠s, 🌠self, 0 | 💫, 💫, 💫s, 💫s, 💫self, 0 | 🎈, 🎈, 🎈s, 🎈s, 🎈self, 0 | 💎, 💎, 💎s, 💎s, 💎self, 0 | 🎮, 🎮, 🎮s, 🎮s, 🎮self, 0$template$they, them, their, theirs, themself, 1`;
+    if(!localStorage.getItem('pronounsNew')){
+        if(localStorage.getItem('pronouns')){
+            let pronounList = localStorage.getItem('pronouns');
+            pronounList += ', 0';
+            for(let i = 0; i < pronounList.length; i ++){
+                if(pronounList[i] === '|'){
+                    if(pronounList.slice(i - 9, i - 1) === 'themself'){
+                        pronounList = pronounList.slice(0, i - 1) + ', 1' + pronounList.slice(i - 1);
+                        i += 5;
+                        continue;
+                    }
+                    pronounList = pronounList.slice(0, i - 1) + ', 0' + pronounList.slice(i - 1);
+                    i += 5;
+                }
+            }
+            localStorage.setItem('pronounsNew', `custom$` + pronounList + '$' + defaultPronouns);
+        }
+        else{
+            localStorage.setItem('pronounsNew', defaultPronouns);
+        }
+    }
+    let pronounsSuggestions = new Map();
+    uncodepronouns();
+    let pronounsBackup = [];
+
+    /*
+    '-' - uppercase
+    1 - name
+    2 - subject pronoun they
+    3 - object pronoun them
+    4 - possesive determiner their
+    5 - possesive pronoun their
+    6 - reflexive pronoun themself
+    7 - is
+    8 - has
+    9 - was
+    10 - s
+    11 - es
+    12 - ies
+    */
+    let fillers;
+
+    let defaultSentencesNames = `default$"I've met with ",, 1,, " today. " | -1,, " is my best friend. " | "Do you know ",, 1,, "? " | "This is ",, 1,, ", who we talked about last week. Don't act like you don't remember it, you've literally asked me about ",, 3,, " like ten times. But don't worry, I won't tell ",, 3,, ". " | "I've heard you have a crush on my friend, ",, 1,, "? " | "I can't believe somebody could say something bad about ",, 1,, "! " | -1,, " lives here. " | "This is our neighbours child, ",, 1,, ". " | "What can I tell you about ",, 1,, "? " | "You've really never met ",, 1,, " before? " | "Let me tell you something about ",, 1,, ". " | "I'm meeting with ",, 1,, " tonight, I'm a little bit nervous about it. Oh, I haven't told you anything about ",, 1,, "? " | "If only I could spend this time with ",, 1,, " instead of wasting it on my homework... " | "I've heard you were talking with somebody about ",, 1,, ". So you know ",, 3,, " too? " | "You wanted to know something about ",, 1,, ", right? " | "This is ",, 1,, ", I haven't told you anything about ",, 3,, " yet, have I? " | "This is my roommate, ",, 1,, ". " | "Do you remember ",, 1,, "? ",, -2,, " ",, 7,, " my cousin. "$template$"Example sentence. "`;
+    if(!localStorage.getItem('sentencesNamesNew')){
+        if(localStorage.getItem('sentencesnames')){
+            let sentenceList = localStorage.getItem('sentencesnames');
+            for(let i = 2; i < sentenceList.length; i ++){
+                if(sentenceList.slice(i - 2, i) === '11'){
+                    sentenceList = sentenceList.slice(0, i - 2) + `"do",, ` + sentenceList.slice(i - 2);
+                    i += 11;
+                }
+            }
+            localStorage.setItem('sentencesNamesNew', `custom$` + sentenceList + '$' + defaultSentencesNames);
+        }
+        else {
+            localStorage.setItem('sentencesNamesNew', defaultSentencesNames);
+        }
+    }
+    let sentencesnames = new Map();
+    uncodesentencesnames();
+    let sentencesnamesBackup = [];
+
+
+    let defaultSentencesSubject = `default$-2,, " ",, 7,, " really cool. " | -2,, " ",, 7,, " a part of LGBTQA+ community. " | -2,, " ",, 8,, " so beautiful eyes! " | "Every time ",, 2,, " laugh",, 10,, ", I can't help but laugh with ",, 3,, ". " | -2,, " fully support",, 10,, " my gender, I'm so thankful to ",, 3,, " for that. " | -2,, " ",, 7,, " 100% valid, don't listen to people who will tell you otherwise. " | -2,, " struggle",, 10,, " some with finding ",, 4,, " identity, but I'm sure ",, 2,, " will figure everything out, sooner or later. " | -2,, " hate",, 10,, " going to school almost as much as I do. It's awful that we have to still deal with this terrible place. " | -2,, " ",, 7,, " kinda introverted, but it doesn't mean ",, 2,, " do",, 11,, "n't like talking, ",, 2,, " just ",, 8,, " to get to know you better. " | -2,, " still ",, 7,, "n't exactly sure, what orientation ",, 2,, " ",, 7,, ". We are both on the stage of discovering things about ourselves yet. " | -2,, " love",, 10,, " cats so much that I sometimes want to buy ",, 3,, " one just to see how happy ",, 2,, " would be. "$template$"Example sentence. "`
+    if(!localStorage.getItem('sentencesSubjectNew')){
+        if(localStorage.getItem('sentencessubject')){
+            let sentenceList = localStorage.getItem('sentencessubject');
+            for(let i = 2; i < sentenceList.length; i ++){
+                if(sentenceList.slice(i - 2, i) === '11'){
+                    sentenceList = sentenceList.slice(0, i - 2) + `"do",, ` + sentenceList.slice(i - 2);
+                    i += 11;
+                }
+            }
+            localStorage.setItem('sentencesSubjectNew', `custom$` + sentenceList + '$' + defaultSentencesSubject);
+        }
+        else {
+            localStorage.setItem('sentencesSubjectNew', defaultSentencesSubject);
+        }
+    }
+    let sentencessubject = new Map();
+    uncodesentencessubject();
+    let sentencessubjectBackup = [];
+
+    let defaultSentencesObject = `default$"I can't wait to meet with ",, 3,, " again. " | "I can talk to ",, 3,, " for hours and I would never get bored. " | -2,, " ",, 8,, " a very complicated personality and that's beutiful, because you always discover new things about ",, 3,, ". " | "I can introduce ",, 3,, " to you, I only need to ask ",, 1,, ", when ",, 2,, " ",, 8,, " some time to meet with you. " | "I'm in love with ",, 3,, ", but please, don't tell anybody about it. " | -2,, " love",, 10,, " ice creams. If you'd want to take ",, 3,, " to a date and didn't know where you should go, take ",, 3,, " for ice creams. It's always a good option. " | "I'm a bit worried about ",, 3,, ", ",, 4,, " mental health seems to have worsened recently. " | "If you see ",, 3,, ", please tell ",, 3,, " that ",, 2,, " ",, 7,, " a valuable being. " | "I wish more people would tell ",, 3,, " that ",, 2,, " ",, 7,, " perfect the way ",, 2,, " ",, 7,, ". " | -2,, " do",, 11,, "n't ",, 8,, " an easy life, I wish I could help ",, 3,, " with ",, 4,, " struggles better. ",, -1,, " doesn't deserve to suffer. " | "If you don't know how to start a conversation with ",, 3,, ", ask ",, 3,, " about ",, 4,, " gender, ",, 2,, " love",, 10,, " to talk about it. " | "I wish I had more time to hang out with ",, 3,, ". I love spending time with ",, 3,, " so much. "$template$"Example sentence. "`;
+    if(!localStorage.getItem('sentencesObjectNew')){
+        if(localStorage.getItem('sentencesobject')){
+            let sentenceList = localStorage.getItem('sentencesobject');
+            for(let i = 2; i < sentenceList.length; i ++){
+                if(sentenceList.slice(i - 2, i) === '11'){
+                    sentenceList = sentenceList.slice(0, i - 2) + `"do",, ` + sentenceList.slice(i - 2);
+                    i += 11;
+                }
+            }
+            localStorage.setItem('sentencesObjectNew', `custom$` + sentenceList + '$' + defaultSentencesObject);
+        }
+        else {
+            localStorage.setItem('sentencesObjectNew', defaultSentencesObject);
+        }
+    }
+    let sentencesobject = new Map();
+    uncodesentencesobject();
+    let sentencesobjectBackup = [];
+
+    let defaultSentencesDeterminer = `default$"I'm amazed with ",, 4,, " skills. You have no idea, how many things ",, 1,, " can do! " | -4,, " smile always brightens up my day. " | "Have you ever seen ",, 4,, " drawings? You should ask ",, 3,, " to show you some, ",, 2,, " ",, 7,, " really talented. " | -2,, " always complain",, 10,, " about ",, 4,, " body, but don't listen to ",, 3,, ", ",, 2,, " ",, 7,, " beautiful. ",, -2,, " just ",, 8,, " low self-esteem. " | "I'm going to buy ",, 3,, " pride flag for ",, 4,, " birthday, ",, 2,, " gonna love it. " | "Remember to not to use ",, 4,, " pronouns around ",, 4,, " parents, ",, 2,, " didn't come out to them yet. " | "I really hope ",, 4,, " transition will go well. " | "I wish ",, 2,, " will find a way to feel comfortable in ",, 4,, " body. Now ",, 2,, " ",, 8,, " some difficulties with that. " | "I'm so mad at people that want to take ",, 4,, " rigths away from ",, 3,, "! I don't understand that, ",, 2,, " just want",, 10,, " to be ",, 6,, ". " | "I hope ",, 2,, " remember",, 10,, " to do the exercises ",, 4,, " therapist gave ",, 3,, ". " | "I'm trying to encourage ",, 3,, " to try and ask ",, 4,, " friends for a hug more often. Did you know that we need at least 8 hugs a day for mental stability? I'm afraid ",, 1,, " doesn't get that much. "$template$"Example sentence. "`;
+    if(!localStorage.getItem('sentencesDeterminerNew')){
+        if(localStorage.getItem('sentencesdeterminer')){
+            let sentenceList = localStorage.getItem('sentencesdeterminer');
+            for(let i = 2; i < sentenceList.length; i ++){
+                if(sentenceList.slice(i - 2, i) === '11'){
+                    sentenceList = sentenceList.slice(0, i - 2) + `"do",, ` + sentenceList.slice(i - 2);
+                    i += 11;
+                }
+            }
+            localStorage.setItem('sentencesDeterminerNew', `custom$` + sentenceList + '$' + defaultSentencesDeterminer);
+        }
+        else {
+            localStorage.setItem('sentencesDeterminerNew', defaultSentencesDeterminer);
+        }
+    }
+    let sentencesdeterminer = new Map();
+    uncodesentencesdeterminer();
+    let sentencesdeterminerBackup = [];
+
+    let defaultSentencesPossesive = `default$"This plushie is ",, 5,, ", isn't it cute? " | "This notebook is ",, 5,, ", ",, 1,, " must have forgotten it. " | "I'm always laughing at ",, 4,, " jokes. It's hard to find a person with such a great sense of humor like ",, 5,, ". " | "This pen is ",, 5,, ", please remind me that I have to give it back to ",, 1,, ". " | -2,, " often say",, 10,, " ",, 2,, " want",, 10,, " to have hair like mine, but in my opinion ",, 5,, " look way much better. " | "If you think my room is nice, you should see ",, 5,, ". It's amazing, I love the way ",, 2,, " designed it. "$template$"Example sentence. "`
+    if(!localStorage.getItem('sentencesPossesiveNew')){
+        if(localStorage.getItem('sentencespossesive')){
+            let sentenceList = localStorage.getItem('sentencespossesive');
+            for(let i = 2; i < sentenceList.length; i ++){
+                if(sentenceList.slice(i - 2, i) === '11'){
+                    sentenceList = sentenceList.slice(0, i - 2) + `"do",, ` + sentenceList.slice(i - 2);
+                    i += 11;
+                }
+            }
+            localStorage.setItem('sentencesPossesiveNew', `custom$` + sentenceList + '$' + defaultSentencesPossesive);
+        }
+        else {
+            localStorage.setItem('sentencesPossesiveNew', defaultSentencesPossesive);
+        }
+    }
+    let sentencespossesive = new Map();
+    uncodesentencespossesive();
+    let sentencespossesiveBackup = [];
+
+    let defaultSentencesReflexive = `default$-2,, " ",, 8,, " made cookies for me for ",, 6,, ", that was so wholesome of ",, 3,, ". " | -2,, " ",, 7,, " testing new pronouns for ",, 6,, " right now. " | "Recently we were doing a project together, but I've got sick and ",, 2,, " had to do almost all of the work for ",, 6,, ", I still feel bad because of it. " | "If you happened to talk with ",, 3,, ", please remind ",, 3,, " ",, 2,, " should love ",, 6,, ". ",, -2,, " constantly forget",, 10,, " about it. " | "I hope ",, 2,, " will learn how to fully be ",, 6,, ". ",, -2,, " still ",, 8,, " problems with that. " | "I wish ",, 2,, " will find environment in which ",, 2,, " can fully express ",, 6,, ", now ",, 2,, " can't really open up. " | "You should talk with ",, 3,, ", ",, 2,, " will tell you more things about ",, 6,, " than I did. " | -2,, " ",, 7,, " not always honest about ",, 6,, ", because ",, 1,, " is scared of what other people will think of ",, 3,, ". " | -2,, " ",, 7,, " stressed all the time, I wish ",, 2,, " gived ",, 6,, " more time to relax. " | "I believe ",, 2,, " should accept ",, 6,, " more. " | -2,, " like",, 10,, " to spend much time just with ",, 6,, ". "$template$"Example sentence. "`;
+    if(!localStorage.getItem('sentencesReflexiveNew')){
+        if(localStorage.getItem('sentencesreflexive')){
+            let sentenceList = localStorage.getItem('sentencesreflexive');
+            for(let i = 2; i < sentenceList.length; i ++){
+                if(sentenceList.slice(i - 2, i) === '11'){
+                    sentenceList = sentenceList.slice(0, i - 2) + `"do",, ` + sentenceList.slice(i - 2);
+                    i += 11;
+                }
+            }
+            localStorage.setItem('sentencesReflexiveNew', `custom$` + sentenceList + '$' + defaultSentencesReflexive);
+        }
+        else {
+            localStorage.setItem('sentencesReflexiveNew', defaultSentencesReflexive);
+        }
+    }
+    let sentencesreflexive = new Map();
+    uncodesentencesreflexive();
+    let sentencesreflexiveBackup = [];
+
+    function uncodenames(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('namesNew');
+        }
+        else{
+            list = defaultNames;
+        }
+        let namesGroups = list.split('$');
+        for(let i = 0; i < namesGroups.length; i += 2){
+            namesSuggestions.set(namesGroups[i], namesGroups[ i + 1 ].split(', '));
+        }
+    }
+
+    function uncodepronouns(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('pronounsNew');
+        }
+        else{
+            list = defaultPronouns;
+        }
+        let pronounsGroups = list.split('$');
+        let sets;
+        for(let i = 0; i < pronounsGroups.length; i += 2){
+            sets = pronounsGroups[ i + 1 ].split(' | ');
+            for(let j = 0; j < sets.length; j ++){
+                sets[j] = sets[j].split(', ');
+            }
+            pronounsSuggestions.set(pronounsGroups[i], sets);
+        }
+    }
+    
+    function uncodesentencesnames(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('sentencesNamesNew');
+        }
+        else {
+            list = defaultSentencesNames;
+        }
+        let sentencesGroups = list.split('$');
+        let snts;
+        for(let i = 0; i < sentencesGroups.length; i += 2){
+            snts = sentencesGroups[ i + 1 ].split(' | ');
+            for(let i = 0; i < snts.length; i ++){
+                snts[i] = snts[i].split(',, ');
+                for(let j = 0; j < snts[i].length; j ++){
+                    if(snts[i][j][0] == '"'){
+                        snts[i][j] = snts[i][j].slice(1, snts[i][j].length - 1);
+                    }
+                    else{
+                        snts[i][j] = parseInt(snts[i][j]);
+                    }
+                }
+            }
+            sentencesnames.set(sentencesGroups[i], snts);
+        }
+    }
+    
+    function uncodesentencessubject(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('sentencesSubjectNew');
+        }
+        else {
+            list = defaultSentencesSubject;
+        }
+        let sentencesGroups = list.split('$');
+        let snts;
+        for(let i = 0; i < sentencesGroups.length; i += 2){
+            snts = sentencesGroups[ i + 1 ].split(' | ');
+            for(let i = 0; i < snts.length; i ++){
+                snts[i] = snts[i].split(',, ');
+                for(let j = 0; j < snts[i].length; j ++){
+                    if(snts[i][j][0] == '"'){
+                        snts[i][j] = snts[i][j].slice(1, snts[i][j].length - 1);
+                    }
+                    else{
+                        snts[i][j] = parseInt(snts[i][j]);
+                    }
+                }
+            }
+            sentencessubject.set(sentencesGroups[i], snts);
+        }
+    }
+    
+    function uncodesentencesobject(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('sentencesObjectNew');
+        }
+        else {
+            list = defaultSentencesObject;
+        }
+        let sentencesGroups = list.split('$');
+        let snts;
+        for(let i = 0; i < sentencesGroups.length; i += 2){
+            snts = sentencesGroups[ i + 1 ].split(' | ');
+            for(let i = 0; i < snts.length; i ++){
+                snts[i] = snts[i].split(',, ');
+                for(let j = 0; j < snts[i].length; j ++){
+                    if(snts[i][j][0] == '"'){
+                        snts[i][j] = snts[i][j].slice(1, snts[i][j].length - 1);
+                    }
+                    else{
+                        snts[i][j] = parseInt(snts[i][j]);
+                    }
+                }
+            }
+            sentencesobject.set(sentencesGroups[i], snts);
+        }
+    }
+    
+    function uncodesentencesdeterminer(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('sentencesDeterminerNew');
+        }
+        else {
+            list = defaultSentencesDeterminer;
+        }
+        let sentencesGroups = list.split('$');
+        let snts;
+        for(let i = 0; i < sentencesGroups.length; i += 2){
+            snts = sentencesGroups[ i + 1 ].split(' | ');
+            for(let i = 0; i < snts.length; i ++){
+                snts[i] = snts[i].split(',, ');
+                for(let j = 0; j < snts[i].length; j ++){
+                    if(snts[i][j][0] == '"'){
+                        snts[i][j] = snts[i][j].slice(1, snts[i][j].length - 1);
+                    }
+                    else{
+                        snts[i][j] = parseInt(snts[i][j]);
+                    }
+                }
+            }
+            sentencesdeterminer.set(sentencesGroups[i], snts);
+        }
+    }
+    
+    function uncodesentencespossesive(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('sentencesPossesiveNew');
+        }
+        else {
+            list = defaultSentencesPossesive;
+        }
+        let sentencesGroups = list.split('$');
+        let snts;
+        for(let i = 0; i < sentencesGroups.length; i += 2){
+            snts = sentencesGroups[ i + 1 ].split(' | ');
+            for(let i = 0; i < snts.length; i ++){
+                snts[i] = snts[i].split(',, ');
+                for(let j = 0; j < snts[i].length; j ++){
+                    if(snts[i][j][0] == '"'){
+                        snts[i][j] = snts[i][j].slice(1, snts[i][j].length - 1);
+                    }
+                    else{
+                        snts[i][j] = parseInt(snts[i][j]);
+                    }
+                }
+            }
+            sentencespossesive.set(sentencesGroups[i], snts);
+        }
+    }
+    
+    function uncodesentencesreflexive(){
+        let list;
+        if(storage){
+            list = localStorage.getItem('sentencesReflexiveNew');
+        }
+        else {
+            list = defaultSentencesReflexive;
+        }
+        let sentencesGroups = list.split('$');
+        let snts;
+        for(let i = 0; i < sentencesGroups.length; i += 2){
+            snts = sentencesGroups[ i + 1 ].split(' | ');
+            for(let i = 0; i < snts.length; i ++){
+                snts[i] = snts[i].split(',, ');
+                for(let j = 0; j < snts[i].length; j ++){
+                    if(snts[i][j][0] == '"'){
+                        snts[i][j] = snts[i][j].slice(1, snts[i][j].length - 1);
+                    }
+                    else{
+                        snts[i][j] = parseInt(snts[i][j]);
+                    }
+                }
+            }
+            sentencesreflexive.set(sentencesGroups[i], snts);
+        }
+    }
+
+//-----------------------------------------------------
+
+
+    function upperCase(string){
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function random(array){
+        let index = Math.floor(Math.random() * array.length);
+        if(array[0] === 0){
+            if(index !== array.length - 1){
+                index += 1;
+            }
+            return array[index];
+        }
+        if(typeof(array[index]) === 'string'){
+            lastPlural = plural[index];
+        }
+        return array[index];
+    }
+
+    function buildSentence(array){
+        if(array === undefined){
+            return '';
+        }
+        let outcome = '';
+        for(let i = 0; i < array.length; i += 1){
+            if(typeof(array[i]) === 'number'){
+                if(array[i] < 0){
+                    if(array[i] < -6){
+                        outcome += upperCase(fillers[array[i] * -1][lastPlural]);
+                    }
+                    else{
+                        outcome += upperCase(random(fillers[array[i] * -1]));
+                    }
+                }
+                else{
+                    if(array[i] > 6){
+                        outcome += fillers[array[i]][lastPlural];
+                    }
+                    else{
+                        outcome += random(fillers[array[i]]);
+                    }
+                }
+            }
+            else{
+                outcome += array[i];
+            }
+        }
+        return outcome;
+    }
+
+    function testResults(form){
+        name = [];
+        name.push(0);
+        for(let i = 1; i <= namesCount; i += 1){
+            eval(`if(form.name${i}.value){
+            name.push(form.name${i}.value)}`);
+        }
+        if(name.length === 1){
+            // name.push('this person');
+            // name.push('that person');
+            // name.push('this individual');
+            // name.push('that individual');
+            // name.push('this human being');
+            // name.push('that human being');
+            for(let i = 0; i < namesSuggestions.get(currentGroup).length; i ++){
+                name.push(namesSuggestions.get(currentGroup)[i]);
+            }
+        }
+        subjectPronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.subjectPronoun${i}.value){
+                subjectPronoun.push(form.subjectPronoun${i}.value)}`);
+        }
+        if(subjectPronoun.length === 0){
+            // for(let i = 1; i < name.length; i += 1){
+            //     subjectPronoun.push(name[i]);
+            // }
+            for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i ++){
+                subjectPronoun.push(pronounsSuggestions.get(currentGroup)[i][0]);
+            }
+        }
+        objectPronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.objectPronoun${i}.value){
+                objectPronoun.push(form.objectPronoun${i}.value)}`);
+        }
+        if(objectPronoun.length === 0){
+            // for(let i = 1; i < name.length; i += 1){
+            //     objectPronoun.push(name[i]);
+            // }
+            for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i ++){
+                objectPronoun.push(pronounsSuggestions.get(currentGroup)[i][1]);
+            }
+        }
+        possesiveDeterminer = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.possesiveDeterminer${i}.value){
+                possesiveDeterminer.push(form.possesiveDeterminer${i}.value)}`);
+        }
+        if(possesiveDeterminer.length === 0){
+            // for(let i = 1; i < name.length; i += 1){
+            //     possesiveDeterminer.push(name[i] + "'s");
+            // }
+            for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i ++){
+                possesiveDeterminer.push(pronounsSuggestions.get(currentGroup)[i][2]);
+            }
+        }
+        possesivePronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.possesivePronoun${i}.value){
+                possesivePronoun.push(form.possesivePronoun${i}.value)}`);
+        }
+        if(possesivePronoun.length === 0){
+            // for(let i = 1; i < name.length; i += 1){
+            //     possesivePronoun.push(name[i] + "'s");
+            // }
+            for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i ++){
+                possesivePronoun.push(pronounsSuggestions.get(currentGroup)[i][3]);
+            }
+        }
+        reflexivePronoun = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.reflexivePronoun${i}.value){
+                reflexivePronoun.push(form.reflexivePronoun${i}.value)}`);
+        }
+        if(reflexivePronoun.length === 0){
+            // for(let i = 1; i < name.length; i += 1){
+            //     reflexivePronoun.push(name[i] + 'self');
+            // }
+            for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i ++){
+                reflexivePronoun.push(pronounsSuggestions.get(currentGroup)[i][4]);
+            }
+        }
+        plural = [];
+        for(let i = 1; i <= setsCount; i += 1){
+            eval(`if(form.subjectPronoun${i}.value){
+                plural.push(Number(form.plural${i}.value))}`);
+        }
+        if(plural.length < subjectPronoun.length){
+            // for(let i = plural.length; i < subjectPronoun.length; i++){
+            //     plural.push(0);
+            // }
+            for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i ++){
+                plural.push(pronounsSuggestions.get(currentGroup)[i][5]);
+            }
+        }
+        fillers = [0, name, subjectPronoun, objectPronoun, possesiveDeterminer, possesivePronoun, reflexivePronoun, is, has, was, s, es, ies];
+        let result = buildSentence(random(sentencesnames.get(currentGroup))) + buildSentence(random(sentencessubject.get(currentGroup))) + buildSentence(random(sentencesobject.get(currentGroup))) + buildSentence(random(sentencesdeterminer.get(currentGroup))) + buildSentence(random(sentencespossesive.get(currentGroup))) + buildSentence(random(sentencesreflexive.get(currentGroup)));
+        write(result);
+    }
+
+    function addName(){
+        namesCount += 1;
+        let input = document.createElement('input');
+        input.setAttribute('name', `name${namesCount}`);
+        input.setAttribute('class', 'gray rounded margin');
+        input.setAttribute('aria-live', 'polite');
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'rose smallButton');
+        button.setAttribute('onClick', `fillName(${namesCount})`);
+        let txt = document.createTextNode('Random');
+        button.append(txt);
+        let button2 = document.createElement('button');
+        button2.setAttribute('type', 'button');
+        button2.setAttribute('class', 'rose smallButton');
+        button2.setAttribute('onClick', `clearName(${namesCount})`);
+        let buttontxt2 = document.createTextNode('Clear');
+        button2.append(buttontxt2);
+        document.getElementById('names').append(input, button, button2, br.cloneNode());
+        input.focus();
+    }
+    function addSet(){
+        setsCount += 1;
+        let table = document.createElement('table');
+        table.setAttribute('role', 'presentation');
+
+        let tr1 = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let div1 = document.createElement('div');
+        div1.setAttribute('class', 'left margin');
+        let txt1 = document.createTextNode('Subject pronoun:');
+        div1.append(txt1);
+        td1.append(div1);
+        let td2 = document.createElement('td');
+        let input1 = document.createElement('input');
+        input1.setAttribute('name', `subjectPronoun${setsCount}`);
+        input1.setAttribute('class', 'gray rounded margin');
+        input1.setAttribute('aria-live', 'polite');
+        input1.setAttribute('autocapitalize', 'off');
+        td2.append(input1);
+        tr1.append(td1, td2);
+
+        let tr2 = document.createElement('tr');
+        let td3 = document.createElement('td');
+        let div2 = document.createElement('div');
+        div2.setAttribute('class', 'left margin');
+        let txt2 = document.createTextNode('Object pronoun:');
+        div2.append(txt2);
+        td3.append(div2);
+        let td4 = document.createElement('td');
+        let input2 = document.createElement('input');
+        input2.setAttribute('name', `objectPronoun${setsCount}`);
+        input2.setAttribute('class', 'gray rounded margin');
+        input2.setAttribute('aria-live', 'polite');
+        input2.setAttribute('autocapitalize', 'off');
+        td4.append(input2);
+        tr2.append(td3, td4);
+
+        let tr3 = document.createElement('tr');
+        let td5 = document.createElement('td');
+        let div3 = document.createElement('div');
+        div3.setAttribute('class', 'left margin');
+        let txt3 = document.createTextNode('Possesive determiner:');
+        div3.append(txt3);
+        td5.append(div3);
+        let td6 = document.createElement('td');
+        let input3 = document.createElement('input');
+        input3.setAttribute('name', `possesiveDeterminer${setsCount}`);
+        input3.setAttribute('class', 'gray rounded margin');
+        input3.setAttribute('aria-live', 'polite');
+        input3.setAttribute('autocapitalize', 'off');
+        td6.append(input3);
+        tr3.append(td5, td6);
+
+        let tr4 = document.createElement('tr');
+        let td7 = document.createElement('td');
+        let div4 = document.createElement('div');
+        div4.setAttribute('class', 'left margin');
+        let txt4 = document.createTextNode('Possesive pronoun:');
+        div4.append(txt4);
+        td7.append(div4);
+        let td8 = document.createElement('td');
+        let input4 = document.createElement('input');
+        input4.setAttribute('name', `possesivePronoun${setsCount}`);
+        input4.setAttribute('class', 'gray rounded margin');
+        input4.setAttribute('aria-live', 'polite');
+        input4.setAttribute('autocapitalize', 'off');
+        td8.append(input4);
+        tr4.append(td7, td8);
+
+        let tr5 = document.createElement('tr');
+        let td9 = document.createElement('td');
+        let div5 = document.createElement('div');
+        div5.setAttribute('class', 'left margin');
+        let txt5 = document.createTextNode('Reflexive pronoun:');
+        div5.append(txt5);
+        td9.append(div5);
+        let td10 = document.createElement('td');
+        let input5 = document.createElement('input');
+        input5.setAttribute('name', `reflexivePronoun${setsCount}`);
+        input5.setAttribute('class', 'gray rounded margin');
+        input5.setAttribute('aria-live', 'polite');
+        input5.setAttribute('autocapitalize', 'off');
+        td10.append(input5);
+        tr5.append(td9, td10);
+
+        table.append(tr1, tr2, tr3, tr4, tr5);
+
+        let h = document.createElement('h3');
+        h.setAttribute('class', 'margin set-title');
+        let txt = document.createTextNode(`Set ${setsCount}:`);
+        h.append(txt);
+
+        let label = document.createElement('label');
+        label.setAttribute('class', 'margin');
+        label.setAttribute('for', `select${setsCount}`);
+        label.append(document.createTextNode('This pronoun set is:'));
+        let select = document.createElement('select');
+        select.setAttribute('name', `plural${setsCount}`);
+        select.setAttribute('id', `select${setsCount}`);
+        select.setAttribute('class', 'gray rounded');
+        let option1 = document.createElement('option');
+        option1.setAttribute('value', '0');
+        option1.append(document.createTextNode('singular'));
+        let option2 = document.createElement('option');
+        option2.setAttribute('value', '1');
+        option2.append(document.createTextNode('plural'));
+        select.append(option1, option2);
+
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'violet smallButton');
+        button.setAttribute('onClick', `autofill(${setsCount}, this.form.subjectPronoun${setsCount}.value)`);
+        button.append(document.createTextNode('Autofill'));
+
+        let button2 = document.createElement('button');
+        button2.setAttribute('type', 'button');
+        button2.setAttribute('class', 'violet smallButton');
+        button2.setAttribute('onClick', `fillPronouns(${setsCount})`);
+        button2.append(document.createTextNode('Random'));
+
+        let button3 = document.createElement('button');
+        button3.setAttribute('type', 'button');
+        button3.setAttribute('class', 'violet smallButton');
+        button3.setAttribute('onClick', `clearSet(${setsCount})`);
+        button3.append(document.createTextNode('Clear'));
+
+        document.getElementById('sets').append(h, table, label, select, button, button2, button3);
+        input1.focus();
+    }
+
+    function autofill(set, subject){
+        let form = document.getElementById('form');
+        if(!subject){
+            return;
+        }
+        for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i += 1){
+            if(pronounsSuggestions.get(currentGroup)[i][0] === subject){
+                eval(`form.objectPronoun${set}.value = pronounsSuggestions.get(currentGroup)[i][1];
+                form.possesiveDeterminer${set}.value = pronounsSuggestions.get(currentGroup)[i][2];
+                form.possesivePronoun${set}.value = pronounsSuggestions.get(currentGroup)[i][3];
+                form.reflexivePronoun${set}.value = pronounsSuggestions.get(currentGroup)[i][4];
+                form.plural${set}.value = parseInt(pronounsSuggestions.get(currentGroup)[i][5]);`);
+                return;
+            }
+        }
+        eval(`form.objectPronoun${set}.value = subject;
+        form.possesiveDeterminer${set}.value = subject + 's';
+        form.possesivePronoun${set}.value = subject + 's';
+        form.reflexivePronoun${set}.value = subject + 'self';`);
+    }
+
+    function fillPronouns(set){
+        if(pronounsSuggestions.get(currentGroup).length === 0){
+            return;
+        }
+        let idx = Math.floor(Math.random() * pronounsSuggestions.get(currentGroup).length);
+        let rand = pronounsSuggestions.get(currentGroup)[idx];
+        eval(`form.subjectPronoun${set}.value = rand[0];
+        form.objectPronoun${set}.value = rand[1];
+        form.possesiveDeterminer${set}.value = rand[2];
+        form.possesivePronoun${set}.value = rand[3];
+        form.reflexivePronoun${set}.value = rand[4];
+        form.plural${set}.value = parseInt(rand[5]);`);
+        
+    }
+
+    function fillName(name){
+        if(namesSuggestions.get(currentGroup).length === 0){
+            return;
+        }
+        let idx = Math.floor(Math.random() * namesSuggestions.get(currentGroup).length);
+        eval(`form.name${name}.value = namesSuggestions.get(currentGroup)[idx];`);
+    }
+
+    function clearSet(set){
+        eval(`form.subjectPronoun${set}.value = '';
+        form.objectPronoun${set}.value = '';
+        form.possesiveDeterminer${set}.value = '';
+        form.possesivePronoun${set}.value = '';
+        form.reflexivePronoun${set}.value = '';`);
+    }
+
+    function clearName(name){
+        eval(`form.name${name}.value = '';`);
+    }
+
+    let namesShown = false;
+    let namesTables = new Map();
+    for(let q = 0; q < groups.length; q ++){
+        let namesTable = document.createElement('table');
+        namesTable.setAttribute('role', 'presentation');
+        namesTable.setAttribute('aria-live', 'polite');
+        for(let i = 0; i < namesSuggestions.get(groups[q]).length; i += 1){
+            let tr = document.createElement('tr');
+            let td1 = document.createElement('td');
+            td1.append(document.createTextNode(namesSuggestions.get(groups[q])[i]));
+            let td2 = document.createElement('td');
+            let button = document.createElement('button');
+            button.setAttribute('type', 'button');
+            button.setAttribute('class', 'rose smallButton');
+            button.setAttribute('onClick', `removeName('${namesSuggestions.get(groups[q])[i]}')`);
+            button.append(document.createTextNode('Delete'));
+            td2.append(button);
+            tr.append(td1, td2);
+            namesTable.append(tr);
+        }
+        namesTables.set(groups[q], namesTable);
+    }
+
+    let namesDown = document.createElement('a');
+    namesDown.setAttribute('id', 'names-start');
+    namesDown.setAttribute('class', 'expandButton');
+    namesDown.setAttribute('href', '#names-end');
+    namesDown.setAttribute('onClick', 'scrollElement(namesUp)');
+    namesDown.append(document.createTextNode('\u2193 bottom \u2193'));
+
+    let namesUp = document.createElement('a');
+    namesUp.setAttribute('id', 'names-end');
+    namesUp.setAttribute('class', 'expandButton');
+    namesUp.setAttribute('href', '#names-start');
+    namesUp.setAttribute('onClick', 'scrollElement(namesDown)');
+    namesUp.append(document.createTextNode('\u2191 top \u2191'));
+
+    let namesP = document.createElement('p');
+    namesP.append(namesDown, namesTables.get(currentGroup), namesUp);
+
+
+    let pronounsShown = false;
+    let pronounsParagraph = document.createElement('p');
+    pronounsParagraph.setAttribute('class', 'text');
+    let pronounsTables = new Map();
+    for(let q = 0; q < groups.length; q ++){
+        let pronounsTable = document.createElement('table');
+        pronounsTable.setAttribute('id', 'pronouns-table');
+        pronounsTable.setAttribute('role', 'presentation');
+        pronounsTable.setAttribute('aria-live', 'polite');
+        for(let i = 0; i < pronounsSuggestions.get(groups[q]).length; i += 1){
+            let tr = document.createElement('tr');
+            let td1 = document.createElement('td');
+            let set = `${pronounsSuggestions.get(groups[q])[i][0]}/${pronounsSuggestions.get(groups[q])[i][1]}/${pronounsSuggestions.get(groups[q])[i][2]}/${pronounsSuggestions.get(groups[q])[i][3]}/${pronounsSuggestions.get(groups[q])[i][4]}`;
+            if(pronounsSuggestions.get(groups[q])[i][5] === '0'){
+                set += ', singular';
+            }
+            else {
+                set += ', plural';
+            }
+            td1.append(document.createTextNode(set));
+            let td2 = document.createElement('td');
+            let setInLocal = `${pronounsSuggestions.get(groups[q])[i][0]}, ${pronounsSuggestions.get(groups[q])[i][1]}, ${pronounsSuggestions.get(groups[q])[i][2]}, ${pronounsSuggestions.get(groups[q])[i][3]}, ${pronounsSuggestions.get(groups[q])[i][4]}, ${pronounsSuggestions.get(groups[q])[i][5]}`;
+            let button = document.createElement('button');
+            button.setAttribute('type', 'button');
+            button.setAttribute('class', 'violet smallButton');
+            button.setAttribute('onClick', `removeSet(\`${set}\`, \`${setInLocal}\`)`);
+            button.append(document.createTextNode('Delete'));
+            td2.append(button);
+            tr.append(td1, td2);
+            pronounsTable.append(tr);
+        }
+        pronounsTables.set(groups[q], pronounsTable);
+    }
+
+    let inputsP = [];
+    
+    let pronounsDown = document.createElement('a');
+    pronounsDown.setAttribute('id', 'pronouns-start');
+    pronounsDown.setAttribute('class', 'expandButton');
+    pronounsDown.setAttribute('href', '#pronouns-end');
+    pronounsDown.setAttribute('onClick', 'scrollElement(document.getElementById("object"))');
+    pronounsDown.append(document.createTextNode('\u2193 bottom \u2193')); //↓
+
+    let pronounsUp = document.createElement('a');
+    pronounsUp.setAttribute('id', 'pronouns-end');
+    pronounsUp.setAttribute('class', 'expandButton');
+    pronounsUp.setAttribute('href', '#pronouns-start');
+    pronounsUp.setAttribute('onClick', 'scrollElement(pronounsDown)');
+    pronounsUp.append(document.createTextNode('\u2191 top \u2191')); //↑
+
+    let pronounsP = document.createElement('p');
+    pronounsP.append(pronounsDown, pronounsTables.get(currentGroup), pronounsUp);
+
+    let sentencesParagraph = document.createElement('p');
+
+    let sentencesShown = false;
+    
+    let sentencesUp = document.createElement('a');
+    sentencesUp.setAttribute('id', 'sentences-start');
+    sentencesUp.setAttribute('class', 'expandButton');
+    sentencesUp.setAttribute('href', '#sentences-end');
+    sentencesUp.setAttribute('onClick', 'scrollElement(document.getElementById("addingSentences"))');
+    sentencesUp.append(document.createTextNode('\u2193 bottom \u2193'));
+
+    let sentencesDown = document.createElement('a');
+    sentencesDown.setAttribute('id', 'sentences-end');
+    sentencesDown.setAttribute('class', 'expandButton');
+    sentencesDown.setAttribute('href', '#sentences-start');
+    sentencesDown.setAttribute('onClick', 'scrollElement(sentencesUp)');
+    sentencesDown.append(document.createTextNode('\u2191 top \u2191'));
+
+    let sentencesParas = new Map();
+    for(let q = 0; q < groups.length; q ++){
+        plural = [pronounsSuggestions.get(groups[q])[0][5]];
+        fillers = [0, [namesSuggestions.get(groups[q])[0]], [pronounsSuggestions.get(groups[q])[0][0]], [pronounsSuggestions.get(groups[q])[0][1]], [pronounsSuggestions.get(groups[q])[0][2]], [pronounsSuggestions.get(groups[q])[0][3]], [pronounsSuggestions.get(groups[q])[0][4]], is, has, was, s, es, ies];
+        let namesh = document.createElement('h3');
+        namesh.append(document.createTextNode('Sentences including name'));
+        let sentencesnamesP = document.createElement('p');
+    
+        for(let i = 0; i < sentencesnames.get(groups[q]).length; i += 1){
+            let p = document.createElement('p');
+            p.setAttribute('class', 'text');
+            let sentence = buildSentence(sentencesnames.get(groups[q])[i]);
+            let txt = document.createElement('p');
+            txt.append(document.createTextNode(sentence));
+            let namesB = document.createElement('button');
+            namesB.setAttribute('type', 'button');
+            namesB.setAttribute('class', 'blue smallButton');
+            namesB.setAttribute('onClick', `removeSentence('names', "${sentence}")`);
+            namesB.append(document.createTextNode('Delete'));
+            p.append(txt, namesB);
+            sentencesnamesP.append(p);
+        }
+    
+        let subjecth = document.createElement('h3');
+        subjecth.append(document.createTextNode('Sentences including subject pronoun'));
+        let sentencessubjectP = document.createElement('p');
+    
+        for(let i = 0; i < sentencessubject.get(groups[q]).length; i += 1){
+            let p = document.createElement('p');
+            p.setAttribute('class', 'text');
+            let sentence = buildSentence(sentencessubject.get(groups[q])[i]);
+            let txt = document.createElement('p');
+            txt.append(document.createTextNode(sentence));
+            let subjectB = document.createElement('button');
+            subjectB.setAttribute('type', 'button');
+            subjectB.setAttribute('class', 'blue smallButton');
+            subjectB.setAttribute('onClick', `removeSentence('subject', "${sentence}")`);
+            subjectB.append(document.createTextNode('Delete'));
+            p.append(txt, subjectB);
+            sentencessubjectP.append(p);
+        }
+    
+        let objecth = document.createElement('h3');
+        objecth.append(document.createTextNode('Sentences including object pronoun'));
+        let sentencesobjectP = document.createElement('p');
+    
+        for(let i = 0; i < sentencesobject.get(groups[q]).length; i += 1){
+            let p = document.createElement('p');
+            p.setAttribute('class', 'text');
+            let sentence = buildSentence(sentencesobject.get(groups[q])[i]);
+            let txt = document.createElement('p');
+            txt.append(document.createTextNode(sentence));
+            let objectB = document.createElement('button');
+            objectB.setAttribute('type', 'button');
+            objectB.setAttribute('class', 'blue smallButton');
+            objectB.setAttribute('onClick', `removeSentence('object', "${sentence}")`);
+            objectB.append(document.createTextNode('Delete'));
+            p.append(txt, objectB);
+            sentencesobjectP.append(p);
+        }
+    
+        let determinerh = document.createElement('h3');
+        determinerh.append(document.createTextNode('Sentences including possesive determiner'));
+        let sentencesdeterminerP = document.createElement('p');
+    
+        for(let i = 0; i < sentencesdeterminer.get(groups[q]).length; i += 1){
+            let p = document.createElement('p');
+            p.setAttribute('class', 'text');
+            let sentence = buildSentence(sentencesdeterminer.get(groups[q])[i]);
+            let txt = document.createElement('p');
+            txt.append(document.createTextNode(sentence));
+            let determinerB = document.createElement('button');
+            determinerB.setAttribute('type', 'button');
+            determinerB.setAttribute('class', 'blue smallButton');
+            determinerB.setAttribute('onClick', `removeSentence('determiner', "${sentence}")`);
+            determinerB.append(document.createTextNode('Delete'));
+            p.append(txt, determinerB);
+            sentencesdeterminerP.append(p);
+        }
+    
+        let possesiveh = document.createElement('h3');
+        possesiveh.append(document.createTextNode('Sentences including possesive pronoun'));
+        let sentencespossesiveP = document.createElement('p');
+    
+        for(let i = 0; i < sentencespossesive.get(groups[q]).length; i += 1){
+            let p = document.createElement('p');
+            p.setAttribute('class', 'text');
+            let sentence = buildSentence(sentencespossesive.get(groups[q])[i]);
+            let txt = document.createElement('p');
+            txt.append(document.createTextNode(sentence));
+            let possesiveB = document.createElement('button');
+            possesiveB.setAttribute('type', 'button');
+            possesiveB.setAttribute('class', 'blue smallButton');
+            possesiveB.setAttribute('onClick', `removeSentence('possesive', "${sentence}")`);
+            possesiveB.append(document.createTextNode('Delete'));
+            p.append(txt, possesiveB);
+            sentencespossesiveP.append(p);
+        }
+    
+        let reflexiveh = document.createElement('h3');
+        reflexiveh.append(document.createTextNode('Sentences including reflexive pronoun'));
+        let sentencesreflexiveP = document.createElement('p');
+    
+        for(let i = 0; i < sentencesreflexive.get(groups[q]).length; i += 1){
+            let p = document.createElement('p');
+            p.setAttribute('class', 'text');
+            let sentence = buildSentence(sentencesreflexive.get(groups[q])[i]);
+            let txt = document.createElement('p');
+            txt.append(document.createTextNode(sentence));
+            let reflexiveB = document.createElement('button');
+            reflexiveB.setAttribute('type', 'button');
+            reflexiveB.setAttribute('class', 'blue smallButton');
+            reflexiveB.setAttribute('onClick', `removeSentence('reflexive', "${sentence}")`);
+            reflexiveB.append(document.createTextNode('Delete'));
+            p.append(txt, reflexiveB);
+            sentencesreflexiveP.append(p);
+        }
+
+        let sentencesP = document.createElement('p');
+        sentencesP.append(namesh, sentencesnamesP, subjecth, sentencessubjectP, objecth, sentencesobjectP, determinerh, sentencesdeterminerP, possesiveh, sentencespossesiveP, reflexiveh, sentencesreflexiveP);
+        sentencesParas.set(groups[q], sentencesP);
+    }
+
+    let sentencesDiv = document.createElement('div');
+    sentencesDiv.append(sentencesUp, sentencesParas.get(currentGroup), sentencesDown);
+
+    let sentenceToAdd;
+    let codedFillers = [0, 'JAKE', 'XE', 'XEM', 'XYR', 'XYRS', 'XEMSELF', 'IS', 'HAS', 'WAS', 'S#', 'ES#', 'IES#'];
+
+    function renderForUser(){
+        let area = document.getElementById('area');
+        let renderedSentence = document.getElementById('renderedSentence');
+        let sentence = area.value;
+        if(sentence[sentence.length - 1] === '|' || sentence[sentence.length - 1] === '$' 
+        || sentence.slice(sentence.length - 2, sentence.length) === ',,' ){
+            area.value = sentence.slice(0, sentence.length - 1);
+            return;
+        }
+        if(sentence[sentence.length - 1] !== ' '){
+            sentence += ' ';
+        }
+        sentenceToAdd = [];
+        let sliceBegining = 0;
+        for(let i = 0; i < sentence.length; i += 1){
+            for(let j = codedFillers.length - 1; j > 0 ; j -= 1){
+                if(i + codedFillers[j].length <= sentence.length &&
+                 sentence.slice(i, i + codedFillers[j].length) === codedFillers[j]){
+                    if(i !== 0){
+                        sentenceToAdd.push(sentence.slice(sliceBegining, i));
+                    }
+                    sentenceToAdd.push(j);
+                    i += codedFillers[j].length - 1; 
+                    sliceBegining = i + 1;
+                    break;
+                 }
+                if(i + codedFillers[j].length + 1 <= sentence.length &&
+                 sentence.slice(i, i + codedFillers[j].length + 1) === '#' + codedFillers[j]){
+                    if(i !== 0){
+                        sentenceToAdd.push(sentence.slice(sliceBegining, i));
+                    }
+                    sentenceToAdd.push(-j);
+                    i += codedFillers[j].length; 
+                    sliceBegining = i + 1;
+                    break;
+                 }
+            }
+        }
+        if(sliceBegining < sentence.length){
+            sentenceToAdd.push(sentence.slice(sliceBegining));
+        }
+        plural = [1];
+        fillers = [0, ['Ash'], ['they'], ['them'], ['their'], ['theirs'], ['themself'], is, has, was, s, es, ies];
+        renderedSentence.textContent = buildSentence(sentenceToAdd);
+    }
+
+
+    function editorMode(){
+        if(!editorEnabled){
+            if(!storage){
+                notify("Feature we need to store data is unavaible. Personalisation mode may not work properly. Turn off the private mode or try to acces the page through a newer browser.");
+            }
+            document.documentElement.style.setProperty("--editor-display", "block");
+            sessionStorage.setItem('editorDisplay', 'block');
+            editorEnabled = true;
+            document.getElementById('editorbutton').scrollIntoView({block: 'start', behavior: 'smooth'});
+            return;
+        }
+        sessionStorage.setItem('editorDisplay', 'none');
+        document.documentElement.style.setProperty("--editor-display", "none");
+        editorEnabled = false;
+    }
+
+
+    function changeGroup(group){
+        namesP.removeChild(namesTables.get(currentGroup));
+        pronounsP.removeChild(pronounsTables.get(currentGroup));
+        sentencesDiv.removeChild(sentencesParas.get(currentGroup));
+        currentGroup = group;
+        sessionStorage.setItem('currentGroup', group);
+        namesDown.after(namesTables.get(currentGroup));
+        pronounsDown.after(pronounsTables.get(currentGroup));
+        sentencesUp.after(sentencesParas.get(currentGroup));
+    }
+
+    let groupEdit = false;
+    let rename = false;
+
+    function enableRename(){
+        if(groupEdit && rename){
+            document.documentElement.style.setProperty('--group-display', 'none');
+            groupEdit = false;
+            return;
+        }
+        document.documentElement.style.setProperty('--group-display', 'inline-block');
+        document.getElementById('group-label').textContent = "Choose a new name for this group:";
+        let button = document.getElementById('group-button');
+        button.textContent = 'Rename';
+        button.setAttribute('onclick', 'renameGroup()');
+        document.getElementById('group-input').focus();
+        groupEdit = true;
+        rename = true;
+    }
+
+    function renameGroup(){
+        let newName = document.getElementById('group-input').value;
+        if(newName){
+
+            for(let i = 0; i < groups.length; i ++){
+                if(groups[i] === currentGroup){
+                    groups[i] = newName;
+                    break;
+                }
+            }
+
+            for(let i = 0; i < keys.length; i ++){
+                dataLists.get(keys[i]).set(newName, dataLists.get(keys[i]).get(currentGroup));
+                dataLists.get(keys[i]).delete(currentGroup);
+            }
+
+            let list;
+            for(let i = 0; i < storageKeys.length; i ++){
+                list = localStorage.getItem(storageKeys[i]);
+                list = list.split('$');
+                for(let j = 0; j < list.length; j += 2){
+                    if(list[j] === currentGroup){
+                        list[j] = newName;
+                        break;
+                    }
+                }
+                localStorage.setItem(storageKeys[i], list.join('$'));
+            }
+
+            let select = document.getElementById('group-select');
+            for(let i = 0; i < select.childNodes.length; i ++){
+                if(select.childNodes[i].textContent === currentGroup){
+                    select.childNodes[i].textContent = newName;
+                    break;
+                }
+            }
+
+            
+            namesTables.set(newName, namesTables.get(currentGroup));
+            namesTables.delete(currentGroup);
+                        
+            pronounsTables.set(newName, pronounsTables.get(currentGroup));
+            pronounsTables.delete(currentGroup);
+
+            sentencesParas.set(newName, sentencesParas.get(currentGroup));
+            sentencesParas.delete(currentGroup);
+
+            currentGroup = newName;
+            sessionStorage.setItem('currentGroup', newName);
+            document.documentElement.style.setProperty('--group-display', 'none');
+            document.getElementById('group-input').value = '';
+            groupEdit = false;
+            select.focus();
+        }
+    }
+
+async function deleteGroup(){
+    if(groups.length === 2){
+        notify("This is the last group, you can't delete it.");
+        return;
+    }
+    if(await getConfirmation("Are you sure you want to delete " + currentGroup + " group? This action cannot be undone.")){
+        let newCurrent;
+        let deletedGroup = currentGroup;
+        for(let i = 0; i < groups.length; i ++){
+            if(groups[i] === deletedGroup){
+                groups.splice(i, 1);
+                if(i === 0){
+                    if(groups[i] !== 'template'){
+                        newCurrent = groups[i];
+                    }
+                    else {
+                        newCurrent = groups[i+1];
+                    }
+                }
+                else{
+                    if(groups[i-1] !== 'template'){
+                        newCurrent = groups[i-1];
+                    }
+                    else if(i !== groups.length){
+                        newCurrent = groups[i];
+                    }
+                    else {
+                        newCurrent = groups[i-2];
+                    }
+                }
+                break;
+            }
+        }
+
+        for(let i = 0; i < keys.length; i ++){
+            dataLists.get(keys[i]).delete(deletedGroup);
+        }
+        
+        let list;
+        for(let i = 0; i < storageKeys.length; i ++){
+            list = localStorage.getItem(storageKeys[i]);
+            list = list.split('$');
+            for(let j = 0; j < list.length; j += 2){
+                if(list[j] === deletedGroup){
+                    list.splice(j, 2);
+                    break;
+                }
+            }
+            localStorage.setItem(storageKeys[i], list.join('$'));
+        }
+        
+        let select = document.getElementById('group-select');
+        for(let i = 1; i < select.childNodes.length; i ++){
+            select.childNodes[i].removeAttribute('selected');
+            if(select.childNodes[i].textContent === newCurrent){
+                select.childNodes[i].setAttribute('selected', 'true');
+                select.value = newCurrent;
+            }
+            if(select.childNodes[i].textContent === deletedGroup){
+                select.removeChild(select.childNodes[i]);
+                i --;
+            }
+        }
+        
+        changeGroup(newCurrent);
+        
+        namesTables.delete(deletedGroup);
+        pronounsTables.delete(deletedGroup);
+        sentencesParas.delete(deletedGroup);
+    
+    }
+}
+
+    function enableAdd(){
+        if(groupEdit && !rename){
+            document.documentElement.style.setProperty('--group-display', 'none');
+            groupEdit = false;
+            return;
+        }
+        document.documentElement.style.setProperty('--group-display', 'inline-block');
+        document.getElementById('group-label').textContent = "Choose a name for the new group:";
+        let button = document.getElementById('group-button');
+        button.textContent = 'Add';
+        button.setAttribute('onclick', 'duplicateGroup("template", document.getElementById("group-input").value)');
+        document.getElementById('group-input').focus();
+        groupEdit = true;
+        rename = false;
+    }
+
+    function duplicateGroup(copiedGroup, newName){
+        if('template' === newName){
+            notify("This name is reserved for the template group we use for adding new groups. Please choose a different name.");
+            return;
+        }
+        for(let i = 0; i < groups.length; i ++){
+            if(groups[i] === newName){
+                notify("A group with this name already exists. Please choose a different name.");
+                return;
+            }
+        }
+        groups.push(newName);
+
+        for(let i = 0; i < keys.length; i ++){
+            dataLists.get(keys[i]).set(newName, dataLists.get(keys[i]).get(copiedGroup));
+        }
+
+        let list;
+        for(let i = 0; i < storageKeys.length; i ++){
+            list = localStorage.getItem(storageKeys[i]);
+            list = list.split('$');
+            for(let j = 0; j < list.length; j += 2){
+                if(list[j] === copiedGroup){
+                    list.push(newName + '$' + list[ j + 1 ]);
+                }
+            }
+            localStorage.setItem(storageKeys[i], list.join('$'));
+        }
+
+        select = document.getElementById('group-select');
+        let option = document.createElement('option');
+        option.textContent = newName;
+        option.setAttribute('selected', 'true');
+        select.append(option);
+
+        
+        namesTables.set(newName, namesTables.get(copiedGroup).cloneNode(true));
+                    
+        pronounsTables.set(newName, pronounsTables.get(copiedGroup).cloneNode(true));
+
+        sentencesParas.set(newName, sentencesParas.get(copiedGroup).cloneNode(true));
+
+        changeGroup(newName);
+
+        document.documentElement.style.setProperty('--group-display', 'none');
+        document.getElementById('group-input').value = '';
+        groupEdit = false;
+        select.focus();
+
+
+    }
+
+
+    function showNames(){
+        if(!namesShown){
+            document.getElementById("showNames").textContent = 'hide all';
+            document.getElementById("showNames").setAttribute('aria-label', 'hide all names');
+            document.getElementById('nameSuggestions').append(namesP);
+            namesShown = true;
+            return;
+        }
+        document.getElementById("showNames").textContent = 'show all';
+        document.getElementById("showNames").setAttribute('aria-label', 'show all names');
+        document.getElementById('nameSuggestions').removeChild(namesP);
+        namesShown = false;
+    }
+    function showPronouns(){
+        if(!pronounsShown){
+            document.getElementById("showPronouns").textContent = 'hide all';
+            document.getElementById("showPronouns").setAttribute('aria-label', 'hide all pronouns');
+            document.getElementById("pronounSuggestions").append(pronounsP);
+            pronounsShown = true;
+            return;
+        }
+        document.getElementById("showPronouns").textContent = 'show all';
+        document.getElementById("showPronouns").setAttribute('aria-label', 'show all pronouns');
+        document.getElementById("pronounSuggestions").removeChild(pronounsP);
+        pronounsShown = false;
+    }
+    function removeName(name){
+        if(namesSuggestions.get(currentGroup).length === 1){
+            notify("It's the last name in this group, you can't delete it.");
+            return;
+        }
+        BackUp();
+        let index;
+        for(let i = 0; i < namesTables.get(currentGroup).childNodes.length; i += 1){
+            if(namesTables.get(currentGroup).childNodes[i].childNodes[0].textContent === name){
+                index = i;
+                break;
+            }
+        }
+        elementsBackup.push([namesTables.get(currentGroup).childNodes[index], `namesTables.get("${currentGroup}")`, namesTables.get(currentGroup).childNodes[index + 1]]);
+        namesTables.get(currentGroup).removeChild(namesTables.get(currentGroup).childNodes[index]);
+        namesSuggestions.get(currentGroup).splice(index, 1);
+        let list = localStorage.getItem('namesNew');
+        list = list.split('$');
+        for(let i = 0; i < list.length; i += 2){
+            if(list[i] === currentGroup){
+                for(let j = 0; j < list[ i + 1 ].length - (name.length + 1); j += 1){
+                    if(list[ i + 1 ].slice(j, j + name.length + 2) === `, ${name}` || list[ i + 1 ].slice(j, j + name.length + 2) === `${name}, `){
+                        list[ i + 1 ] = list[ i + 1 ].slice(0, j) + list[ i + 1 ].slice(j + name.length + 2);
+                        break;
+                    }
+                }
+            }
+        }
+        localStorage.setItem('namesNew', list.join('$'));
+    }
+
+    function addToNames(name){
+        if(!name){
+            return;
+        }
+        for(let i = 0; i < namesSuggestions.get(currentGroup).length; i += 1){
+            if(namesSuggestions.get(currentGroup)[i] === name){
+                notify('This name already is in this group.');
+                return;
+            }
+        }
+        namesSuggestions.get(currentGroup).push(name);
+        let list = localStorage.getItem('namesNew');
+        list = list.split('$');
+        for(let i = 0; i < list.length; i += 2){
+            if(list[i] === currentGroup){
+                list[ i + 1 ] += `, ${name}`;
+            }
+        }
+        localStorage.setItem('namesNew', list.join('$'));
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        td1.append(document.createTextNode(name));
+        let td2 = document.createElement('td');
+        let button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'rose smallButton');
+        button.setAttribute('onClick', `removeName('${name}')`);
+        button.append(document.createTextNode('Delete'));
+        td2.append(button);
+        tr.append(td1, td2);
+        namesTables.get(currentGroup).append(tr);
+        namesInput.value = '';
+    }
+
+    function removeSet(setInTable, set){
+        if(pronounsSuggestions.get(currentGroup).length === 1){
+            notify("It's the last set in this group, you can't delete it.");
+            return;
+        }
+        BackUp();
+        let index;
+        for(let i = 0; i < pronounsTables.get(currentGroup).childNodes.length; i += 1){
+            if(pronounsTables.get(currentGroup).childNodes[i].childNodes[0].textContent === setInTable){
+                index = i;
+                break;
+            }
+        }
+        elementsBackup.push([pronounsTables.get(currentGroup).childNodes[index], `pronounsTables.get('${currentGroup}')`, pronounsTables.get(currentGroup).childNodes[index + 1]]);
+        pronounsTables.get(currentGroup).removeChild(pronounsTables.get(currentGroup).childNodes[index]);
+        pronounsSuggestions.get(currentGroup).splice(index, 1);
+
+        let list = localStorage.getItem('pronounsNew');
+        list = list.split('$');
+
+        for(let i = 0; i < list.length; i += 2){
+            if(list[i] === currentGroup){
+                for(let j = 0; j < list[ i + 1 ].length - (set.length + 2); j += 1){
+                    if(list[ i + 1 ].slice(j, j + set.length + 3) === ` | ${set}` || list[ i + 1 ].slice(j, j + set.length + 3) === `${set} | `){
+                        list[ i + 1 ] = list[ i + 1 ].slice(0, j) + list[ i + 1 ].slice(j + set.length + 3);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        localStorage.setItem('pronounsNew', list.join('$'));
+    }
+
+    function addToPronouns(){
+        if(inputsP.length === 0){
+            inputsP.push(document.getElementById('subject'), document.getElementById('object'), document.getElementById('possesived'), document.getElementById('possesivep'), document.getElementById('reflexive'), document.getElementById('editor-plural'));
+        }
+        for(let i = 0; i < 5; i += 1){
+            if(!inputsP[i].value){
+                return;
+            }
+        }
+        let set = 
+        `${inputsP[0].value}, ${inputsP[1].value}, ${inputsP[2].value}, ${inputsP[3].value}, ${inputsP[4].value}, ${inputsP[5].value}`;
+        
+        let list = localStorage.getItem('pronounsNew');
+        list = list.split('$');
+
+        for(let i = 0; i < list.length; i += 2){
+            if(list[i] === currentGroup){
+                for(let j = 0; j < list[ i + 1 ].length - (set.length + 2); j += 1){
+                    if(list[ i + 1 ].slice(j, j + set.length + 3) === ` | ${set}` || list[ i + 1 ].slice(j, j + set.length + 3) === `${set} | `){
+                        notify('This set already is in this group.');
+                        return;
+                    }
+                }
+                list[ i + 1 ] += ` | ${set}`;
+                break;
+            }
+        }
+
+        localStorage.setItem('pronounsNew', list.join('$'));
+        uncodepronouns();
+
+        let tr = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let txt = document.createTextNode(`${inputsP[0].value}/${inputsP[1].value}/${inputsP[2].value}/${inputsP[3].value}/${inputsP[4].value}`);
+        if(inputsP[5].value === '0'){
+            txt.textContent += ', singular';
+        }
+        else {
+            txt.textContent += ', plural';
+        }
+        td1.append(txt);
+        let td2 = document.createElement('td');
+        button = document.createElement('button');
+        button.setAttribute('type', 'button');
+        button.setAttribute('class', 'violet smallButton');
+        button.setAttribute('onClick', `removeSet(\`${txt.textContent}\`, \`${set}\`)`);
+        button.append(document.createTextNode('Delete'));
+        td2.append(button);
+        tr.append(td1, td2);
+        pronounsTables.get(currentGroup).append(tr);
+
+        for(let i = 0; i < 5; i += 1){
+            inputsP[i].value = '';
+         }
+    }
+
+    function autofillEditor(subject){
+        if(!subject){
+            return;
+        }
+        if(inputsP.length === 0){
+            inputsP.push(document.getElementById('subject'), document.getElementById('object'), document.getElementById('possesived'), document.getElementById('possesivep'), document.getElementById('reflexive'), document.getElementById('editor-plural'));
+        }
+        for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i += 1){
+            if(pronounsSuggestions.get(currentGroup)[i][0] === subject){
+                for(let j = 1; j < 5; j += 1){
+                    inputsP[j].value = pronounsSuggestions.get(currentGroup)[i][j];
+                }
+                return;
+            }
+        }
+        inputsP[1].value = subject;
+        inputsP[2].value = subject + 's';
+        inputsP[3].value = subject + 's';
+        inputsP[4].value = subject + 'self';
+    }
+
+    let childNode = new Map();
+    childNode.set('names', 1);
+    childNode.set('subject', 3);
+    childNode.set('object', 5);
+    childNode.set('determiner', 7);
+    childNode.set('possesive', 9);
+    childNode.set('reflexive', 11);
+    //number of child node that paragraph with the type of sentences is in the div with sentences
+    
+    let sentencesLists = new Map();
+    sentencesLists.set('names', sentencesnames);
+    sentencesLists.set('subject', sentencessubject);
+    sentencesLists.set('object', sentencesobject);
+    sentencesLists.set('determiner', sentencesdeterminer);
+    sentencesLists.set('possesive', sentencespossesive);
+    sentencesLists.set('reflexive', sentencesreflexive);
+
+    let dataLists = new Map();
+    dataLists.set('names', namesSuggestions);
+    dataLists.set('pronouns', pronounsSuggestions);
+    dataLists.set('sentencesnames', sentencesnames);
+    dataLists.set('sentencessubject', sentencessubject);
+    dataLists.set('sentencesobject', sentencesobject);
+    dataLists.set('sentencesdeterminer', sentencesdeterminer);
+    dataLists.set('sentencespossesive', sentencespossesive);
+    dataLists.set('sentencesreflexive', sentencesreflexive);
+
+    let backups = new Map();
+    backups.set('names', namesBackup);
+    backups.set('pronouns', pronounsBackup);
+    backups.set('sentencesnames', sentencesnamesBackup);
+    backups.set('sentencessubject', sentencessubjectBackup);
+    backups.set('sentencesobject', sentencesobjectBackup);
+    backups.set('sentencesdeterminer', sentencesdeterminerBackup);
+    backups.set('sentencespossesive', sentencespossesiveBackup);
+    backups.set('sentencesreflexive', sentencesreflexiveBackup);
+
+    let uncodes = new Map();
+    uncodes.set('names', uncodenames());
+    uncodes.set('pronouns', uncodepronouns());
+    uncodes.set('sentencesnames', uncodesentencesnames());
+    uncodes.set('sentencessubject', uncodesentencessubject());
+    uncodes.set('sentencesobject', uncodesentencesobject());
+    uncodes.set('sentencesdeterminer', uncodesentencesdeterminer());
+    uncodes.set('sentencespossesive', uncodesentencespossesive());
+    uncodes.set('sentencesreflexive', uncodesentencesreflexive());
+    
+    function removeSentence(list, sentence){
+        if(sentencesLists.get(list).get(currentGroup).length === 1){
+            notify("It's the last sentence on this sentences list, you can't delete it.");
+            return;
+        }
+        BackUp();
+        let index;
+        for(let i = 0; i < sentencesParas.get(currentGroup).childNodes[childNode.get(list)].childNodes.length; i += 1){
+            if(sentencesParas.get(currentGroup).childNodes[childNode.get(list)].childNodes[i].childNodes[0].textContent === sentence){
+                elementsBackup.push([sentencesParas.get(currentGroup).childNodes[childNode.get(list)].childNodes[i], sentencesParas.get(currentGroup).childNodes[childNode.get(list)], sentencesParas.get(currentGroup).childNodes[childNode.get(list)].childNodes[i + 1]]);
+                sentencesParas.get(currentGroup).childNodes[childNode.get(list)].removeChild(sentencesParas.get(currentGroup).childNodes[childNode.get(list)].childNodes[i]);
+                index = i;
+                break;
+            }
+        }
+        let unbuildedS = '';
+        if(typeof(sentencesLists.get(list).get(currentGroup)[index][0]) === 'string'){
+            unbuildedS += '"' + sentencesLists.get(list).get(currentGroup)[index][0] + '"';
+        }
+        else{
+            unbuildedS += sentencesLists.get(list).get(currentGroup)[index][0];
+        }
+        for(let i = 1; i < sentencesLists.get(list).get(currentGroup)[index].length; i += 1){
+            if(typeof(sentencesLists.get(list).get(currentGroup)[index][i]) === 'string'){
+                unbuildedS += ',, "' + sentencesLists.get(list).get(currentGroup)[index][i] + '"';
+            }
+            else{
+                unbuildedS += ',, ' + sentencesLists.get(list).get(currentGroup)[index][i];
+            }
+        }
+
+        let sentencesList = localStorage.getItem('sentences' +list[0].toUpperCase() + list.slice(1) + 'New');
+        sentencesList = sentencesList.split('$');
+        for(let i = 0; i < sentencesList.length; i += 2){
+            if(sentencesList[i] === currentGroup){
+                for(let j = 0; j < sentencesList[ i + 1 ].length; j += 1){
+                    if(sentencesList[ i + 1 ].slice(j, j + unbuildedS.length + 3) === ' | ' + unbuildedS || sentencesList[ i + 1 ].slice(j, j + unbuildedS.length + 3) === unbuildedS + ' | '){
+                        sentencesList[ i + 1 ] = sentencesList[ i + 1 ].slice(0, j) + sentencesList[ i + 1 ].slice( j + unbuildedS.length + 3);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        localStorage.setItem('sentences' +list[0].toUpperCase() + list.slice(1) + 'New', sentencesList.join('$'));
+
+        sentencesLists.get(list).get(currentGroup).splice(index, 1);
+    }
+
+    function AddToSentences(list, sentence){
+        if(sentence){
+            let index;
+            for(let i = 0; i < sentencesParas.get(currentGroup).childNodes[childNode.get(list)].childNodes.length; i += 1){
+                if(sentencesLists.get(list).get(currentGroup)[i] === sentence){
+                    notify('This sentence already is in this group.');
+                    return;
+                    //doesn't work, probably because we're trying to compare two lists
+                    //anyway, why don't just let folks have the same sentence added few times?
+                }
+            }
+            sentencesLists.get(list).get(currentGroup).push(sentence);
+            let unbuildedS = '';
+            if(typeof(sentence[0]) === 'string'){
+                unbuildedS += '"' + sentence[0] + '"';
+            }
+            else{
+                unbuildedS += sentence[0];
+            }
+            for(let i = 1; i < sentence.length; i += 1){
+                if(typeof(sentence[i]) === 'string'){
+                    unbuildedS += ',, "' + sentence[i] + '"';
+                }
+                else{
+                    unbuildedS += ',, ' + sentence[i];
+                }
+            }
+
+            let sentencesList = localStorage.getItem('sentences' + list[0].toUpperCase() + list.slice(1) + 'New');
+            sentencesList = sentencesList.split('$');
+            for(let i = 0; i < sentencesList.length; i += 2){
+                if(sentencesList[i] === currentGroup){
+                    sentencesList[ i + 1 ] += ' | ' + unbuildedS;
+                    break;
+                }
+            }
+            localStorage.setItem('sentences' + list[0].toUpperCase() + list.slice(1) + 'New', sentencesList.join('$'));
+
+            area.value = '';
+            renderedSentence.textContent = '';
+            plural = [pronounsSuggestions.get(currentGroup)[0][5]];
+            fillers = [0, [namesSuggestions.get(currentGroup)[0]], [pronounsSuggestions.get(currentGroup)[0][0]], [pronounsSuggestions.get(currentGroup)[0][1]], [pronounsSuggestions.get(currentGroup)[0][2]], [pronounsSuggestions.get(currentGroup)[0][3]], [pronounsSuggestions.get(currentGroup)[0][4]], is, has, was, s, es, ies];
+            let p = document.createElement('p');
+            p.setAttribute('class', 'text');
+            let sntc = buildSentence(sentencesLists.get(list).get(currentGroup)[sentencesLists.get(list).get(currentGroup).length - 1]);
+            let txt = document.createElement('p');
+            txt.setAttribute('class', 'text');
+            txt.append(document.createTextNode(sntc));
+            let button = document.createElement('button');
+            button.setAttribute('type', 'button');
+            button.setAttribute('class', 'blue smallButton');
+            button.setAttribute('onclick', `removeSentence('${list}', "${sntc}")`);
+            button.append(document.createTextNode('Delete'));
+            p.append(txt, button);
+            sentencesParas.get(currentGroup).childNodes[childNode.get(list)].append(p);
+        }
+    }
+        
+    function BackUp(){
+        for(let i = 0; i < keys.length; i += 1){
+            backups.get(keys[i]).push(localStorage.getItem(storageKeys[i]));
+        }
+    }
+
+    window.addEventListener('keydown', keyPressed);
+
+    function keyPressed(key){
+        if(key.code === 'KeyZ'){
+            if(key.ctrlKey){
+                undo();
+                return;
+            }
+        }
+        if(key.code === 'Escape'){
+            exit();
+            closeAlert();
+        }
+        if(key.code === 'Enter' && !finished){
+            skipForward();
+        }
+    }
+
+    function disableAnimation() {
+        ms = 0;
+        localStorage.setItem('ms', '0');
+        localStorage.setItem('animation-disabled', 'true');
+        document.documentElement.style.setProperty('--a-button-display', 'none');
+    }
+
+    function undo(){
+        if(namesBackup.length !== 0){
+            for(let i = 0; i < keys.length; i += 1){
+                localStorage.setItem(storageKeys[i], backups.get(keys[i]).pop());
+                uncodes.get(keys[i]);
+            }
+        }
+        if(elementsBackup.length !== 0){
+            let ln = elementsBackup.length - 1;
+            elementsBackup[ln][1].insertBefore(elementsBackup[ln][0], elementsBackup[ln][2]);
+            elementsBackup.pop();
+            window.scrollBy(0, 40);
+        }
+    }
+
+    async function reset(){
+        if(await getConfirmation("Are you sure? All changes that you've made will be lost and this action cannot be undone. We will refresh the page after you confirm the action.")){
+            localStorage.removeItem('namesNew');
+            localStorage.removeItem('pronounsNew');
+            localStorage.removeItem('sentencesNamesNew');
+            localStorage.removeItem('sentencesSubjectNew');
+            localStorage.removeItem('sentencesObjectNew');
+            localStorage.removeItem('sentencesDeterminerNew');
+            localStorage.removeItem('sentencesPossesiveNew');
+            localStorage.removeItem('sentencesReflexiveNew');
+            sessionStorage.clear();
+            document.location.reload();
+        }
+    }
+
+    async function scrollElement(element){
+        await new Promise(resolve => setTimeout(resolve, 100));
+        try{
+            element.scrollIntoView({block: 'center', behavior: 'smooth'});
+        }
+        catch{
+            try{
+                element.scrollIntoView();
+            }
+            catch{
+                notify("We are sorry, it seems like your browser doesn't support the feature we need to make this button work properly.");
+            }
+        }
+    }
+
+    function showSentences(){
+        if(!sentencesShown){
+            document.getElementById('sentences').append(sentencesDiv);
+            document.getElementById('showSentences').textContent = 'hide all';
+            document.getElementById('showSentences').setAttribute('aria-label', 'hide all sentences');
+            sentencesShown = true;
+            return;
+        }
+        document.getElementById('showSentences').textContent = 'show all';
+        document.getElementById('showSentences').setAttribute('aria-label', 'show all sentences');
+        document.getElementById('sentences').removeChild(sentencesDiv);
+        sentencesShown = false;
+    }
+
+    let fonts = ["'Comic Sans MS', 'Delius', cursive", "'Trebuchet MS', sans-serif", "'Lucida Bright', serif",
+    "'Courier New', monospaced", "'Brush Script MT', script"];
+    if(!localStorage.getItem('font')){
+        localStorage.setItem('font', 0);
+    }
+    document.documentElement.style.setProperty('--font', fonts[localStorage.getItem('font')]);
+
+    function changeFont(){
+        let f = parseInt(localStorage.getItem('font'));
+        f += 1;
+        if(f === fonts.length){
+            f = 0;
+        }
+        document.documentElement.style.setProperty('--font', fonts[f]);
+        localStorage.setItem('font', f);
+    }
+
+    function copyData(){
+        let code = '';
+        for(let i = 0; i < storageKeys.length; i ++){
+            code += `${localStorage.getItem(storageKeys[i])}$$`;
+        }
+        code += 'code is complete';
+        navigator.clipboard.writeText(code);
+        return code;
+    }
+
+    function renderCode(){
+        let renderArea = document.getElementById('renderArea');
+        let renderB = document.getElementById('renderButton');
+        let code = copyData();
+        if(renderArea.value !== ''){
+            renderArea.value = '';
+            document.documentElement.style.setProperty('--render-display', 'none');
+            renderB.textContent = "Render code";
+            return;
+        }
+        document.documentElement.style.setProperty('--render-display', 'block');
+        renderArea.value = code;
+        renderB.textContent = "Hide code";
+    }
+
+    async function pasteData(code){
+        BackUp();
+        if(await getConfirmation("Are you sure? You will lost all of the changes you've made here and this action cannot be undone. We will refresh the page after you confirm the action.")){
+            try{
+                let codes = code.split('$$');
+                for(let i = 0; i < keys.length; i ++){
+                    localStorage.setItem(keys[i], codes[i]);
+                    uncodes.get(keys[i]);
+                    if(i > 1){    
+                        plural = [1];
+                        fillers = [0, ['Ash'], ['they'], ['them'], ['their'], ['theirs'], ['themself'],
+                        is, has, was, s, es, ies];
+                        for(let j = 0; j < sentencesLists.get(keys[i]).length; j++){
+                            buildSentence(sentencesLists.get(keys[i])[j]);
+                        }
+                    }
+                }
+                document.location.reload();
+            }
+            catch{
+                notify("We are sorry, something is wrong with code and we cannot update your changes. Make sure that you've pasted actual, website generated code. If you keep seeing this message, contact the developers.");
+                for(let i = 0; i < keys.length; i += 1){
+                    localStorage.setItem(storageKeys[i], backups.get(keys[i]).pop());
+                    uncodes.get(keys[i]);
+                }
+                pasteArea.value = '';
+            }
+        }
+    }
+
+    function checkIfValid(input){
+        let text = input.target.value;
+        if(text[text.length - 1] === '|' || text[text.length - 1] === '$'){
+            input.target.value = text.slice(0, text.length - 1);
+        }
+    }
+
+</script>
+
+<body>
+
+    <header>
+        <h1 id="logo-banner"><img src="new-icon.png" alt="logo" aria-hidden="true" id="logo"><span id="title">Pronouns and Names Tester</span></h1>
+        <button type='button' class='green fontButton' aria-label="change font" onclick='changeFont()'>Aa</button>
+    </header>
+
+    <div class="pop-up chatbox" id="chatbox" onclick="skipForward()" role="alertdialog" aria-modal="true" aria-label="test results"><button class="green smallButton close" onclick="exit()">close</button></div>
+    <div class="pop-up chatbox try"></div>
+    <div class="shadow" id="chatbox-shadow" onclick="exit()"></div>
+
+    <div class="pop-up" id="alert" role="alertdialog" aria-modal="true" aria-label="alert"><p></p><button class="green smallButton" onclick="closeAlert()" id="ok">OK</button></div>
+    <div class="shadow" id="alert-shadow" onclick="closeAlert()"></div>
+
+    <div class="pop-up" id="confirm-dialog" role="alertdialog" aria-modal="true" aria-label="alert"><p></p><button class="smallButton" onclick="cancel()" id="cancel">Cancel</button><button class="green smallButton" onclick="confirmAction()" id="confirm">Confirm</button></div>
+    <div class="shadow" id="confirm-shadow" onclick="cancel()"></div>
+
+    <main>
+    <form method='get' id='form'>
+        <h2 class='text'>Input all names you want to test / your names: </h2>
+        <input name='name1' class='gray rounded margin' aria-live="polite">
+        <button type='button' class='rose smallButton' onclick='fillName(1)'>Random</button>
+        <button type='button' class='rose smallButton' onclick='clearName(1)'>Clear</button><br>
+        <p id='names'> </p>
+        <button type='button' class='rose button' onClick='addName()'>Add next</button>
+
+        <p id="useless" class="text">If buttons don't work, try accesing the page from different browser or enable JavaScript in the browser settings.</p>
+
+        <h2 class='text'>Input all pronoun sets you want to test / your pronoun sets: </h2><br>
+        <h3 class='text'>Set 1:</h3>
+        <table role="presentation">
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Subject pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='subjectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Object pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='objectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Possesive determiner:
+                    </div>
+                </td>
+                <td>
+                    <input name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Possesive pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='possesivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin'>
+                        Reflexive pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                </td>
+            </tr>
+        </table>
+
+        <label class='margin' for="select1">This pronoun set is: </label> 
+        <select name='plural1' class='gray rounded' id="select1">
+            <option value='0'>singular</option>
+            <option value='1'>plural</option>
+        </select>
+
+        <button type='button' class='violet smallButton' onclick='autofill(1, this.form.subjectPronoun1.value)'>Autofill</button>
+        <button type='button' class='violet smallButton' onclick='fillPronouns(1)'>Random</button>
+        <button type='button' class='violet smallButton' onclick='clearSet(1)'>Clear</button>
+        <p id='sets'> </p>
+        <button type='button' class='violet button' onClick='addSet()'>Add next</button><br>
+
+        <p class="text">
+            Tip: if you add the same name or set multiple times, it will appear in test results more often.
+        </p>
+
+        <button type="button" class="blue button" id="aria-button" onclick="disableAnimation()" aria-label="click before testing to disable writing animation, so your screen reader won't have problems with accesing test results">Disable animation</button>
+
+        <button type="button" class='blue bigButton' onClick='testResults(this.form)' id="test">Test</button>
+    </form>
+
+    <button id='editorbutton' type='button' class='green button' onClick='tryEditor()'>Personalise</button><br>
+
+
+
+
+
+    <div id='editor'>
+
+        <p class="text">
+            All changes that you make will be saved directly in your browser. It means they aren't sent to any server, we don't have any access to them, but also you won't be able to acces them through other browser or from different device. Make sure you don't use private mode, because it will clear your data after you close the page (at least on all browser we tested with). Your changes will also be lost when you delete cookies, so if you have to do that, <a href="#copying-data">copy data</a> and save it somewhere else beforehand (we've heard that Safari may from time to time automatically delete all cookies, so be careful when using that browser). 
+        </p>
+
+        <p class="text">
+            If you're wondering why some symbols won't appear in inputs no matter how many times you click them, that's because we use them for coding informations and you could accidentaly break the page if we let you use them.
+        </p>
+
+        <h1 class="text">
+            Group
+        </h1>
+
+        <p class="text">
+            Now you can store your data in separated groups. We made this option with <a href="https://pluralpedia.org/w/Plurality" target="_blank" rel="noopener noreferrer">plural</a> and <a href="https://otherkin.wiki/o/Otherkin" target="_blank" rel="noopener noreferrer">otherkin</a> folks in mind, but it can be useful for everybody else too: for example when you want to separate pronoun sets and names that you are still testing from the ones that give you gender euphoria. Data from currently chosen group will be used for randomising names and sets and creating test results. If you want Tester to randomly choose from all names and/or pronoun sets from the group, leave all corresponding input fields empty before testing.
+        </p>
+
+        <select id="group-select" class="gray" aria-label="choose group" aria-live="polite" oninput="changeGroup(this.value)">
+        </select>
+
+            <button class="green button" onclick="enableRename()">Rename</button>
+            <button class="green button" onclick="deleteGroup()">Delete</button>
+            <button class="green button" onclick="duplicateGroup(currentGroup, currentGroup + '1')">Duplicate</button>
+            <button class="green button" onclick="enableAdd()">Add new</button>
+        
+        <div>
+        <label class="group" id="group-label" for="group-input"></label>
+            <div>
+                <input type="text" class="gray rounded margin group" id="group-input">
+                <button class="green button group" id="group-button" onclick="renameGroup()">Rename</button>
+            </div>
+        </div>
+
+
+<!-- 
+        <p class="text" id="speed">This value represents time in miliseconds that program will wait between displaying letters in writing animation. In simpler words: the lower the value, the faster the animation. If you don't want your test results to be animated, set it to 0.</p>
+
+        <input type="number" aria-labelledby="speed" min="0" max="200" class="gray rounded"> -->
+
+        <h2 class="text">
+            Names
+        </h2>
+
+        <button id="showNames" class="expandButton" onclick="showNames()" aria-label="show all names">show all</button>
+
+        <p class="text" id="nameSuggestions"></p>
+
+        <input id='namesInput' class='gray rounded margin' oninput="checkIfValid" aria-label="add name">
+        <button type='button' class='rose smallButton' onclick='addToNames(document.getElementById("namesInput").value)'>Add</button>
+
+        <h2 class="text">
+            Pronoun sets
+        </h2>
+
+        <button id="showPronouns" class="expandButton" onclick="showPronouns()" aria-label="show all pronouns">show all</button>
+
+        <p class="text" id="pronounSuggestions"></p>
+        
+        <table role="presentation">
+            <tr>
+                <td>
+                    <div class='left margin' id="subject-adding">
+                        Subject pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input id='subject' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="subject-adding">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin' id="object-adding">
+                        Object pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input id='object' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="object-adding">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin' id="possesive-d-adding">
+                        Possesive determiner:
+                    </div>
+                </td>
+                <td>
+                    <input id='possesived' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesive-d-adding">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin' id="possesive-p-adding">
+                        Possesive pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input id='possesivep' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesive-p-adding">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class='left margin' id="reflexive-adding">
+                        Reflexive pronoun:
+                    </div>
+                </td>
+                <td>
+                    <input id='reflexive' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="reflexive-adding">
+                </td>
+            </tr>
+        </table>
+
+        <label class='margin' for="editor-plural">This pronoun set is: </label> 
+        <select id="editor-plural" class='gray rounded'>
+            <option value='0'>singular</option>
+            <option value='1'>plural</option>
+        </select>
+
+        <button type='button' class='violet smallButton' onclick='autofillEditor(document.getElementById("subject").value)'>Autofill</button>
+
+        <button type='button' class='violet smallButton' onclick='addToPronouns()'>Add</button>
+
+        <h2 class="text">
+            Testing sentences
+        </h2>
+
+        <button id="showSentences" class="expandButton" onclick="showSentences()" aria-label="show all testing sentences">show all</button>
+
+        <p class="text" id="sentences"></p>
+
+        <p class="text" id="addingSentences">
+            Write new testing sentences about yourself, but as you were named Jake and used xe/xem/xyr/xyrs/xemself pronouns. Every name, pronoun and verbs 'has', 'is' and 'was' coming directly after your pronouns (not name) write all in capital letters. Endings 's', 'es' or 'ies' of verbs related to your pronouns also write in capital letters and put after them symbol '#' without a space before it. The same symbol put before words in capital letters, if they are on the begining of the sentence (unless you don't want them to start with a capital letter). To make tests feel less artifical always make sentences on names list a form of introduction and avoid giving similiar informations in sentences on different lists. For higher integrity of generated passages you can add multiple sentences at once (we advise to keep their number under four, so they won't overflow the container). Before submitting make sure you haven't done any mistakes, as you won't be able to directly edit the text once it's added.
+        </p>
+
+        <p class="text">
+            Here's an example:
+        </p>
+
+        <p class="text">
+            #JAKE works with us too. #XE doES#n't have time to meet you right now, XE IS talking with our boss. #XE trIES# to convince her to give us more achievable deadlines for our projects and she seems to slowly give in. #XE really makeS# world a better place.
+        </p>
+
+        <textarea id="area" cols="75" rows="5" class="gray rounded" oninput="renderForUser()" aria-label="Add new testing sentences according to rules described above"></textarea>
+
+        <p class="text">
+            And here you will see, how your sentences will look like for Ash, who uses they/them pronouns:
+        </p>
+
+        <p class="text" id="renderedSentence"></p>
+
+        <p class="text" for="addingSelect">
+            Choose a list you want to add your sentence(s) to:
+        </p>
+
+        <select id="addingSelect" class="gray rounded">
+            <option value='names'>names list</option>
+            <option value='subject'>subject pronouns list</option>
+            <option value='object'>object pronouns list</option>
+            <option value='determiner'>possesive determiners list</option>
+            <option value='possesive'>possesive pronouns list</option>
+            <option value='reflexive'>reflexive pronouns list</option>
+        </select>
+
+        <p class="text">
+            Your text doesn't actually need to contain the part of speech that is on the name of the list, we don't check that. The purpose of these lists is to make sure that you will get all forms of your pronoun set(s) with every test, but if you don't mind not seeing a sentence with possesive pronoun every time and you'd rather put on its list something easier to come up with, you can totally do it.
+        </p>
+        
+        <button class='blue button' onclick='AddToSentences(document.getElementById("addingSelect").value, sentenceToAdd)'>Add</button>
+
+        <p class="text" id="undo">
+            If you deleted something on accident, click here (ctrl + z on QWERTY keyboard or ctrl + y on QWERTZ work as well):
+        </p>
+        
+        <button class='green button' onclick='undo()' aria-labelledby="undo">Undo</button>
+
+        <p class="text">
+            If you want to move your data to a different device or browser, click 'copy data' button. It will copy to your clipboard encoded information about all your saved names, pronouns and testing sentences. On mobile your clipboard may have too small capacity, so if button seems to not work or code you have in clipboard doesn't end with words 'code is complete', click 'render code' button. It will allow you to copy code manually in smaller parts.
+        </p>
+        
+        <button class='green button' onclick='copyData()' aria-label="Copy encoded data. More details above.">Copy data</button>
+        
+        <button id="renderButton" class='green button' onclick='renderCode()'>Render code</button>
+
+        <textarea id="renderArea" rows="30" class="gray rounded"></textarea>
+
+        <p class="text">
+            If you already have code copied from the other browser/device, paste it below. But have in mind, that replacing data will overwrite all changes that you've made here. And don't paste here anything which wasn't supposed to be here, including the code from the old version, since we slightly changed data encoding to encorporate new features.
+        </p>
+
+        <textarea id="pasteArea" rows="10" class="gray rounded" aria-label="Paste encoded data. More details above."></textarea>
+        
+        <button class='green button' onclick='pasteData(pasteArea.value)'>Replace data</button>
+
+        <p class="text">
+            This button will restart the page to it's initial settings. This means that all your custom names, pronouns and testing sentences will be lost and this action is irreversible. Developers have no idea why would you want to do that and even why they've made this an option (okay, that was a lie, we needed it for testing purposes). We advice you to use it only when your changes broke the page. We'll ask you for confirmation when you click it.
+        </p>
+        
+        <button class='green button' onclick='reset()'>Reset to default</button>
+
+    </div>
+
+
+
+    <p class="text">
+        If you like our Tester, please consider sharing it, <a href="https://docs.google.com/forms/d/e/1FAIpQLScvDv6MsTZucNfDJ-t3f5vvuekw5Pwmj6BXQkBhHxUOH0nYsQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">filling out a short feedback form</a> and <a href="https://ko-fi.com/therainbowchaossystem" target="_blank" rel="noopener noreferrer">supporting us on ko-fi</a>. Every response and donation will help us stay motivated to further improve usability and accessibility of this project and not abandon it once again. Also, we're currently looking for a job, if you need a web developer, feel free to contact us!
+    </p>
+
+    <p class="text">
+        For the offline version of the page right-click anywhere on the background and choose 'save as' option on your computer or find download button in the browser menu on your mobile. If you already have one version saved on this device, delete it before downloading a new one in order to avoid potential problems with the stored data.
+    </p>
+
+    <p class="text">
+        We are extremely grateful for every link to the tester shared on social media, but please, credit us when you respond to folks name and pronoun testing requests with default passages generated through this site. We've put a lot of work to construct sentences that will sound natural in different combinations and seeing somebody respond with them like they come up with them themselves doesn't feel fair.
+    </p>
+
+</main>  
+    <footer>
+        <div class="links">
+            <div>
+                <a href="old">Switch to old version</a>
+                <address>
+                    <a href="mailto:pronounsandnamestester@gmail.com">Contact us</a>
+                </address>
+                <a href="https://ko-fi.com/therainbowchaossystem" target="_blank" rel="noopener noreferrer">Support us</a>
+                <a href="https://github.com/chocolate-pancake/pronounsandnamestester" target="_blank" rel="noopener noreferrer">Source code on github</a>
+            </div>
+            <div>
+                <p>Pronoun resources:</p>
+                <a href="https://pronouns.cc/" target="_blank" rel="noopener noreferrer">pronouns.cc</a>
+                <a href="https://pronouns.page/" target="_blank" rel="noopener noreferrer">pronouns.page</a>
+                <a href="https://pronoun.fandom.com/f" target="_blank" rel="noopener noreferrer">pronoun wiki</a>
+            </div>
+            <div>
+                <p>Trans resources:</p>
+                <a href="https://www.thetrevorproject.org/" target="_blank" rel="noopener noreferrer">The Trevor Project</a>
+                <a href="https://translifeline.org/" target="_blank" rel="noopener noreferrer">Trans Lifeline</a>
+                <a href="https://transequality.org/" target="_blank" rel="noopener noreferrer">National Center for Transgender Equality</a>
+            </div>
+        </div>
+        <p class="text">
+            ©2022-2023 The Rainbow Chaos System. Content available under <a href="https://oql.avris.it/license/v1.1" target="_blank" rel="noopener noreferrer">Opinionated Queer License</a>.
+        </p>
+    </footer> 
+
+</body>
+
+<script language="JavaScript">
+    document.getElementById("chatbox").append(document.createElement('p'));
+    document.querySelector(".try").append(document.createTextNode(''));
+        
+    if(localStorage.getItem('names') && !localStorage.getItem('visited')){
+        notify("Welcome to the new version of Pronouns and Names Tester! We've added some new features and improved accessibility and overall user experience. We hope you'll like it, but if you don't, you can find a link to the old version at the bottom of the page.");
+        localStorage.setItem('visited', 'true');
+    }
+
+    let select = document.getElementById('group-select');
+    for(let i = 0; i < groups.length; i ++){
+        if(groups[i] === 'template'){
+            continue;
+        }
+        let opt = document.createElement('option');
+        opt.append(groups[i]);
+        if(groups[i] === currentGroup){
+            opt.setAttribute('selected', 'true');
+        }
+        select.append(opt);
+    }
+
+    function resetPage(){
+        localStorage.clear();
+        sessionStorage.clear();
+        document.location.reload();
+    }
+    function tryEditor(){
+        try{
+            editorMode();
+        }
+        catch{
+            notify("We came across unexpected problems. If page previously worked, try reseting it to default or contact the developers at PronounsAndNamesTester@gmail.com.");
+            let b = document.createElement('button');
+            b.setAttribute('type', 'button');
+            b.setAttribute('class', 'green button');
+            b.setAttribute('onclick', 'resetPage()');
+            b.append(document.createTextNode('Reset'));
+            document.getElementById('editor').append(b);
+            b.scrollIntoView();
+        }
+    }
+</script>
+
+</html>
