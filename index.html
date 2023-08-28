@@ -12,11 +12,12 @@
     <meta name='keywords' content='pronouns, names, pronoun, name, test, testing, neopronouns'>
     <meta name='color-scheme' content='dark'>
     <meta property="og:image" itemprop="image primaryImageOfPage" content="https://chocolate-pancake.github.io/pronounsandnamestester/new-icon.png">
+    <meta property="og:image:alt" content="heart emoji">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Pronouns and Names Tester">
     <meta property="og:url" content="https://chocolate-pancake.github.io/pronounsandnamestester/">
     <meta name="twitter:title" property="og:title" content="Pronouns and Names Tester">
-    <meta name='description' content="A tool that allows you to personalise testing sentences and try out unlimited amount of pronoun sets and names at once, to help you find the perfect ones for you. Created with trans, non-binary and gender non-conforming folks in mind, but can be used by anyone. ">
+    <meta name='description' content="A tool that allows you to personalise testing sentences and try out unlimited amount of pronoun sets and names at once to help you find the perfect ones for you. Created with trans, non-binary and gender non-conforming folks in mind, but can be used by anyone. ">
     <meta name='twitter:description' property="og:description" content="A tool that allows you to personalise testing sentences and try out unlimited amount of pronoun sets and names at once, to help you find the perfect ones for you. Created with trans, non-binary and gender non-conforming folks in mind, but can be used by anyone. ">
     <style>
 
@@ -88,7 +89,12 @@
         }
 
         #title {
-            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            max-width: 0;
+            max-height: 0;
+            overflow: hidden;
         }
 
         main {
@@ -345,10 +351,13 @@
             justify-content: space-evenly;
             align-items: center;
             flex-wrap: wrap;
+            line-height: 200%;
         }
         
         .links a {
             display: block;
+            /* margin-top: 0.75em; */
+            /* margin-bottom: 0.75em; */
         }
 
         address {
@@ -491,7 +500,9 @@
 
         @media (min-width: 670px) {
             #title {
-                display: inline;
+                max-width: none;
+                max-height: none;
+                position: relative;
             }
 
             header {
@@ -1273,6 +1284,7 @@
         input.setAttribute('name', `name${namesCount}`);
         input.setAttribute('class', 'gray rounded margin');
         input.setAttribute('aria-live', 'polite');
+        input.setAttribute('aria-label', 'name');
         let button = document.createElement('button');
         button.setAttribute('type', 'button');
         button.setAttribute('class', 'rose smallButton');
@@ -1297,6 +1309,7 @@
         let td1 = document.createElement('td');
         let div1 = document.createElement('div');
         div1.setAttribute('class', 'left margin');
+        div1.setAttribute('id', `subjectpronoun${setsCount}`);
         let txt1 = document.createTextNode('Subject pronoun:');
         div1.append(txt1);
         td1.append(div1);
@@ -1305,6 +1318,7 @@
         input1.setAttribute('name', `subjectPronoun${setsCount}`);
         input1.setAttribute('class', 'gray rounded margin');
         input1.setAttribute('aria-live', 'polite');
+        input1.setAttribute('aria-labelledby', `subjectpronoun${setsCount}`);
         input1.setAttribute('autocapitalize', 'off');
         td2.append(input1);
         tr1.append(td1, td2);
@@ -1313,6 +1327,7 @@
         let td3 = document.createElement('td');
         let div2 = document.createElement('div');
         div2.setAttribute('class', 'left margin');
+        div2.setAttribute('id', `objectpronoun${setsCount}`);
         let txt2 = document.createTextNode('Object pronoun:');
         div2.append(txt2);
         td3.append(div2);
@@ -1321,6 +1336,7 @@
         input2.setAttribute('name', `objectPronoun${setsCount}`);
         input2.setAttribute('class', 'gray rounded margin');
         input2.setAttribute('aria-live', 'polite');
+        input2.setAttribute('aria-labelledby', `objectpronoun${setsCount}`);
         input2.setAttribute('autocapitalize', 'off');
         td4.append(input2);
         tr2.append(td3, td4);
@@ -1329,6 +1345,7 @@
         let td5 = document.createElement('td');
         let div3 = document.createElement('div');
         div3.setAttribute('class', 'left margin');
+        div3.setAttribute('id', `possesivedeterminer${setsCount}`);
         let txt3 = document.createTextNode('Possesive determiner:');
         div3.append(txt3);
         td5.append(div3);
@@ -1337,6 +1354,7 @@
         input3.setAttribute('name', `possesiveDeterminer${setsCount}`);
         input3.setAttribute('class', 'gray rounded margin');
         input3.setAttribute('aria-live', 'polite');
+        input3.setAttribute('aria-labelledby', `possesivedeterminer${setsCount}`);
         input3.setAttribute('autocapitalize', 'off');
         td6.append(input3);
         tr3.append(td5, td6);
@@ -1345,6 +1363,7 @@
         let td7 = document.createElement('td');
         let div4 = document.createElement('div');
         div4.setAttribute('class', 'left margin');
+        div4.setAttribute('id', `possesivepronoun${setsCount}`);
         let txt4 = document.createTextNode('Possesive pronoun:');
         div4.append(txt4);
         td7.append(div4);
@@ -1353,6 +1372,7 @@
         input4.setAttribute('name', `possesivePronoun${setsCount}`);
         input4.setAttribute('class', 'gray rounded margin');
         input4.setAttribute('aria-live', 'polite');
+        input4.setAttribute('aria-labelledby', `possesivepronoun${setsCount}`);
         input4.setAttribute('autocapitalize', 'off');
         td8.append(input4);
         tr4.append(td7, td8);
@@ -1361,6 +1381,7 @@
         let td9 = document.createElement('td');
         let div5 = document.createElement('div');
         div5.setAttribute('class', 'left margin');
+        div5.setAttribute('id', `reflexivepronoun${setsCount}`);
         let txt5 = document.createTextNode('Reflexive pronoun:');
         div5.append(txt5);
         td9.append(div5);
@@ -1369,6 +1390,7 @@
         input5.setAttribute('name', `reflexivePronoun${setsCount}`);
         input5.setAttribute('class', 'gray rounded margin');
         input5.setAttribute('aria-live', 'polite');
+        input5.setAttribute('aria-labelledby', `reflexivepronoun${setsCount}`);
         input5.setAttribute('autocapitalize', 'off');
         td10.append(input5);
         tr5.append(td9, td10);
@@ -2539,7 +2561,7 @@ async function deleteGroup(){
 
     <header>
         <h1 id="logo-banner"><img src="new-icon.png" alt="logo" aria-hidden="true" id="logo"><span id="title">Pronouns and Names Tester</span></h1>
-        <button type='button' class='green fontButton' aria-label="change font" onclick='changeFont()'>Aa</button>
+        <button type='button' class='green smallButton' aria-label="change font" onclick='changeFont()'>Font</button>
     </header>
 
     <div class="pop-up chatbox" id="chatbox" onclick="skipForward()" role="alertdialog" aria-modal="true" aria-label="test results"><button class="green smallButton close" onclick="exit()">close</button></div>
@@ -2555,7 +2577,7 @@ async function deleteGroup(){
     <main>
     <form method='get' id='form'>
         <h2 class='text'>Input all names you want to test / your names: </h2>
-        <input name='name1' class='gray rounded margin' aria-live="polite">
+        <input name='name1' class='gray rounded margin' aria-live="polite" aria-label="name">
         <button type='button' class='rose smallButton' onclick='fillName(1)'>Random</button>
         <button type='button' class='rose smallButton' onclick='clearName(1)'>Clear</button><br>
         <p id='names'> </p>
@@ -2568,52 +2590,52 @@ async function deleteGroup(){
         <table role="presentation">
             <tr>
                 <td>
-                    <div class='left margin'>
+                    <div class='left margin' id="subjectpronoun1">
                         Subject pronoun:
                     </div>
                 </td>
                 <td>
-                    <input name='subjectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                    <input name='subjectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="subjectpronoun1">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class='left margin'>
+                    <div class='left margin' id="objectpronoun1">
                         Object pronoun:
                     </div>
                 </td>
                 <td>
-                    <input name='objectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                    <input name='objectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="objectpronoun1">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class='left margin'>
+                    <div class='left margin' id="possesivedeterminer1">
                         Possesive determiner:
                     </div>
                 </td>
                 <td>
-                    <input name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                    <input name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivedeterminer1">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class='left margin'>
+                    <div class='left margin' id="possesivepronoun1">
                         Possesive pronoun:
                     </div>
                 </td>
                 <td>
-                    <input name='possesivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                    <input name='possesivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivepronoun1">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class='left margin'>
+                    <div class='left margin' id="reflexivepronoun1">
                         Reflexive pronoun:
                     </div>
                 </td>
                 <td>
-                    <input name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite">
+                    <input name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="reflexivepronoun1">
                 </td>
             </tr>
         </table>
