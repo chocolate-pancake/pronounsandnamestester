@@ -809,7 +809,7 @@
     */
     let fillers;
 
-    let defaultSentencesNames = `default$"I've met with ",, 1,, " today. " | -1,, " is my best friend. " | "Do you know ",, 1,, "? " | "This is ",, 1,, ", who we talked about last week. Don't act like you don't remember it, you've literally asked me about ",, 3,, " like ten times. But don't worry, I won't tell ",, 3,, ". " | "I've heard you have a crush on my friend, ",, 1,, "? " | "I can't believe somebody could say something bad about ",, 1,, "! " | -1,, " lives here. " | "This is our neighbours child, ",, 1,, ". " | "What can I tell you about ",, 1,, "? " | "You've really never met ",, 1,, " before? " | "Let me tell you something about ",, 1,, ". " | "I'm meeting with ",, 1,, " tonight, I'm a little bit nervous about it. Oh, I haven't told you anything about ",, 1,, "? " | "If only I could spend this time with ",, 1,, " instead of wasting it on my homework... " | "I've heard you were talking with somebody about ",, 1,, ". So you know ",, 3,, " too? " | "You wanted to know something about ",, 1,, ", right? " | "This is ",, 1,, ", I haven't told you anything about ",, 3,, " yet, have I? " | "This is my roommate, ",, 1,, ". " | "Do you remember ",, 1,, "? ",, -2,, " ",, 7,, " my cousin. "$template$"Example sentence. "`;
+    let defaultSentencesNames = `default$"I met ",, 1,, " today. " | -1,, " is my best friend. " | "Do you know ",, 1,, "? " | "This is ",, 1,, ", who we talked about last week. Don't act like you don't remember it, you've literally asked me about ",, 3,, " like ten times. But don't worry, I won't tell ",, 3,, ". " | "I've heard you have a crush on my friend, ",, 1,, "? " | "I can't believe somebody could say something bad about ",, 1,, "! " | -1,, " lives here. " | "This is our neighbours child, ",, 1,, ". " | "What can I tell you about ",, 1,, "? " | "You've really never met ",, 1,, " before? " | "Let me tell you something about ",, 1,, ". " | "I'm meeting with ",, 1,, " tonight, I'm a little bit nervous about it. Oh, I haven't told you anything about ",, 1,, "? " | "If only I could spend this time with ",, 1,, " instead of wasting it on my homework... " | "I've heard you were talking with somebody about ",, 1,, ". So you know ",, 3,, " too? " | "You wanted to know something about ",, 1,, ", right? " | "This is ",, 1,, ", I haven't told you anything about ",, 3,, " yet, have I? " | "This is my roommate, ",, 1,, ". " | "Do you remember ",, 1,, "? ",, -2,, " ",, 7,, " my cousin. "$template$"Example sentence. "`;
     if(!localStorage.getItem('sentencesNamesNew')){
         if(localStorage.getItem('sentencesnames')){
             let sentenceList = localStorage.getItem('sentencesnames');
@@ -1454,6 +1454,17 @@
                 form.plural${set}.value = parseInt(pronounsSuggestions.get(currentGroup)[i][5]);`);
                 return;
             }
+        }
+        if(subject[subject.length - 1] === 's'){
+            eval(`form.objectPronoun${set}.value = subject;
+            form.possesiveDeterminer${set}.value = subject + 'es';
+            form.possesivePronoun${set}.value = subject + 'es';`);
+            if(subject.length > 1 && subject[subject.length - 2] === 's'){
+                eval(`form.reflexivePronoun${set}.value = subject + 'elf';`);
+                return;
+            }
+            eval(`form.reflexivePronoun${set}.value = subject + 'self';`);
+            return;
         }
         eval(`form.objectPronoun${set}.value = subject;
         form.possesiveDeterminer${set}.value = subject + 's';
@@ -2225,6 +2236,18 @@ async function deleteGroup(){
                 }
                 return;
             }
+        }
+        
+        if(subject[subject.length - 1] === 's'){
+            inputsP[1].value = subject;
+            inputsP[2].value = subject + 'es';
+            inputsP[3].value = subject + 'es';
+            if(subject.length > 1 && subject[subject.length - 2] === 's'){
+                inputsP[4].value = subject + 'elf';
+                return;
+            }
+            inputsP[4].value = subject + 'self';
+            return;
         }
         inputsP[1].value = subject;
         inputsP[2].value = subject + 's';
