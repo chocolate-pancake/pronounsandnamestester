@@ -743,7 +743,7 @@
     let currentGroup;
     let groups = [];
 
-    let defaultNames = `default$Alex, Amari, Arbor, Arden, Ariel, Aries, Arrow, Artemis, Ash, Aster, Atumn, Avery, Azriel, Basil, Berry, Bex, Billy, Bix, Blair, Blake, Bowie, Brecken, Bryn, Cal, Cameron, Carmel, Carson, Cedar, Casey, Charlie, Claire, Cloud, Cookie, Corey, Cove, Dakota, Dark, Demi, Dennis, Dino, Drew, Dune, Dusty, Ellery, Ellis, Emerson, Emery, Ender, Everest, Fallon, Fenix, Finch, Finley, Finnegan, Fio, Flash, Flower, Frankie, Frey, Galaxy, Garland, Garnet, Gavin, Gentry, Gianni, Gift, Glenn, Golden, Greer, Hale, Hao, Hart, Harper, Hayden, Haylen, Hollis, Hope, Hunter, Ian, Iman, Indigo, Indy, Ira, Jaden, Jace, Jack, James, Jamie, Jasmine, Jessie, Jett, Jordan, Josh, Jude, Juniper, Kai, Kane, Kade, Karter, Kennedy, Kingsley, Kit, Koda, Kyle, Landon, Lark, Leaf, Lennon, Link, Lisa, Logan, Lowen, Lux, Lyric, Max, Makoto, Mani, Marlowe, Milan, Moon, Morgan, Moss, Murphy, Natale, Nature, Nazareth, Nell, Night, Noe, Noel, Nova, Nuru, Oakes, Oakley, Omid, Onyx, Otzar, Pan, Paris, Parker, Pax, Pemberley, Perry, Peyton, Phoenix, Pim, Pixel, Poe, Poet, Psalm, Puck, Quant, Quest, Quill, Quinby, Quincy, Quinn, Rain, Reagan, Remi, Remy, Ridley, Riley, Rio, River, Robin, Rory, Rowan, Royal, Rumi, Ryan, Sage, Salem, Sally, Sam, Sawyer, Sayer, Shadow, Shiloh, Scout, Skylar, Summer, Sutton, Snow, Sophie, Spencer, Spring, Star, Storm, Sunrise, Sunshine, Tait, Tatum, Taylor, Teegan, Tempest, Temple, Terrin, Tide, Udak, Umber, Urban, Utah, Vahn, Valentine, Vale, Valo, Veer, Vermont, Vero, Vesper, Vicky, Viper, Waneta, Waverly, Winter, Wisdom, Wren, Wylie, Xavi, Xen, Xerxes, Xia, Yael, Yale, Yarden, Yardley, Yuri, Zaire, Zane, Zasha, Zeal, Zealand, Zen, Zene, Zenith, Zephyr, Zohar, Zuri$template$Alex`;
+    let defaultNames = `default$Alby, Alex, Amari, Arbor, Arden, Ariel, Aries, Arrow, Artemis, Ash, Asher, Aspen, Aster, Atumn, Aubrey, Avery, Azriel, Baker, Banks, Basil, Bellamy, Berry, Bex, Billy, Bix, Blair, Blake, Bowie, Brecken, Bryn, Cal, Calean, Cameron, Carmel, Carson, Cedar, Casey, Charlie, Chester, Claire, Cloud, Cody, Cole, Cookie, Corey, Cove, Dakota, Dark, Demi, Devin, Dennis, Dino, Drew, Dune, Dusty, Ellery, Ellis, Emerson, Emery, Ender, Everest, Fallon, Fenix, Finch, Finley, Finnegan, Fio, Flash, Flower, Frankie, Frey, Galaxy, Garland, Garnet, Gavin, Gentry, Gianni, Gift, Glenn, Golden, Greer, Hale, Hao, Hart, Harper, Hayden, Haylen, Hollis, Hope, Hunter, Ian, Iman, Indigo, Indy, Ira, Jaden, Jace, Jack, James, Jamie, Jasmine, Jessie, Jett, Jordan, Josh, Jude, Juniper, Kai, Kane, Kade, Karter, Kennedy, Kingsley, Kit, Koda, Kyle, Landon, Lark, Leaf, Lennon, Link, Lisa, Logan, Lowen, Lux, Lyric, Max, Makoto, Mani, Marlowe, Milan, Moon, Morgan, Moss, Murphy, Natale, Nature, Nazareth, Nell, Night, Noe, Noel, Nova, Nuru, Oakes, Oakley, Omid, Onyx, Otzar, Ozzie, Pan, Paris, Parker, Pax, Pemberley, Perry, Peyton, Phoenix, Pim, Pixel, Poe, Poet, Psalm, Puck, Quant, Quest, Quill, Quinby, Quincy, Quinn, Rain, Reagan, Remi, Remy, Ridley, Riley, Rio, River, Robin, Rory, Rowan, Royal, Rumi, Ryan, Sage, Salem, Sally, Sam, Sawyer, Sayer, Shadow, Shiloh, Scout, Skylar, Summer, Sutton, Snow, Sophie, Spencer, Spring, Star, Storm, Sunrise, Sunshine, Tait, Tatum, Taylor, Teegan, Tempest, Temple, Terrin, Tide, Udak, Umber, Urban, Utah, Vahn, Valentine, Vale, Valo, Veer, Vermont, Vero, Vesper, Vicky, Viper, Waneta, Waverly, Winter, Wisdom, Wren, Wylie, Xavi, Xen, Xerxes, Xia, Yael, Yale, Yarden, Yardley, Yuri, Zaire, Zane, Zasha, Zeal, Zealand, Zen, Zene, Zenith, Zephyr, Zohar, Zuri$template$Alex`;
     try {if(!localStorage.getItem('namesNew')){
         if(localStorage.getItem('names')){
             localStorage.setItem('namesNew', `custom$` + localStorage.getItem('names') + '$' + defaultNames);
@@ -767,7 +767,7 @@
     currentGroup = sessionStorage.getItem('currentGroup');
     let namesBackup = [];
 
-    let defaultPronouns = `default$she, her, her, hers, herself, 0 | he, him, his, his, himself, 0 | they, them, their, theirs, themself, 1 | it, it, its, its, itself, 0 | one, one, one's, one's, oneself, 0 | thon, thon, thons, thon's, thonself, 0 | xe, xem, xyr, xyrs, xemself, 0 | xe, xim, xis, xis, ximself, 0 | xe, xim, xir, xirs, ximself, 0 | ve, ver, vis, vers, verself, 0 | ze, zir, zir, zirs, zirself, 0 | e, em, es, ems, emself, 0 | e, em, es, ems, emself, 1 | ae, aer, aer, aers, aerself, 0 | co, co, cos, cos, coself, 0 | vi, vir, vis, virs, virself, 0 | ne, nem, nir, nirs, nemself, 0 | ey, em, eir, eirs, emself, 0 | ey, em, eir, eirs, emself, 1 | ey, eym, eyr, eyrs, eymself, 0 | ey, eym, eyr, eyrs, eymself, 1 | xey, xem, xeir, xeirs, xemself, 0 | xey, xem, xeir, xeirs, xemself, 1 | vey, vem, veir, veirs, vemself, 0 | vey, vem, veir, veirs, vemself, 1 | ix, ix, ixs, ixs, ixself, 0 | han, han, hans, hans, hanself, 0 | he, he, hes, hes, heself, 0 | hei, heim, heir, heir, heimself, 0 | hy, hym, hys, hys, hymself, 0 | jee, jem, jeir, jeirs, jemself, 0 | she, shim, shis, shis, shimself, 0 | shey, shem, sheir, sheirs, shemself, 0 | se, sim, ser, sers, serself, 0 | cy, cyr, cyr, cyrs, cyrself, 0 | tee, tor, tors, tors, torself, 0 | te, tem, ter, ters, temself, 0 | sye, sym, syr, syrs, symself, 0 | shy, hyr, hyr, hyrs, hyrself, 0 | shi, hir, hir, hirs, hirself, 0 | thit, thit, thits, thits, thitself, 0 | vae, vaer, vaer, vaers, vaerself, 0 | zae, zaer, zaer, zaers, zaerself, 0 | fae, faer, faer, faers, faerself, 0 | bun, bun, buns, buns, bunself, 0 | faun, faun, fauns, fauns, faunself, 0 | file, file, files, files, fileself, 0 | gem, gem, gems, gems, gemself, 0 | puff, puff, puffs, puffs, puffself, 0 | kit, kit, kits, kits, kitself, 0 | ai, ain, aire, aires, aiself, 0 | meow, mew, mews, mews, meowself, 0 | star, star, stars, stars, starself, 0 | lea, leaf, leafs, leafs, leafself, 0 | fey, fem, feir, feirs, femself, 0 | fae, faem, faer, faers, femself, 0 | bloom, bloom, blooms, blooms, bloomself, 0 | fade, fade, fades, fades, fadeself, 0 | fla, flare, flares, flares, flareself, 0 | flo, flow, flows, flows, flowerself, 0 | fluff, fluff, fluffs, fluffs, fluffself, 0 | fog, fog, fogs, fogs, fogself, 0 | fra, frost, fros, fros, frostself, 0 | fur, fur, furs, furs, furself, 0 | cat, cat, cats, cats, catself, 0 | cherry, cherry, cherries, cherries, cherryself, 0 | ic, ice, isse, issi, iceself, 0 | corn, corn, corns, corns, cornself, 0 | cactus, cactus, cactuses, cactuses, cactusself, 0 | bug, bug, bugs, bugs, bugself, 0 | dar, dark, darks, darks, darkself, 0 | dem, demon, demons, demons, demonself, 0 | dragon, dragon, dragons, dragons, dragonself, 0 | dream, dream, dreams, dreams, dreamself, 0 | lun, lun, luns, luns, lunself, 0 | moon, moon, moon, moons, moonself, 0 | paw, paw, paws, paws, pawself, 0 | sno, snow, snows, snows, snowself, 0 | woof, woof, woofs, woofs, woofself, 0 | rai, rain, rains, rains, rainself, 0 | 💜, 💜, 💜s, 💜s, 💜self, 0 | 💚, 💚, 💚s, 💚s, 💚self, 0 | 🖤, 🖤, 🖤s, 🖤s, 🖤self, 0 | 💙, 💙, 💙s, 💙s, 💙self, 0 | 💛, 💛, 💛s, 💛s, 💛self, 0 | 🦊, 🦊, 🦊s, 🦊s, 🦊self, 0 | 🦕, 🦕, 🦕s, 🦕s, 🦕self, 0 | 🐬, 🐬, 🐬s, 🐬s, 🐬self, 0 | 🦝, 🦝, 🦝s, 🦝s, 🦝self, 0 | 🐾, 🐾, 🐾s, 🐾s, 🐾self, 0 | 🍪, 🍪, 🍪s, 🍪s, 🍪self, 0 | 🍕, 🍕, 🍕s, 🍕s, 🍕self, 0 | 🍬, 🍬, 🍬s, 🍬s, 🍬self, 0 | 🍧, 🍧, 🍧s, 🍧s, 🍧self, 0 | 🎂, 🎂, 🎂s, 🎂s, 🎂self, 0 | 🍭, 🍭, 🍭s, 🍭s, 🍭self, 0 | 🍉, 🍉, 🍉s, 🍉s, 🍉self, 0 | 🍓, 🍓, 🍓s, 🍓s, 🍓self, 0 | 🥝, 🥝, 🥝s, 🥝s, 🥝self, 0 | 🍇, 🍇, 🍇s, 🍇s, 🍇self, 0 | 🌑, 🌑, 🌑s, 🌑s, 🌑self, 0 | 🪐, 🪐, 🪐s, 🪐s, 🪐self, 0 | 🗻, 🗻, 🗻s, 🗻s, 🗻self, 0 | ☁, ☁, ☁s, ☁s, ☁self, 0 | 🌈, 🌈, 🌈s, 🌈s, 🌈self, 0 | 🔥, 🔥, 🔥s, 🔥s, 🔥self, 0 | 💧, 💧, 💧s, 💧s, 💧self, 0 | ❄, ❄, ❄s, ❄s, ❄self, 0 | 🌊, 🌊, 🌊s, 🌊s, 🌊self, 0 | 🌌, 🌌, 🌌s, 🌌s, 🌌self, 0 | 🌪, 🌪, 🌪s, 🌪s, 🌪self, 0 | 🌠, 🌠, 🌠s, 🌠s, 🌠self, 0 | 💫, 💫, 💫s, 💫s, 💫self, 0 | 🎈, 🎈, 🎈s, 🎈s, 🎈self, 0 | 💎, 💎, 💎s, 💎s, 💎self, 0 | 🎮, 🎮, 🎮s, 🎮s, 🎮self, 0$template$they, them, their, theirs, themself, 1`;
+    let defaultPronouns = `default$she, her, her, hers, herself, 0 | he, him, his, his, himself, 0 | they, them, their, theirs, themself, 1 | it, it, its, its, itself, 0 | one, one, one's, one's, oneself, 0 | thon, thon, thons, thon's, thonself, 0 | xe, xem, xyr, xyrs, xemself, 0 | xe, xim, xis, xis, ximself, 0 | xe, xim, xir, xirs, ximself, 0 | ve, ver, vis, vers, verself, 0 | ze, zir, zir, zirs, zirself, 0 | e, em, es, ems, emself, 0 | e, em, es, ems, emself, 1 | ae, aer, aer, aers, aerself, 0 | co, co, cos, cos, coself, 0 | vi, vir, vis, virs, virself, 0 | ne, nem, nir, nirs, nemself, 0 | ey, em, eir, eirs, emself, 0 | ey, em, eir, eirs, emself, 1 | ey, eym, eyr, eyrs, eymself, 0 | ey, eym, eyr, eyrs, eymself, 1 | xey, xem, xeir, xeirs, xemself, 0 | xey, xem, xeir, xeirs, xemself, 1 | zey, zem, zeir, zeirs, zemself, 0 | zey, zem, zeir, zeirs, zemself, 1 | zhey, zhem, zheir, zheirs, zhemself, 0 | zhey, zhem, zheir, zheirs, zhemself, 1 | vey, vem, veir, veirs, vemself, 0 | vey, vem, veir, veirs, vemself, 1 | ix, ix, ixs, ixs, ixself, 0 | han, han, hans, hans, hanself, 0 | he, he, hes, hes, heself, 0 | hei, heim, heir, heir, heimself, 0 | hy, hym, hys, hys, hymself, 0 | jee, jem, jeir, jeirs, jemself, 0 | she, shim, shis, shis, shimself, 0 | shey, shem, sheir, sheirs, shemself, 0 | se, sim, ser, sers, serself, 0 | cy, cyr, cyr, cyrs, cyrself, 0 | tee, tor, tors, tors, torself, 0 | te, tem, ter, ters, temself, 0 | sye, sym, syr, syrs, symself, 0 | shy, hyr, hyr, hyrs, hyrself, 0 | shi, hir, hir, hirs, hirself, 0 | zhe, zher, zher, zhers, zherself, 0 | thit, thit, thits, thits, thitself, 0 | vae, vaer, vaer, vaers, vaerself, 0 | zae, zaer, zaer, zaers, zaerself, 0 | fae, faer, faer, faers, faerself, 0 | bun, bun, buns, buns, bunself, 0 | faun, faun, fauns, fauns, faunself, 0 | file, file, files, files, fileself, 0 | gem, gem, gems, gems, gemself, 0 | puff, puff, puffs, puffs, puffself, 0 | kit, kit, kits, kits, kitself, 0 | ai, ain, aire, aires, aiself, 0 | meow, mew, mews, mews, meowself, 0 | star, star, stars, stars, starself, 0 | lea, leaf, leafs, leafs, leafself, 0 | fey, fem, feir, feirs, femself, 0 | fae, faem, faer, faers, femself, 0 | bloom, bloom, blooms, blooms, bloomself, 0 | fade, fade, fades, fades, fadeself, 0 | fla, flare, flares, flares, flareself, 0 | flo, flow, flows, flows, flowerself, 0 | fluff, fluff, fluffs, fluffs, fluffself, 0 | fog, fog, fogs, fogs, fogself, 0 | fra, frost, fros, fros, frostself, 0 | fur, fur, furs, furs, furself, 0 | cat, cat, cats, cats, catself, 0 | cherry, cherry, cherries, cherries, cherryself, 0 | ic, ice, isse, issi, iceself, 0 | corn, corn, corns, corns, cornself, 0 | cactus, cactus, cactuses, cactuses, cactusself, 0 | bug, bug, bugs, bugs, bugself, 0 | dar, dark, darks, darks, darkself, 0 | dem, demon, demons, demons, demonself, 0 | dragon, dragon, dragons, dragons, dragonself, 0 | dream, dream, dreams, dreams, dreamself, 0 | lun, lun, luns, luns, lunself, 0 | moon, moon, moon, moons, moonself, 0 | paw, paw, paws, paws, pawself, 0 | sno, snow, snows, snows, snowself, 0 | woof, woof, woofs, woofs, woofself, 0 | rai, rain, rains, rains, rainself, 0 | 💜, 💜, 💜s, 💜s, 💜self, 0 | 💚, 💚, 💚s, 💚s, 💚self, 0 | 🖤, 🖤, 🖤s, 🖤s, 🖤self, 0 | 💙, 💙, 💙s, 💙s, 💙self, 0 | 💛, 💛, 💛s, 💛s, 💛self, 0 | 🦊, 🦊, 🦊s, 🦊s, 🦊self, 0 | 🦕, 🦕, 🦕s, 🦕s, 🦕self, 0 | 🐬, 🐬, 🐬s, 🐬s, 🐬self, 0 | 🦝, 🦝, 🦝s, 🦝s, 🦝self, 0 | 🐾, 🐾, 🐾s, 🐾s, 🐾self, 0 | 🍪, 🍪, 🍪s, 🍪s, 🍪self, 0 | 🍕, 🍕, 🍕s, 🍕s, 🍕self, 0 | 🍬, 🍬, 🍬s, 🍬s, 🍬self, 0 | 🍧, 🍧, 🍧s, 🍧s, 🍧self, 0 | 🎂, 🎂, 🎂s, 🎂s, 🎂self, 0 | 🍭, 🍭, 🍭s, 🍭s, 🍭self, 0 | 🍉, 🍉, 🍉s, 🍉s, 🍉self, 0 | 🍓, 🍓, 🍓s, 🍓s, 🍓self, 0 | 🥝, 🥝, 🥝s, 🥝s, 🥝self, 0 | 🍇, 🍇, 🍇s, 🍇s, 🍇self, 0 | 🌑, 🌑, 🌑s, 🌑s, 🌑self, 0 | 🪐, 🪐, 🪐s, 🪐s, 🪐self, 0 | 🗻, 🗻, 🗻s, 🗻s, 🗻self, 0 | ☁, ☁, ☁s, ☁s, ☁self, 0 | 🌈, 🌈, 🌈s, 🌈s, 🌈self, 0 | 🔥, 🔥, 🔥s, 🔥s, 🔥self, 0 | 💧, 💧, 💧s, 💧s, 💧self, 0 | ❄, ❄, ❄s, ❄s, ❄self, 0 | 🌊, 🌊, 🌊s, 🌊s, 🌊self, 0 | 🌌, 🌌, 🌌s, 🌌s, 🌌self, 0 | 🌪, 🌪, 🌪s, 🌪s, 🌪self, 0 | 🌠, 🌠, 🌠s, 🌠s, 🌠self, 0 | 💫, 💫, 💫s, 💫s, 💫self, 0 | 🎈, 🎈, 🎈s, 🎈s, 🎈self, 0 | 💎, 💎, 💎s, 💎s, 💎self, 0 | 🎮, 🎮, 🎮s, 🎮s, 🎮self, 0$template$they, them, their, theirs, themself, 1`;
     if(!localStorage.getItem('pronounsNew')){
         if(localStorage.getItem('pronouns')){
             let pronounList = localStorage.getItem('pronouns');
@@ -1813,6 +1813,12 @@
     }
 
 
+    function changeSpeed(speed){
+        ms = parseInt(speed);
+        localStorage.setItem('ms', speed);
+    }
+
+
     function changeGroup(group){
         namesP.removeChild(namesTables.get(currentGroup));
         pronounsP.removeChild(pronounsTables.get(currentGroup));
@@ -2588,7 +2594,7 @@ async function deleteGroup(){
         <button type='button' class='green smallButton' aria-label="change font" onclick='changeFont()'>Font</button>
     </header>
 
-    <div class="pop-up chatbox" id="chatbox" onclick="skipForward()" role="alertdialog" aria-modal="true" aria-label="test results"><button class="green smallButton close" onclick="exit()">close</button></div>
+    <div class="pop-up chatbox" id="chatbox" onclick="skipForward()" role="alertdialog" aria-modal="true" aria-label="test results"><button class="green smallButton close" onclick="exit()">Close</button></div>
     <div class="pop-up chatbox try"></div>
     <div class="shadow" id="chatbox-shadow" onclick="exit()"></div>
 
@@ -2694,12 +2700,27 @@ async function deleteGroup(){
     <div id='editor'>
 
         <p class="text">
-            All changes that you make will be saved directly in your browser. It means they aren't sent to any server, we don't have any access to them, but also you won't be able to acces them through other browser or from different device. Make sure you don't use private mode, because it will clear your data after you close the page (at least on all browser we tested with). Your changes will also be lost when you delete cookies, so if you have to do that, <a href="#copying-data">copy data</a> and save it somewhere else beforehand (we've heard that Safari may from time to time automatically delete all cookies, so be careful when using that browser). 
+            All changes that you make will be saved directly in your browser. It means they aren't sent to any server, we don't have any access to them, but also you won't be able to acces them through other browser or from different device. Make sure you don't use private mode, because it will clear your data after you close the page (at least on all browsers we tested with). Your changes will also be lost when you delete cookies, so if you have to do that, <a href="#copying-data">copy data</a> and save it somewhere else beforehand (we've heard that Safari may from time to time automatically delete all cookies, so be careful when using that browser). 
         </p>
 
         <p class="text">
             If you're wondering why some symbols won't appear in inputs no matter how many times you click them, that's because we use them for coding informations and you could accidentaly break the page if we let you use them.
         </p>
+
+        <p class="text" id="speed-info">
+            Choose the speed of displaying sentences during testing:
+        </p>
+
+        <select id="speed-select" class="gray rounded" aria-labelledby="speed-info" oninput="changeSpeed(this.value)">
+            <option value="50">super slow</option>
+            <option value="30">very slow</option>
+            <option value="25">slow</option>
+            <option value="20">medium</option>
+            <option value="17">fast</option>
+            <option value="15">very fast</option>
+            <option value="10">super fast</option>
+            <option value="0">infinite (no animation)</option>
+        </select>
 
         <h1 class="text">
             Group
@@ -2885,7 +2906,7 @@ async function deleteGroup(){
         <button class='green button' onclick='pasteData(pasteArea.value)'>Replace data</button>
 
         <p class="text">
-            This button will restart the page to it's initial settings. This means that all your custom names, pronouns and testing sentences will be lost and this action is irreversible. Developers have no idea why would you want to do that and even why they've made this an option (okay, that was a lie, we needed it for testing purposes). We advice you to use it only when your changes broke the page. We'll ask you for confirmation when you click it.
+            This button will restart the page to its initial settings. This means that all your custom names, pronouns and testing sentences will be lost and this action is irreversible. Developers have no idea why would you want to do that and even why they've made this an option (okay, that was a lie, we needed it for testing purposes). We advise you to use it only when your changes broke the page. We'll ask you for confirmation when you click it.
         </p>
         
         <button class='green button' onclick='reset()'>Reset to default</button>
@@ -2895,7 +2916,7 @@ async function deleteGroup(){
 
 
     <p class="text">
-        If you like our Tester, please consider sharing it, <a href="https://docs.google.com/forms/d/e/1FAIpQLScvDv6MsTZucNfDJ-t3f5vvuekw5Pwmj6BXQkBhHxUOH0nYsQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">filling out a short feedback form</a> and <a href="https://ko-fi.com/therainbowchaossystem" target="_blank" rel="noopener noreferrer">supporting us on ko-fi</a>. Every response and donation will help us stay motivated to further improve usability and accessibility of this project and not abandon it once again. Also, we're currently looking for a job, if you need a web developer, feel free to contact us!
+        If you like our Tester, please consider <a href="https://docs.google.com/forms/d/e/1FAIpQLScvDv6MsTZucNfDJ-t3f5vvuekw5Pwmj6BXQkBhHxUOH0nYsQ/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">filling out a short feedback form</a> to let us know about it! We deeply appreciate every response, it helps us better understand how you use our app and makes us motivated to not abandon this project and find some free time to improve it according to your needs.
     </p>
 
     <p class="text">
@@ -2914,7 +2935,6 @@ async function deleteGroup(){
                 <address>
                     <a href="mailto:pronounsandnamestester@gmail.com">Contact us</a>
                 </address>
-                <a href="https://ko-fi.com/therainbowchaossystem" target="_blank" rel="noopener noreferrer">Support us</a>
                 <a href="https://github.com/chocolate-pancake/pronounsandnamestester" target="_blank" rel="noopener noreferrer">Source code on github</a>
             </div>
             <div>
@@ -2931,7 +2951,7 @@ async function deleteGroup(){
             </div>
         </div>
         <p class="text">
-            ©2022-2023 The Rainbow Chaos System. Content available under <a href="https://oql.avris.it/license/v1.1" target="_blank" rel="noopener noreferrer">Opinionated Queer License</a>.
+            ©2022-2024 The Rainbow Chaos System. Content available under <a href="https://oql.avris.it/license/v1.1" target="_blank" rel="noopener noreferrer">Opinionated Queer License</a>.
         </p>
     </footer> 
 
@@ -2958,6 +2978,24 @@ async function deleteGroup(){
         }
         select.append(opt);
     }
+
+    
+    let options = document.getElementById("speed-select").childNodes;
+    let matches = false;
+    for (let i = 0; i < options.length; i++){
+        if(parseInt(options[i].value) === ms){
+            options[i].setAttribute('selected', 'true');
+            matches = true;
+            break;
+        }        
+    }
+    if(!matches){
+        let customOption = document.createElement('option');
+        customOption.setAttribute('value', toString(ms));
+        customOption.append("custom");
+        document.getElementById("speed-select").append(customOption);
+    }
+
 
     function resetPage(){
         localStorage.clear();
