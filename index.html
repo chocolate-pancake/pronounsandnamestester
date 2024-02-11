@@ -725,7 +725,15 @@
 
 
     let namesCount = 1;
+    let namesElements = [];
     let setsCount = 1;
+    let setsElements = [];
+    let subjectElements = [];
+    let objectElements = [];
+    let determinerElements = [];
+    let possesiveElements = [];
+    let reflexiveElements = [];
+    let pluralElements = [];
     let br = document.createElement('br');
     let name;
     let subjectPronoun, objectPronoun, possesiveDeterminer, possesivePronoun, reflexivePronoun;
@@ -1179,11 +1187,24 @@
     }
 
     function testResults(form){
+        if(namesElements.length === 0){
+            namesElements.push(document.getElementById("name1"));
+        }
+        if(setsElements.length === 0){
+            setsElements.push(document.getElementById("set1"));
+            subjectElements.push(document.getElementById('subject1'));
+            objectElements.push(document.getElementById('object1'));
+            determinerElements.push(document.getElementById('determiner1'));
+            possesiveElements.push(document.getElementById('possesive1'));
+            reflexiveElements.push(document.getElementById('reflexive1'));
+            pluralElements.push(document.getElementById('plural1'));
+        }
         name = [];
         name.push(0);
-        for(let i = 1; i <= namesCount; i += 1){
-            eval(`if(form.name${i}.value){
-            name.push(form.name${i}.value)}`);
+        for(let i = 0; i < namesElements.length; i += 1){
+            if(namesElements[i].firstChild.value){
+                name.push(namesElements[i].firstChild.value);
+            }
         }
         if(name.length === 1){
             // name.push('this person');
@@ -1197,9 +1218,10 @@
             }
         }
         subjectPronoun = [];
-        for(let i = 1; i <= setsCount; i += 1){
-            eval(`if(form.subjectPronoun${i}.value){
-                subjectPronoun.push(form.subjectPronoun${i}.value)}`);
+        for(let i = 0; i < setsCount; i += 1){
+            if(subjectElements[i].value){
+                subjectPronoun.push(subjectElements[i].value);
+            }
         }
         if(subjectPronoun.length === 0){
             // for(let i = 1; i < name.length; i += 1){
@@ -1210,9 +1232,10 @@
             }
         }
         objectPronoun = [];
-        for(let i = 1; i <= setsCount; i += 1){
-            eval(`if(form.objectPronoun${i}.value){
-                objectPronoun.push(form.objectPronoun${i}.value)}`);
+        for(let i = 0; i < setsCount; i += 1){
+            if(objectElements[i].value){
+                objectPronoun.push(objectElements[i].value);
+            }
         }
         if(objectPronoun.length === 0){
             // for(let i = 1; i < name.length; i += 1){
@@ -1223,9 +1246,10 @@
             }
         }
         possesiveDeterminer = [];
-        for(let i = 1; i <= setsCount; i += 1){
-            eval(`if(form.possesiveDeterminer${i}.value){
-                possesiveDeterminer.push(form.possesiveDeterminer${i}.value)}`);
+        for(let i = 0; i < setsCount; i += 1){
+            if(determinerElements[i].value){
+                possesiveDeterminer.push(determinerElements[i].value);
+            }
         }
         if(possesiveDeterminer.length === 0){
             // for(let i = 1; i < name.length; i += 1){
@@ -1236,9 +1260,10 @@
             }
         }
         possesivePronoun = [];
-        for(let i = 1; i <= setsCount; i += 1){
-            eval(`if(form.possesivePronoun${i}.value){
-                possesivePronoun.push(form.possesivePronoun${i}.value)}`);
+        for(let i = 0; i < setsCount; i += 1){
+            if(possesiveElements[i].value){
+                possesivePronoun.push(possesiveElements[i].value);
+            }
         }
         if(possesivePronoun.length === 0){
             // for(let i = 1; i < name.length; i += 1){
@@ -1249,9 +1274,10 @@
             }
         }
         reflexivePronoun = [];
-        for(let i = 1; i <= setsCount; i += 1){
-            eval(`if(form.reflexivePronoun${i}.value){
-                reflexivePronoun.push(form.reflexivePronoun${i}.value)}`);
+        for(let i = 0; i < setsCount; i += 1){
+            if(reflexiveElements[i].value){
+                reflexivePronoun.push(reflexiveElements[i].value);
+            }
         }
         if(reflexivePronoun.length === 0){
             // for(let i = 1; i < name.length; i += 1){
@@ -1262,9 +1288,10 @@
             }
         }
         plural = [];
-        for(let i = 1; i <= setsCount; i += 1){
-            eval(`if(form.subjectPronoun${i}.value){
-                plural.push(Number(form.plural${i}.value))}`);
+        for(let i = 0; i < setsCount; i += 1){
+            if(pluralElements[i].value){
+                plural.push(pluralElements[i].value);
+            }
         }
         if(plural.length < subjectPronoun.length){
             // for(let i = plural.length; i < subjectPronoun.length; i++){
@@ -1280,7 +1307,11 @@
     }
 
     function addName(){
+        if(namesElements.length === 0){
+            namesElements.push(document.getElementById("name1"));
+        }
         namesCount += 1;
+        namesElements.push(document.createElement('div'));
         let input = document.createElement('input');
         input.setAttribute('name', `name${namesCount}`);
         input.setAttribute('class', 'gray rounded margin');
@@ -1298,10 +1329,21 @@
         button2.setAttribute('onClick', `clearName(${namesCount})`);
         let buttontxt2 = document.createTextNode('Clear');
         button2.append(buttontxt2);
-        document.getElementById('names').append(input, button, button2, br.cloneNode());
+        namesElements[namesCount - 1].append(input, button, button2, br.cloneNode())
+        document.getElementById('names').append(namesElements[namesCount - 1]);
         input.focus();
     }
     function addSet(){
+        if(setsElements.length === 0){
+            setsElements.push(document.getElementById("set1"));
+            subjectElements.push(document.getElementById('subject1'));
+            objectElements.push(document.getElementById('object1'));
+            determinerElements.push(document.getElementById('determiner1'));
+            possesiveElements.push(document.getElementById('possesive1'));
+            reflexiveElements.push(document.getElementById('reflexive1'));
+            pluralElements.push(document.getElementById('plural1'));
+        }
+        setsElements.push(document.createElement('div'));
         setsCount += 1;
         let table = document.createElement('table');
         table.setAttribute('role', 'presentation');
@@ -1321,6 +1363,7 @@
         input1.setAttribute('aria-live', 'polite');
         input1.setAttribute('aria-labelledby', `subjectpronoun${setsCount}`);
         input1.setAttribute('autocapitalize', 'off');
+        subjectElements.push(input1);
         td2.append(input1);
         tr1.append(td1, td2);
 
@@ -1339,6 +1382,7 @@
         input2.setAttribute('aria-live', 'polite');
         input2.setAttribute('aria-labelledby', `objectpronoun${setsCount}`);
         input2.setAttribute('autocapitalize', 'off');
+        objectElements.push(input2);
         td4.append(input2);
         tr2.append(td3, td4);
 
@@ -1357,6 +1401,7 @@
         input3.setAttribute('aria-live', 'polite');
         input3.setAttribute('aria-labelledby', `possesivedeterminer${setsCount}`);
         input3.setAttribute('autocapitalize', 'off');
+        determinerElements.push(input3);
         td6.append(input3);
         tr3.append(td5, td6);
 
@@ -1375,6 +1420,7 @@
         input4.setAttribute('aria-live', 'polite');
         input4.setAttribute('aria-labelledby', `possesivepronoun${setsCount}`);
         input4.setAttribute('autocapitalize', 'off');
+        possesiveElements.push(input4);
         td8.append(input4);
         tr4.append(td7, td8);
 
@@ -1393,6 +1439,7 @@
         input5.setAttribute('aria-live', 'polite');
         input5.setAttribute('aria-labelledby', `reflexivepronoun${setsCount}`);
         input5.setAttribute('autocapitalize', 'off');
+        reflexiveElements.push(input5);
         td10.append(input5);
         tr5.append(td9, td10);
 
@@ -1418,6 +1465,7 @@
         option2.setAttribute('value', '1');
         option2.append(document.createTextNode('plural'));
         select.append(option1, option2);
+        pluralElements.push(select);
 
         let button = document.createElement('button');
         button.setAttribute('type', 'button');
@@ -1437,75 +1485,120 @@
         button3.setAttribute('onClick', `clearSet(${setsCount})`);
         button3.append(document.createTextNode('Clear'));
 
-        document.getElementById('sets').append(h, table, label, select, button, button2, button3);
+        setsElements[setsCount - 1].append(h, table, label, select, button, button2, button3);
+        document.getElementById('sets').append(setsElements[setsCount - 1]);
         input1.focus();
     }
 
     function autofill(set, subject){
+        set --;
+        if(setsElements.length === 0){
+            setsElements.push(document.getElementById("set1"));
+            subjectElements.push(document.getElementById('subject1'));
+            objectElements.push(document.getElementById('object1'));
+            determinerElements.push(document.getElementById('determiner1'));
+            possesiveElements.push(document.getElementById('possesive1'));
+            reflexiveElements.push(document.getElementById('reflexive1'));
+            pluralElements.push(document.getElementById('plural1'));
+        }
         let form = document.getElementById('form');
         if(!subject){
             return;
         }
         for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i += 1){
             if(pronounsSuggestions.get(currentGroup)[i][0] === subject){
-                eval(`form.objectPronoun${set}.value = pronounsSuggestions.get(currentGroup)[i][1];
-                form.possesiveDeterminer${set}.value = pronounsSuggestions.get(currentGroup)[i][2];
-                form.possesivePronoun${set}.value = pronounsSuggestions.get(currentGroup)[i][3];
-                form.reflexivePronoun${set}.value = pronounsSuggestions.get(currentGroup)[i][4];
-                form.plural${set}.value = parseInt(pronounsSuggestions.get(currentGroup)[i][5]);`);
+                objectElements[set].value = pronounsSuggestions.get(currentGroup)[i][1];
+                determinerElements[set].value = pronounsSuggestions.get(currentGroup)[i][2];
+                possesiveElements[set].value = pronounsSuggestions.get(currentGroup)[i][3];
+                reflexiveElements[set].value = pronounsSuggestions.get(currentGroup)[i][4];
+                pluralElements[set].value = parseInt(pronounsSuggestions.get(currentGroup)[i][5]);
                 return;
             }
         }
         if(subject[subject.length - 1] === 's'){
-            eval(`form.objectPronoun${set}.value = subject;
-            form.possesiveDeterminer${set}.value = subject + 'es';
-            form.possesivePronoun${set}.value = subject + 'es';`);
+            objectElements[set].value = subject;
+            determinerElements[set].value = subject + 'es';
+            possesiveElements[set].value = subject + 'es';
+            pluralElements[set].value = 0;
             if(subject.length > 1 && subject[subject.length - 2] === 's'){
-                eval(`form.reflexivePronoun${set}.value = subject + 'elf';`);
+                reflexiveElements[set].value = subject + 'elf';
                 return;
             }
-            eval(`form.reflexivePronoun${set}.value = subject + 'self';`);
+            reflexiveElements[set].value = subject + 'self';
             return;
         }
-        eval(`form.objectPronoun${set}.value = subject;
-        form.possesiveDeterminer${set}.value = subject + 's';
-        form.possesivePronoun${set}.value = subject + 's';
-        form.reflexivePronoun${set}.value = subject + 'self';`);
+        objectElements[set].value = subject;
+        determinerElements[set].value = subject + 's';
+        possesiveElements[set].value = subject + 's';
+        reflexiveElements[set].value = subject + 'self';
+        pluralElements[set].value = 0;
     }
 
     function fillPronouns(set){
+        set --;
+        if(setsElements.length === 0){
+            setsElements.push(document.getElementById("set1"));
+            subjectElements.push(document.getElementById('subject1'));
+            objectElements.push(document.getElementById('object1'));
+            determinerElements.push(document.getElementById('determiner1'));
+            possesiveElements.push(document.getElementById('possesive1'));
+            reflexiveElements.push(document.getElementById('reflexive1'));
+            pluralElements.push(document.getElementById('plural1'));
+        }
         if(pronounsSuggestions.get(currentGroup).length === 0){
             return;
         }
         let idx = Math.floor(Math.random() * pronounsSuggestions.get(currentGroup).length);
         let rand = pronounsSuggestions.get(currentGroup)[idx];
-        eval(`form.subjectPronoun${set}.value = rand[0];
-        form.objectPronoun${set}.value = rand[1];
-        form.possesiveDeterminer${set}.value = rand[2];
-        form.possesivePronoun${set}.value = rand[3];
-        form.reflexivePronoun${set}.value = rand[4];
-        form.plural${set}.value = parseInt(rand[5]);`);
+        subjectElements[set].value = rand[0];
+        objectElements[set].value = rand[1];
+        determinerElements[set].value = rand[2];
+        possesiveElements[set].value = rand[3];
+        reflexiveElements[set].value = rand[4];
+        pluralElements[set].value = parseInt(rand[5]);
         
     }
 
     function fillName(name){
+        if(namesElements.length === 0){
+            namesElements.push(document.getElementById("name1"));
+        }
         if(namesSuggestions.get(currentGroup).length === 0){
             return;
         }
         let idx = Math.floor(Math.random() * namesSuggestions.get(currentGroup).length);
-        eval(`form.name${name}.value = namesSuggestions.get(currentGroup)[idx];`);
+        namesElements[name - 1].firstChild.value = namesSuggestions.get(currentGroup)[idx];
     }
 
     function clearSet(set){
-        eval(`form.subjectPronoun${set}.value = '';
-        form.objectPronoun${set}.value = '';
-        form.possesiveDeterminer${set}.value = '';
-        form.possesivePronoun${set}.value = '';
-        form.reflexivePronoun${set}.value = '';`);
+        if(setsElements.length === 0){
+            setsElements.push(document.getElementById("set1"));
+            subjectElements.push(document.getElementById('subject1'));
+            objectElements.push(document.getElementById('object1'));
+            determinerElements.push(document.getElementById('determiner1'));
+            possesiveElements.push(document.getElementById('possesive1'));
+            reflexiveElements.push(document.getElementById('reflexive1'));
+            pluralElements.push(document.getElementById('plural1'));
+        }
+        set --;
+        if(set !== 0 && subjectElements[set].value === '' && objectElements[set].value === '' && determinerElements[set].value === '' && possesiveElements[set].value === '' && reflexiveElements[set].value === ''){
+            document.getElementById('sets').removeChild(setsElements[set]);
+            return;
+        }
+        subjectElements[set].value = '';
+        objectElements[set].value = '';
+        determinerElements[set].value = '';
+        possesiveElements[set].value = '';
+        reflexiveElements[set].value = '';
     }
 
     function clearName(name){
-        eval(`form.name${name}.value = '';`);
+        if(name !== 1 && namesElements[name - 1].firstChild.value === ''){
+            names.removeChild(namesElements[name - 1]);
+        }
+        else{
+            namesElements[name - 1].firstChild.value = '';
+        }
     }
 
     let namesShown = false;
@@ -2607,83 +2700,86 @@ async function deleteGroup(){
     <main>
     <form method='get' id='form'>
         <h2 class='text'>Input all names you want to test / your names: </h2>
-        <input name='name1' class='gray rounded margin' aria-live="polite" aria-label="name">
-        <button type='button' class='rose smallButton' onclick='fillName(1)'>Random</button>
-        <button type='button' class='rose smallButton' onclick='clearName(1)'>Clear</button><br>
+        <div id="name1"><input name='name1' class='gray rounded margin' aria-live="polite" aria-label="name"><button type='button' class='rose smallButton' onclick='fillName(1)'>Random</button><button type='button' class='rose smallButton' onclick='clearName(1)'>Clear</button><br>
+        </div>
         <p id='names'> </p>
         <button type='button' class='rose button' onClick='addName()'>Add next</button>
 
         <p id="useless" class="text">If buttons don't work, try accesing the page from different browser or enable JavaScript in the browser settings.</p>
 
         <h2 class='text'>Input all pronoun sets you want to test / your pronoun sets: </h2><br>
-        <h3 class='text'>Set 1:</h3>
-        <table role="presentation">
-            <tr>
-                <td>
-                    <div class='left margin' id="subjectpronoun1">
-                        Subject pronoun:
-                    </div>
-                </td>
-                <td>
-                    <input name='subjectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="subjectpronoun1">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class='left margin' id="objectpronoun1">
-                        Object pronoun:
-                    </div>
-                </td>
-                <td>
-                    <input name='objectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="objectpronoun1">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class='left margin' id="possesivedeterminer1">
-                        Possesive determiner:
-                    </div>
-                </td>
-                <td>
-                    <input name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivedeterminer1">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class='left margin' id="possesivepronoun1">
-                        Possesive pronoun:
-                    </div>
-                </td>
-                <td>
-                    <input name='possesivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivepronoun1">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class='left margin' id="reflexivepronoun1">
-                        Reflexive pronoun:
-                    </div>
-                </td>
-                <td>
-                    <input name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="reflexivepronoun1">
-                </td>
-            </tr>
-        </table>
+        <div id="set1">
+            <h3 class='text'>Set 1:</h3>
+            <table role="presentation">
+                <tr>
+                    <td>
+                        <div class='left margin' id="subjectpronoun1">
+                            Subject pronoun:
+                        </div>
+                    </td>
+                    <td>
+                        <input id="subject1" name='subjectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="subjectpronoun1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class='left margin' id="objectpronoun1">
+                            Object pronoun:
+                        </div>
+                    </td>
+                    <td>
+                        <input id="object1" name='objectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="objectpronoun1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class='left margin' id="possesivedeterminer1">
+                            Possesive determiner:
+                        </div>
+                    </td>
+                    <td>
+                        <input id="determiner1" name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivedeterminer1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class='left margin' id="possesivepronoun1">
+                            Possesive pronoun:
+                        </div>
+                    </td>
+                    <td>
+                        <input id="possesive1" name='possesivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivepronoun1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class='left margin' id="reflexivepronoun1">
+                            Reflexive pronoun:
+                        </div>
+                    </td>
+                    <td>
+                        <input id="reflexive1" name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="reflexivepronoun1">
+                    </td>
+                </tr>
+            </table>
 
-        <label class='margin' for="select1">This pronoun set is: </label> 
-        <select name='plural1' class='gray rounded' id="select1">
-            <option value='0'>singular</option>
-            <option value='1'>plural</option>
-        </select>
+            <label class='margin' for="select1">This pronoun set is: </label> 
+            <select id="plural1" name='plural1' class='gray rounded' id="select1">
+                <option value='0'>singular</option>
+                <option value='1'>plural</option>
+            </select>
 
-        <button type='button' class='violet smallButton' onclick='autofill(1, this.form.subjectPronoun1.value)'>Autofill</button>
-        <button type='button' class='violet smallButton' onclick='fillPronouns(1)'>Random</button>
-        <button type='button' class='violet smallButton' onclick='clearSet(1)'>Clear</button>
+            <button type='button' class='violet smallButton' onclick='autofill(1, this.form.subjectPronoun1.value)'>Autofill</button><button type='button' class='violet smallButton' onclick='fillPronouns(1)'>Random</button><button type='button' class='violet smallButton' onclick='clearSet(1)'>Clear</button>
+        </div>
         <p id='sets'> </p>
         <button type='button' class='violet button' onClick='addSet()'>Add next</button><br>
 
         <p class="text">
             Tip: if you add the same name or set multiple times, it will appear in test results more often.
+        </p>
+
+        <p class="text">
+            Pressing 'clear' on additional, already empty inputs will remove them from the page.
         </p>
 
         <button type="button" class="blue button" id="aria-button" onclick="disableAnimation()" aria-label="click before testing to disable writing animation, so your screen reader won't have problems with accesing test results">Disable animation</button>
@@ -2727,7 +2823,7 @@ async function deleteGroup(){
         </h1>
 
         <p class="text">
-            Now you can store your data in separated groups. We made this option with <a href="https://pluralpedia.org/w/Plurality" target="_blank" rel="noopener noreferrer">plural</a> and <a href="https://otherkin.wiki/o/Otherkin" target="_blank" rel="noopener noreferrer">otherkin</a> folks in mind, but it can be useful for everybody else too: for example when you want to separate pronoun sets and names that you are still testing from the ones that give you gender euphoria. Data from currently chosen group will be used for randomising names and sets and creating test results. If you want Tester to randomly choose from all names and/or pronoun sets from the group, leave all corresponding input fields empty before testing.
+            Now you can store your data in separated groups. We made this option with <a href="https://pluralpedia.org/w/Plurality" target="_blank" rel="noopener noreferrer">plural</a> and <a href="https://otherkin.wiki/o/Otherkin" target="_blank" rel="noopener noreferrer">otherkin</a> folks in mind, but it can be useful for everybody else too: for example when you want to separate pronoun sets and names that you are still testing from the ones that give you gender euphoria. Data from currently chosen group will be used for randomising names and sets and creating test results. If you want Tester to randomly choose from all names and/or pronoun sets from the group, leave all corresponding input fields empty before testing. Currently autofill for more complex pronouns, like she/her, they/them and fae/faer, also depends on the data from the group, so if specific ones are not present there, you'll get results like she/shes, they/theys or fae/faes when autofilling.
         </p>
 
         <select id="group-select" class="gray" aria-label="choose group" aria-live="polite" oninput="changeGroup(this.value)">
