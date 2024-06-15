@@ -708,6 +708,109 @@
     let editorEnabled = sessionStorage.getItem('editorDisplay') === 'block';
 
 
+    if(!sessionStorage.getItem('namesFields')){
+        sessionStorage.setItem('namesFields', '');
+    }
+    let namesFields = sessionStorage.getItem('namesFields').split(',');
+
+    if(!sessionStorage.getItem('pronounsFields')){
+        sessionStorage.setItem('pronounsFields', ',,,,,0');
+    }
+    let pronounsStrings = sessionStorage.getItem('pronounsFields').split('|');
+    let pronounsFields = [];
+    for(let i = 0; i < pronounsStrings.length; i ++){
+        pronounsFields.push(pronounsStrings[i].split(','));
+    }
+
+
+    function updateFields(){
+        
+        namesElements.push(document.getElementById("name1"));
+        
+        namesElements[0].firstChild.value = namesFields[0];
+        for(let i = 1; i < namesFields.length; i ++){
+            addName();
+            namesElements[i].firstChild.value = namesFields[i];
+        }
+
+        setsElements.push(document.getElementById("set1"));
+        subjectElements.push(document.getElementById('subject1'));
+        objectElements.push(document.getElementById('object1'));
+        determinerElements.push(document.getElementById('determiner1'));
+        possesiveElements.push(document.getElementById('possesive1'));
+        reflexiveElements.push(document.getElementById('reflexive1'));
+        pluralElements.push(document.getElementById('plural1'));
+
+        subjectElements[0].value = pronounsFields[0][0];
+        objectElements[0].value = pronounsFields[0][1];
+        determinerElements[0].value = pronounsFields[0][2];
+        possesiveElements[0].value = pronounsFields[0][3];
+        reflexiveElements[0].value = pronounsFields[0][4];
+        pluralElements[0].value = pronounsFields[0][5];
+
+        for(let i = 1; i < pronounsFields.length; i ++){
+            addSet();
+            subjectElements[i].value = pronounsFields[i][0];
+            objectElements[i].value = pronounsFields[i][1];
+            determinerElements[i].value = pronounsFields[i][2];
+            possesiveElements[i].value = pronounsFields[i][3];
+            reflexiveElements[i].value = pronounsFields[i][4];
+            pluralElements[i].value = pronounsFields[i][5];
+        }
+
+
+    }
+
+
+
+    function changeName(string, editedName){
+        if(editedName < namesFields.length){
+            namesFields[editedName] = string;
+        }
+        else{
+            namesFields.push(string);
+        }
+        sessionStorage.setItem('namesFields', namesFields.join());
+    }
+
+    let fieldsNumber = 6;
+
+    function setToStorage(){
+        pronounsStrings = [];
+        for(let i = 0; i < pronounsFields.length; i ++){
+            pronounsStrings.push(pronounsFields[i].join());
+        }
+        sessionStorage.setItem('pronounsFields', pronounsStrings.join('|'));
+    }
+
+    function changeSet(string, editedSet, editedField){
+        if(editedSet < pronounsFields.length){
+            pronounsFields[editedSet][editedField] = string;
+        }
+        else{
+            let set = [];
+            for(i = 0; i < fieldsNumber; i++){
+                if(i === editedField){
+                    set.push(string);
+                }
+                else if(i === fieldsNumber - 1){
+                    set.push('0');
+                }
+                else{
+                    set.push('');
+                }
+            }
+            console.log(set);
+            pronounsFields.push(set);
+        }
+        setToStorage();
+    }
+
+    
+
+
+
+
     if(!localStorage.getItem('ms')){
         localStorage.setItem('ms', '20');
     }
@@ -818,7 +921,7 @@
     */
     let fillers;
 
-    let defaultSentencesNames = `default$"I met ",, 1,, " today. " | -1,, " is my best friend. " | "Do you know ",, 1,, "? " | "This is ",, 1,, ", who we talked about last week. Don't act like you don't remember it, you've literally asked me about ",, 3,, " like ten times. But don't worry, I won't tell ",, 3,, ". " | "I've heard you have a crush on my friend, ",, 1,, "? " | "I can't believe somebody could say something bad about ",, 1,, "! " | -1,, " lives here. " | "This is our neighbours child, ",, 1,, ". " | "What can I tell you about ",, 1,, "? " | "You've really never met ",, 1,, " before? " | "Let me tell you something about ",, 1,, ". " | "I'm meeting with ",, 1,, " tonight, I'm a little bit nervous about it. Oh, I haven't told you anything about ",, 1,, "? " | "If only I could spend this time with ",, 1,, " instead of wasting it on my homework... " | "I've heard you were talking with somebody about ",, 1,, ". So you know ",, 3,, " too? " | "You wanted to know something about ",, 1,, ", right? " | "This is ",, 1,, ", I haven't told you anything about ",, 3,, " yet, have I? " | "This is my roommate, ",, 1,, ". " | "Do you remember ",, 1,, "? ",, -2,, " ",, 7,, " my cousin. "$template$"Example sentence. "`;
+    let defaultSentencesNames = `default$"I met ",, 1,, " today. " | -1,, " is my best friend. " | "Do you know ",, 1,, "? " | "This is ",, 1,, ", who we talked about last week. You have to remember it, nobody could forget ",, 1,, "! " | "I've heard thath you wanted to meet my friend, ",, 1,, "? " | "I can't believe somebody could say something bad about ",, 1,, "! " | -1,, " lives here. " | "This is our neighbours child, ",, 1,, ". " | "What can I tell you about ",, 1,, "? " | "You've really never met ",, 1,, " before? " | "Let me tell you something about ",, 1,, ". " | "I'm meeting with ",, 1,, " tonight, I'm a little bit nervous about it. Oh, I haven't told you anything about ",, 1,, "? " | "If only I could spend this time with ",, 1,, " instead of wasting it on my homework... " | "I've heard you were talking with somebody about ",, 1,, ". So you know ",, 3,, " too? " | "You wanted to know something about ",, 1,, ", right? " | "This is ",, 1,, ", I haven't told you anything about ",, 3,, " yet, have I? " | "This is my roommate, ",, 1,, ". " | "Do you remember ",, 1,, "? ",, -2,, " ",, 7,, " my cousin. "$template$"Example sentence. "`;
     if(!localStorage.getItem('sentencesNamesNew')){
         if(localStorage.getItem('sentencesnames')){
             let sentenceList = localStorage.getItem('sentencesnames');
@@ -839,7 +942,7 @@
     let sentencesnamesBackup = [];
 
 
-    let defaultSentencesSubject = `default$-2,, " ",, 7,, " really cool. " | -2,, " ",, 7,, " a part of LGBTQA+ community. " | -2,, " ",, 8,, " so beautiful eyes! " | "Every time ",, 2,, " laugh",, 10,, ", I can't help but laugh with ",, 3,, ". " | -2,, " fully support",, 10,, " my gender, I'm so thankful to ",, 3,, " for that. " | -2,, " ",, 7,, " 100% valid, don't listen to people who will tell you otherwise. " | -2,, " struggle",, 10,, " some with finding ",, 4,, " identity, but I'm sure ",, 2,, " will figure everything out, sooner or later. " | -2,, " hate",, 10,, " going to school almost as much as I do. It's awful that we have to still deal with this terrible place. " | -2,, " ",, 7,, " kinda introverted, but it doesn't mean ",, 2,, " do",, 11,, "n't like talking, ",, 2,, " just ",, 8,, " to get to know you better. " | -2,, " still ",, 7,, "n't exactly sure, what orientation ",, 2,, " ",, 7,, ". We are both on the stage of discovering things about ourselves yet. " | -2,, " love",, 10,, " cats so much that I sometimes want to buy ",, 3,, " one just to see how happy ",, 2,, " would be. "$template$"Example sentence. "`
+    let defaultSentencesSubject = `default$-2,, " ",, 7,, " really cool. " | -2,, " ",, 7,, " a part of LGBTQA+ community. " | -2,, " ",, 8,, " so beautiful eyes! " | "Every time ",, 2,, " laugh",, 10,, ", I can't help but laugh with ",, 3,, ". " | -2,, " fully support",, 10,, " my gender, I'm so thankful to ",, 3,, " for that. " | -2,, " ",, 7,, " 100% valid, don't listen to people who will tell you otherwise. " | -2,, " struggle",, 10,, " some with finding ",, 4,, " identity, but I'm sure ",, 2,, " will figure everything out, sooner or later. " | -2,, " hate",, 10,, " going to school almost as much as I do. It's awful that we have to still deal with this terrible place. " | -2,, " ",, 7,, " kinda introverted, but it doesn't mean ",, 2,, " do",, 11,, "n't like talking, ",, 2,, " just ",, 8,, " to get to know you better. " | -2,, " still ",, 7,, "n't exactly sure, what orientation ",, 2,, " ",, 7,, ". We are both on the stage of discovering things about ourselves yet. " | -2,, " love",, 10,, " cats so much that I sometimes want to give ",, 3,, " one just to see how happy ",, 2,, " would be. "$template$"Example sentence. "`
     if(!localStorage.getItem('sentencesSubjectNew')){
         if(localStorage.getItem('sentencessubject')){
             let sentenceList = localStorage.getItem('sentencessubject');
@@ -859,7 +962,7 @@
     uncodesentencessubject();
     let sentencessubjectBackup = [];
 
-    let defaultSentencesObject = `default$"I can't wait to meet with ",, 3,, " again. " | "I can talk to ",, 3,, " for hours and I would never get bored. " | -2,, " ",, 8,, " a very complicated personality and that's beutiful, because you always discover new things about ",, 3,, ". " | "I can introduce ",, 3,, " to you, I only need to ask ",, 1,, ", when ",, 2,, " ",, 8,, " some time to meet with you. " | "I'm in love with ",, 3,, ", but please, don't tell anybody about it. " | -2,, " love",, 10,, " ice creams. If you'd want to take ",, 3,, " to a date and didn't know where you should go, take ",, 3,, " for ice creams. It's always a good option. " | "I'm a bit worried about ",, 3,, ", ",, 4,, " mental health seems to have worsened recently. " | "If you see ",, 3,, ", please tell ",, 3,, " that ",, 2,, " ",, 7,, " a valuable being. " | "I wish more people would tell ",, 3,, " that ",, 2,, " ",, 7,, " perfect the way ",, 2,, " ",, 7,, ". " | -2,, " do",, 11,, "n't ",, 8,, " an easy life, I wish I could help ",, 3,, " with ",, 4,, " struggles better. ",, -1,, " doesn't deserve to suffer. " | "If you don't know how to start a conversation with ",, 3,, ", ask ",, 3,, " about ",, 4,, " gender, ",, 2,, " love",, 10,, " to talk about it. " | "I wish I had more time to hang out with ",, 3,, ". I love spending time with ",, 3,, " so much. "$template$"Example sentence. "`;
+    let defaultSentencesObject = `default$"I can't wait to meet with ",, 3,, " again. " | "I can talk to ",, 3,, " for hours and I would never get bored. " | -2,, " ",, 8,, " a very complicated personality and that's beutiful, because you always discover new things about ",, 3,, ". " | "I can introduce ",, 3,, " to you, I only need to ask ",, 1,, ", when ",, 2,, " ",, 8,, " some time to meet with you. " | "I owe ",, 3,, " a lot. ",, -2,, " really helped me in a difficult time. " | -2,, " love",, 10,, " ice creams. If you'd want to go out with ",, 3,, " and didn't know where you should go, go with ",, 3,, " for ice creams. It's always a good option. " | "I'm a bit worried about ",, 3,, ", ",, 4,, " mental health seems to have worsened recently. " | "If you see ",, 3,, ", please tell ",, 3,, " that ",, 2,, " ",, 7,, " a valuable being. " | "I wish more people would tell ",, 3,, " that ",, 2,, " ",, 7,, " perfect the way ",, 2,, " ",, 7,, ". " | -2,, " do",, 11,, "n't ",, 8,, " an easy life, I wish I could help ",, 3,, " with ",, 4,, " struggles better. ",, -1,, " doesn't deserve to suffer. " | "If you don't know how to start a conversation with ",, 3,, ", ask ",, 3,, " about ",, 4,, " gender, ",, 2,, " love",, 10,, " to talk about it. " | "I wish I had more time to hang out with ",, 3,, ". I love spending time with ",, 3,, " so much. "$template$"Example sentence. "`;
     if(!localStorage.getItem('sentencesObjectNew')){
         if(localStorage.getItem('sentencesobject')){
             let sentenceList = localStorage.getItem('sentencesobject');
@@ -879,7 +982,7 @@
     uncodesentencesobject();
     let sentencesobjectBackup = [];
 
-    let defaultSentencesDeterminer = `default$"I'm amazed with ",, 4,, " skills. You have no idea, how many things ",, 1,, " can do! " | -4,, " smile always brightens up my day. " | "Have you ever seen ",, 4,, " drawings? You should ask ",, 3,, " to show you some, ",, 2,, " ",, 7,, " really talented. " | -2,, " always complain",, 10,, " about ",, 4,, " body, but don't listen to ",, 3,, ", ",, 2,, " ",, 7,, " beautiful. ",, -2,, " just ",, 8,, " low self-esteem. " | "I'm going to buy ",, 3,, " pride flag for ",, 4,, " birthday, ",, 2,, " gonna love it. " | "Remember to not to use ",, 4,, " pronouns around ",, 4,, " parents, ",, 2,, " didn't come out to them yet. " | "I really hope ",, 4,, " transition will go well. " | "I wish ",, 2,, " will find a way to feel comfortable in ",, 4,, " body. Now ",, 2,, " ",, 8,, " some difficulties with that. " | "I'm so mad at people that want to take ",, 4,, " rigths away from ",, 3,, "! I don't understand that, ",, 2,, " just want",, 10,, " to be ",, 6,, ". " | "I hope ",, 2,, " remember",, 10,, " to do the exercises ",, 4,, " therapist gave ",, 3,, ". " | "I'm trying to encourage ",, 3,, " to try and ask ",, 4,, " friends for a hug more often. Did you know that we need at least 8 hugs a day for mental stability? I'm afraid ",, 1,, " doesn't get that much. "$template$"Example sentence. "`;
+    let defaultSentencesDeterminer = `default$"I'm amazed with ",, 4,, " skills. You have no idea, how many things ",, 1,, " can do! " | -4,, " smile always brightens up my day. " | "Have you ever seen ",, 4,, " drawings? You should ask ",, 3,, " to show you some, ",, 2,, " ",, 7,, " really talented. " | -2,, " always complain",, 10,, " about ",, 4,, " body, but don't listen to ",, 3,, ", ",, 2,, " ",, 7,, " beautiful. ",, -2,, " just ",, 8,, " low self-esteem. " | "I'm going to buy ",, 3,, " pride flag for ",, 4,, " birthday, ",, 2,, " gonna love it. " | "Remember to not to use ",, 4,, " pronouns around ",, 4,, " parents, ",, 2,, " didn't come out to them yet. " | "I really hope ",, 4,, " transition will go well. " | "I wish ",, 2,, " will find a way to feel comfortable in ",, 4,, " body. Now ",, 2,, " ",, 8,, " some difficulties with that. " | "I'm so mad at people that want to take ",, 4,, " rigths away from ",, 3,, "! I don't understand that, ",, 2,, " just want",, 10,, " to be ",, 6,, ". " | "I hope ",, 2,, " remember",, 10,, " to drink ",, 4,, " water. It's important to stay hydrated. " | "I'm trying to encourage ",, 3,, " to try and ask ",, 4,, " friends for a hug more often. Did you know that according to some scientists we need at least 8 hugs a day for mental stability? I'm afraid ",, 1,, " doesn't get that much. "$template$"Example sentence. "`;
     if(!localStorage.getItem('sentencesDeterminerNew')){
         if(localStorage.getItem('sentencesdeterminer')){
             let sentenceList = localStorage.getItem('sentencesdeterminer');
@@ -1135,6 +1238,7 @@
     }
 
 //-----------------------------------------------------
+//generating testing results
 
 
     function upperCase(string){
@@ -1187,18 +1291,18 @@
     }
 
     function testResults(form){
-        if(namesElements.length === 0){
-            namesElements.push(document.getElementById("name1"));
-        }
-        if(setsElements.length === 0){
-            setsElements.push(document.getElementById("set1"));
-            subjectElements.push(document.getElementById('subject1'));
-            objectElements.push(document.getElementById('object1'));
-            determinerElements.push(document.getElementById('determiner1'));
-            possesiveElements.push(document.getElementById('possesive1'));
-            reflexiveElements.push(document.getElementById('reflexive1'));
-            pluralElements.push(document.getElementById('plural1'));
-        }
+        // if(namesElements.length === 0){
+        //     namesElements.push(document.getElementById("name1"));
+        // }
+        // if(setsElements.length === 0){
+        //     setsElements.push(document.getElementById("set1"));
+        //     subjectElements.push(document.getElementById('subject1'));
+        //     objectElements.push(document.getElementById('object1'));
+        //     determinerElements.push(document.getElementById('determiner1'));
+        //     possesiveElements.push(document.getElementById('possesive1'));
+        //     reflexiveElements.push(document.getElementById('reflexive1'));
+        //     pluralElements.push(document.getElementById('plural1'));
+        // }
         name = [];
         name.push(0);
         for(let i = 0; i < namesElements.length; i += 1){
@@ -1306,10 +1410,11 @@
         write(result);
     }
 
+//-----------------------------------------------------------
+//managing input fields
+
+
     function addName(){
-        if(namesElements.length === 0){
-            namesElements.push(document.getElementById("name1"));
-        }
         namesCount += 1;
         namesElements.push(document.createElement('div'));
         let input = document.createElement('input');
@@ -1317,6 +1422,7 @@
         input.setAttribute('class', 'gray rounded margin');
         input.setAttribute('aria-live', 'polite');
         input.setAttribute('aria-label', 'name');
+        input.setAttribute('oninput', `changeName(this.value, ${namesCount} - 1)`);
         let button = document.createElement('button');
         button.setAttribute('type', 'button');
         button.setAttribute('class', 'rose smallButton');
@@ -1332,17 +1438,10 @@
         namesElements[namesCount - 1].append(input, button, button2, br.cloneNode())
         document.getElementById('names').append(namesElements[namesCount - 1]);
         input.focus();
+
     }
+
     function addSet(){
-        if(setsElements.length === 0){
-            setsElements.push(document.getElementById("set1"));
-            subjectElements.push(document.getElementById('subject1'));
-            objectElements.push(document.getElementById('object1'));
-            determinerElements.push(document.getElementById('determiner1'));
-            possesiveElements.push(document.getElementById('possesive1'));
-            reflexiveElements.push(document.getElementById('reflexive1'));
-            pluralElements.push(document.getElementById('plural1'));
-        }
         setsElements.push(document.createElement('div'));
         setsCount += 1;
         let table = document.createElement('table');
@@ -1363,6 +1462,7 @@
         input1.setAttribute('aria-live', 'polite');
         input1.setAttribute('aria-labelledby', `subjectpronoun${setsCount}`);
         input1.setAttribute('autocapitalize', 'off');
+        input1.setAttribute('oninput', `changeSet(this.value, ${setsCount} - 1, 0)`);
         subjectElements.push(input1);
         td2.append(input1);
         tr1.append(td1, td2);
@@ -1382,6 +1482,7 @@
         input2.setAttribute('aria-live', 'polite');
         input2.setAttribute('aria-labelledby', `objectpronoun${setsCount}`);
         input2.setAttribute('autocapitalize', 'off');
+        input2.setAttribute('oninput', `changeSet(this.value, ${setsCount} - 1, 1)`);
         objectElements.push(input2);
         td4.append(input2);
         tr2.append(td3, td4);
@@ -1401,6 +1502,7 @@
         input3.setAttribute('aria-live', 'polite');
         input3.setAttribute('aria-labelledby', `possesivedeterminer${setsCount}`);
         input3.setAttribute('autocapitalize', 'off');
+        input3.setAttribute('oninput', `changeSet(this.value, ${setsCount} - 1, 2)`);
         determinerElements.push(input3);
         td6.append(input3);
         tr3.append(td5, td6);
@@ -1420,6 +1522,7 @@
         input4.setAttribute('aria-live', 'polite');
         input4.setAttribute('aria-labelledby', `possesivepronoun${setsCount}`);
         input4.setAttribute('autocapitalize', 'off');
+        input4.setAttribute('oninput', `changeSet(this.value, ${setsCount} - 1, 3)`);
         possesiveElements.push(input4);
         td8.append(input4);
         tr4.append(td7, td8);
@@ -1439,6 +1542,7 @@
         input5.setAttribute('aria-live', 'polite');
         input5.setAttribute('aria-labelledby', `reflexivepronoun${setsCount}`);
         input5.setAttribute('autocapitalize', 'off');
+        input5.setAttribute('oninput', `changeSet(this.value, ${setsCount} - 1, 4)`);
         reflexiveElements.push(input5);
         td10.append(input5);
         tr5.append(td9, td10);
@@ -1458,6 +1562,7 @@
         select.setAttribute('name', `plural${setsCount}`);
         select.setAttribute('id', `select${setsCount}`);
         select.setAttribute('class', 'gray rounded');
+        select.setAttribute('oninput', `changeSet(this.value, ${setsCount} - 1, 5)`);
         let option1 = document.createElement('option');
         option1.setAttribute('value', '0');
         option1.append(document.createTextNode('singular'));
@@ -1492,15 +1597,6 @@
 
     function autofill(set, subject){
         set --;
-        if(setsElements.length === 0){
-            setsElements.push(document.getElementById("set1"));
-            subjectElements.push(document.getElementById('subject1'));
-            objectElements.push(document.getElementById('object1'));
-            determinerElements.push(document.getElementById('determiner1'));
-            possesiveElements.push(document.getElementById('possesive1'));
-            reflexiveElements.push(document.getElementById('reflexive1'));
-            pluralElements.push(document.getElementById('plural1'));
-        }
         let form = document.getElementById('form');
         if(!subject){
             return;
@@ -1511,7 +1607,10 @@
                 determinerElements[set].value = pronounsSuggestions.get(currentGroup)[i][2];
                 possesiveElements[set].value = pronounsSuggestions.get(currentGroup)[i][3];
                 reflexiveElements[set].value = pronounsSuggestions.get(currentGroup)[i][4];
-                pluralElements[set].value = parseInt(pronounsSuggestions.get(currentGroup)[i][5]);
+                pluralElements[set].value = pronounsSuggestions.get(currentGroup)[i][5];
+                for(let j = 1; j < fieldsNumber; j++){
+                    changeSet(pronounsSuggestions.get(currentGroup)[i][j], set, j);
+                }
                 return;
             }
         }
@@ -1520,11 +1619,17 @@
             determinerElements[set].value = subject + 'es';
             possesiveElements[set].value = subject + 'es';
             pluralElements[set].value = 0;
+            changeSet(subject, set, 1);
+            changeSet(subject + 'es', set, 2);
+            changeSet(subject + 'es', set, 3);
+            changeSet('0', set, 5);
             if(subject.length > 1 && subject[subject.length - 2] === 's'){
                 reflexiveElements[set].value = subject + 'elf';
+                changeSet(subject + 'elf', set, 4);
                 return;
             }
             reflexiveElements[set].value = subject + 'self';
+            changeSet(subject + 'self', set, 4);
             return;
         }
         objectElements[set].value = subject;
@@ -1532,19 +1637,15 @@
         possesiveElements[set].value = subject + 's';
         reflexiveElements[set].value = subject + 'self';
         pluralElements[set].value = 0;
+        changeSet(subject, set, 1);
+        changeSet(subject + 's', set, 2);
+        changeSet(subject + 's', set, 3);
+        changeSet(subject + 'self', set, 4);
+        changeSet('0', set, 5);
     }
 
     function fillPronouns(set){
         set --;
-        if(setsElements.length === 0){
-            setsElements.push(document.getElementById("set1"));
-            subjectElements.push(document.getElementById('subject1'));
-            objectElements.push(document.getElementById('object1'));
-            determinerElements.push(document.getElementById('determiner1'));
-            possesiveElements.push(document.getElementById('possesive1'));
-            reflexiveElements.push(document.getElementById('reflexive1'));
-            pluralElements.push(document.getElementById('plural1'));
-        }
         if(pronounsSuggestions.get(currentGroup).length === 0){
             return;
         }
@@ -1556,33 +1657,27 @@
         possesiveElements[set].value = rand[3];
         reflexiveElements[set].value = rand[4];
         pluralElements[set].value = parseInt(rand[5]);
+        for(let i = 0; i < fieldsNumber; i++){
+            changeSet(rand[i], set, i);
+        }
         
     }
 
     function fillName(name){
-        if(namesElements.length === 0){
-            namesElements.push(document.getElementById("name1"));
-        }
         if(namesSuggestions.get(currentGroup).length === 0){
             return;
         }
         let idx = Math.floor(Math.random() * namesSuggestions.get(currentGroup).length);
         namesElements[name - 1].firstChild.value = namesSuggestions.get(currentGroup)[idx];
+        changeName(namesElements[name - 1].firstChild.value, name - 1);
     }
 
     function clearSet(set){
-        if(setsElements.length === 0){
-            setsElements.push(document.getElementById("set1"));
-            subjectElements.push(document.getElementById('subject1'));
-            objectElements.push(document.getElementById('object1'));
-            determinerElements.push(document.getElementById('determiner1'));
-            possesiveElements.push(document.getElementById('possesive1'));
-            reflexiveElements.push(document.getElementById('reflexive1'));
-            pluralElements.push(document.getElementById('plural1'));
-        }
         set --;
         if(set !== 0 && subjectElements[set].value === '' && objectElements[set].value === '' && determinerElements[set].value === '' && possesiveElements[set].value === '' && reflexiveElements[set].value === ''){
             document.getElementById('sets').removeChild(setsElements[set]);
+            pronounsFields = pronounsFields.slice(0, set).concat(pronounsFields.slice(set + 1));
+            setToStorage();
             return;
         }
         subjectElements[set].value = '';
@@ -1590,16 +1685,27 @@
         determinerElements[set].value = '';
         possesiveElements[set].value = '';
         reflexiveElements[set].value = '';
+        for(let i = 0; i < fieldsNumber - 1; i++){
+            changeSet('', set, i);
+        }
     }
 
     function clearName(name){
         if(name !== 1 && namesElements[name - 1].firstChild.value === ''){
             names.removeChild(namesElements[name - 1]);
+            namesFields = namesFields.slice(0, name -1).concat(namesFields.slice(name));
+            sessionStorage.setItem('namesFields', namesFields.join());
         }
         else{
             namesElements[name - 1].firstChild.value = '';
+            changeName('', name - 1);
         }
     }
+
+//-----------------------------------------------------------
+//handling toggling of personalisation mode
+
+
 
     let namesShown = false;
     let namesTables = new Map();
@@ -1906,6 +2012,11 @@
     }
 
 
+//---------------------------------------------------
+//settings and groups handling
+
+
+
     function changeSpeed(speed){
         ms = parseInt(speed);
         localStorage.setItem('ms', speed);
@@ -2139,6 +2250,9 @@ async function deleteGroup(){
 
     }
 
+//-----------------------------------------------
+//toggling and modyfing names and sets
+
 
     function showNames(){
         if(!namesShown){
@@ -2355,6 +2469,10 @@ async function deleteGroup(){
         inputsP[4].value = subject + 'self';
     }
 
+//--------------------------------------------------------------------------------
+//toggling and modyfing sentences
+
+
     let childNode = new Map();
     childNode.set('names', 1);
     childNode.set('subject', 3);
@@ -2508,7 +2626,12 @@ async function deleteGroup(){
             sentencesParas.get(currentGroup).childNodes[childNode.get(list)].append(p);
         }
     }
-        
+       
+    
+//-----------------------------------------------------------------
+//miscelanous functions
+
+
     function BackUp(){
         for(let i = 0; i < keys.length; i += 1){
             backups.get(keys[i]).push(localStorage.getItem(storageKeys[i]));
@@ -2700,7 +2823,7 @@ async function deleteGroup(){
     <main>
     <form method='get' id='form'>
         <h2 class='text'>Input all names you want to test / your names: </h2>
-        <div id="name1"><input name='name1' class='gray rounded margin' aria-live="polite" aria-label="name"><button type='button' class='rose smallButton' onclick='fillName(1)'>Random</button><button type='button' class='rose smallButton' onclick='clearName(1)'>Clear</button><br>
+        <div id="name1"><input name='name1' class='gray rounded margin' aria-live="polite" aria-label="name" oninput="changeName(this.value, 0)"><button type='button' class='rose smallButton' onclick='fillName(1)'>Random</button><button type='button' class='rose smallButton' onclick='clearName(1)'>Clear</button><br> 
         </div>
         <p id='names'> </p>
         <button type='button' class='rose button' onClick='addName()'>Add next</button>
@@ -2718,7 +2841,7 @@ async function deleteGroup(){
                         </div>
                     </td>
                     <td>
-                        <input id="subject1" name='subjectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="subjectpronoun1">
+                        <input id="subject1" name='subjectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="subjectpronoun1" oninput="changeSet(this.value, 0, 0)">
                     </td>
                 </tr>
                 <tr>
@@ -2728,7 +2851,7 @@ async function deleteGroup(){
                         </div>
                     </td>
                     <td>
-                        <input id="object1" name='objectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="objectpronoun1">
+                        <input id="object1" name='objectPronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="objectpronoun1" oninput="changeSet(this.value, 0, 1)">
                     </td>
                 </tr>
                 <tr>
@@ -2738,7 +2861,7 @@ async function deleteGroup(){
                         </div>
                     </td>
                     <td>
-                        <input id="determiner1" name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivedeterminer1">
+                        <input id="determiner1" name='possesiveDeterminer1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivedeterminer1" oninput="changeSet(this.value, 0, 2)">
                     </td>
                 </tr>
                 <tr>
@@ -2748,7 +2871,7 @@ async function deleteGroup(){
                         </div>
                     </td>
                     <td>
-                        <input id="possesive1" name='possesivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivepronoun1">
+                        <input id="possesive1" name='possesivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="possesivepronoun1" oninput="changeSet(this.value, 0, 3)">
                     </td>
                 </tr>
                 <tr>
@@ -2758,13 +2881,13 @@ async function deleteGroup(){
                         </div>
                     </td>
                     <td>
-                        <input id="reflexive1" name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="reflexivepronoun1">
+                        <input id="reflexive1" name='reflexivePronoun1' class='gray rounded margin' autocapitalize='off' aria-live="polite" aria-labelledby="reflexivepronoun1" oninput="changeSet(this.value, 0, 4)">
                     </td>
                 </tr>
             </table>
 
             <label class='margin' for="plural1">This pronoun set is: </label> 
-            <select id="plural1" name='plural1' class='gray rounded'>
+            <select id="plural1" name='plural1' class='gray rounded' oninput="changeSet(this.value, 0, 5)">
                 <option value='0'>singular</option>
                 <option value='1'>plural</option>
             </select>
@@ -2799,9 +2922,9 @@ async function deleteGroup(){
             All changes that you make will be saved directly in your browser. It means they aren't sent to any server, we don't have any access to them, but also you won't be able to acces them through other browser or from different device. Make sure you don't use private mode, because it will clear your data after you close the page (at least on all browsers we tested with). Your changes will also be lost when you delete cookies, so if you have to do that, <a href="#copying-data">copy data</a> and save it somewhere else beforehand (we've heard that Safari may from time to time automatically delete all cookies, so be careful when using that browser). 
         </p>
 
-        <p class="text">
+        <!-- <p class="text">
             If you're wondering why some symbols won't appear in inputs no matter how many times you click them, that's because we use them for coding informations and you could accidentaly break the page if we let you use them.
-        </p>
+        </p> -->
 
         <p class="text" id="speed-info">
             Choose the speed of displaying sentences during testing:
@@ -2842,11 +2965,6 @@ async function deleteGroup(){
             </div>
         </div>
 
-
-<!-- 
-        <p class="text" id="speed">This value represents time in miliseconds that program will wait between displaying letters in writing animation. In simpler words: the lower the value, the faster the animation. If you don't want your test results to be animated, set it to 0.</p>
-
-        <input type="number" aria-labelledby="speed" min="0" max="200" class="gray rounded"> -->
 
         <h2 class="text">
             Names
@@ -3019,9 +3137,9 @@ async function deleteGroup(){
         For the offline version of the page right-click anywhere on the background and choose 'save as' option on your computer or find download button in the browser menu on your mobile. If you already have one version saved on this device, delete it before downloading a new one in order to avoid potential problems with the stored data.
     </p>
 
-    <p class="text">
+    <!-- <p class="text">
         We are extremely grateful for every link to the tester shared on social media, but please, credit us when you respond to folks name and pronoun testing requests with default passages generated through this site. We've put a lot of work to construct sentences that will sound natural in different combinations and seeing somebody respond with them like they come up with them themselves doesn't feel fair.
-    </p>
+    </p> -->
 
 </main>  
     <footer>
@@ -3029,7 +3147,7 @@ async function deleteGroup(){
             <div>
                 <a href="old">Switch to old version</a>
                 <address>
-                    <a href="mailto:pronounsandnamestester@gmail.com">Contact us</a>
+                    <a href="mailto:systemteczowegochaosu@gmail.com">Contact us</a>
                 </address>
                 <a href="https://github.com/chocolate-pancake/pronounsandnamestester" target="_blank" rel="noopener noreferrer">Source code on github</a>
             </div>
@@ -3061,6 +3179,8 @@ async function deleteGroup(){
         notify("Welcome to the new version of Pronouns and Names Tester! We've added some new features and improved accessibility and overall user experience. We hope you'll like it, but if you don't, you can find a link to the old version at the bottom of the page.");
         localStorage.setItem('visited', 'true');
     }
+    
+    updateFields();
 
     let select = document.getElementById('group-select');
     for(let i = 0; i < groups.length; i ++){
