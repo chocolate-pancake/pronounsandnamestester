@@ -1651,6 +1651,14 @@
         }
         let idx = Math.floor(Math.random() * pronounsSuggestions.get(currentGroup).length);
         let rand = pronounsSuggestions.get(currentGroup)[idx];
+        if(subjectElements.length < pronounsSuggestions.get(currentGroup).length){
+            for(let i = 0; i < subjectElements.length; i ++){
+                if(subjectElements[i].value === rand[0] && objectElements[i].value === rand[1] && determinerElements[i].value === rand[2] && possesiveElements[i].value === rand[3] && reflexiveElements[i].value === rand[4] && pluralElements[i].value === rand[5]){
+                    fillPronouns(set + 1);
+                    return
+                }
+            }
+        }
         subjectElements[set].value = rand[0];
         objectElements[set].value = rand[1];
         determinerElements[set].value = rand[2];
@@ -1668,6 +1676,14 @@
             return;
         }
         let idx = Math.floor(Math.random() * namesSuggestions.get(currentGroup).length);
+        if(namesElements.length < namesSuggestions.get(currentGroup).length){
+            for(let i = 0; i < namesElements.length; i ++){
+                if(namesElements[i].firstChild.value === namesSuggestions.get(currentGroup)[idx]){
+                    fillName(name);
+                    return;
+                }
+            }
+        }
         namesElements[name - 1].firstChild.value = namesSuggestions.get(currentGroup)[idx];
         changeName(namesElements[name - 1].firstChild.value, name - 1);
     }
@@ -2902,7 +2918,7 @@ async function deleteGroup(){
         </p>
 
         <p class="text">
-            Pressing 'clear' on additional, already empty inputs will remove them from the page.
+            Pressing 'clear' on additional, already empty inputs will remove them from the page. Refreshing the page will readjust the numbering of pronoun inputs.
         </p>
 
         <button type="button" class="blue button" id="aria-button" onclick="disableAnimation()" aria-label="click before testing to disable writing animation, so your screen reader won't have problems with accesing test results">Disable animation</button>
