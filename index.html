@@ -784,6 +784,8 @@
     }
 
     function changeSet(string, editedSet, editedField){
+        let children = document.getElementById('sets').childNodes;
+        editedSet = Array.prototype.indexOf.call(children, setsElements[editedSet]) + 1;
         if(editedSet < pronounsFields.length){
             pronounsFields[editedSet][editedField] = string;
         }
@@ -800,7 +802,6 @@
                     set.push('');
                 }
             }
-            console.log(set);
             pronounsFields.push(set);
         }
         setToStorage();
@@ -830,6 +831,7 @@
     let namesCount = 1;
     let namesElements = [];
     let setsCount = 1;
+    let visibleSets = 1;
     let setsElements = [];
     let subjectElements = [];
     let objectElements = [];
@@ -1022,7 +1024,7 @@
     uncodesentencespossesive();
     let sentencespossesiveBackup = [];
 
-    let defaultSentencesReflexive = `default$-2,, " ",, 8,, " made cookies for me for ",, 6,, ", that was so wholesome of ",, 3,, ". " | -2,, " ",, 7,, " testing new pronouns for ",, 6,, " right now. " | "Recently we were doing a project together, but I've got sick and ",, 2,, " had to do almost all of the work for ",, 6,, ", I still feel bad because of it. " | "If you happened to talk with ",, 3,, ", please remind ",, 3,, " ",, 2,, " should love ",, 6,, ". ",, -2,, " constantly forget",, 10,, " about it. " | "I hope ",, 2,, " will learn how to fully be ",, 6,, ". ",, -2,, " still ",, 8,, " problems with that. " | "I wish ",, 2,, " will find environment in which ",, 2,, " can fully express ",, 6,, ", now ",, 2,, " can't really open up. " | "You should talk with ",, 3,, ", ",, 2,, " will tell you more things about ",, 6,, " than I did. " | -2,, " ",, 7,, " not always honest about ",, 6,, ", because ",, 1,, " is scared of what other people will think of ",, 3,, ". " | -2,, " ",, 7,, " stressed all the time, I wish ",, 2,, " gived ",, 6,, " more time to relax. " | "I believe ",, 2,, " should accept ",, 6,, " more. " | -2,, " like",, 10,, " to spend much time just with ",, 6,, ". "$template$"Example sentence. "`;
+    let defaultSentencesReflexive = `default$-2,, " ",, 8,, " made cookies for me for ",, 6,, ", that was so wholesome of ",, 3,, ". " | -2,, " ",, 7,, " testing new pronouns for ",, 6,, " right now. " | "Recently we were doing a project together, but I've got sick and ",, 2,, " had to do almost all of the work for ",, 6,, ", I still feel bad because of it. " | "If you happened to talk with ",, 3,, ", please remind ",, 3,, " ",, 2,, " should love ",, 6,, ". ",, -2,, " constantly forget",, 10,, " about it. " | "I hope ",, 2,, " will learn how to fully be ",, 6,, ". ",, -2,, " still ",, 8,, " problems with that. " | "I wish ",, 2,, " will find environment in which ",, 2,, " can fully express ",, 6,, ", now ",, 2,, " can't really open up. " | "You should talk with ",, 3,, ", ",, 2,, " will tell you more things about ",, 6,, " than I did. " | -2,, " ",, 7,, " not always honest about ",, 6,, ", because ",, 1,, " is scared of what other people will think of ",, 3,, ". " | -2,, " ",, 7,, " stressed all the time, I wish ",, 2,, " gave ",, 6,, " more time to relax. " | "I believe ",, 2,, " should accept ",, 6,, " more. " | -2,, " like",, 10,, " to spend much time just with ",, 6,, ". "$template$"Example sentence. "`;
     if(!localStorage.getItem('sentencesReflexiveNew')){
         if(localStorage.getItem('sentencesreflexive')){
             let sentenceList = localStorage.getItem('sentencesreflexive');
@@ -1444,6 +1446,7 @@
     function addSet(){
         setsElements.push(document.createElement('div'));
         setsCount += 1;
+        visibleSets += 1;
         let table = document.createElement('table');
         table.setAttribute('role', 'presentation');
 
@@ -1551,7 +1554,7 @@
 
         let h = document.createElement('h3');
         h.setAttribute('class', 'margin set-title');
-        let txt = document.createTextNode(`Set ${setsCount}:`);
+        let txt = document.createTextNode(`Set ${visibleSets}:`);
         h.append(txt);
 
         let label = document.createElement('label');
@@ -1599,6 +1602,7 @@
         set --;
         let form = document.getElementById('form');
         if(!subject){
+            notify("You have to fill in the first field for the autofill function to work.");
             return;
         }
         for(let i = 0; i < pronounsSuggestions.get(currentGroup).length; i += 1){
@@ -1691,8 +1695,19 @@
     function clearSet(set){
         set --;
         if(set !== 0 && subjectElements[set].value === '' && objectElements[set].value === '' && determinerElements[set].value === '' && possesiveElements[set].value === '' && reflexiveElements[set].value === ''){
+            let children = document.getElementById('sets').childNodes;
+            let visibleIdx = Array.prototype.indexOf.call(children, setsElements[set]);
+            for(let i = visibleIdx + 1; i < children.length; i ++){
+                children[i].firstChild.textContent = `Set ${i + 1}:`;
+            }
             document.getElementById('sets').removeChild(setsElements[set]);
-            pronounsFields = pronounsFields.slice(0, set).concat(pronounsFields.slice(set + 1));
+            visibleSets -= 1;
+            if(visibleIdx < children.length){
+                pronounsFields = pronounsFields.slice(0, visibleIdx + 1).concat(pronounsFields.slice(visibleIdx + 2)); //visibleIdx is an index in children that don't include the first set, while pronounsFields do
+            }
+            else {
+                pronounsFields = pronounsFields.slice(0, visibleIdx + 1);
+            }
             setToStorage();
             return;
         }
@@ -2454,6 +2469,7 @@ async function deleteGroup(){
 
     function autofillEditor(subject){
         if(!subject){
+            notify("You have to fill in the first field for the autofill function to work.");
             return;
         }
         if(inputsP.length === 0){
@@ -2910,7 +2926,7 @@ async function deleteGroup(){
 
             <button type='button' class='violet smallButton' onclick='autofill(1, this.form.subjectPronoun1.value)'>Autofill</button><button type='button' class='violet smallButton' onclick='fillPronouns(1)'>Random</button><button type='button' class='violet smallButton' onclick='clearSet(1)'>Clear</button>
         </div>
-        <p id='sets'> </p>
+        <p id='sets'></p>
         <button type='button' class='violet button' onClick='addSet()'>Add next</button><br>
 
         <p class="text">
@@ -2918,7 +2934,11 @@ async function deleteGroup(){
         </p>
 
         <p class="text">
-            Pressing 'clear' on additional, already empty inputs will remove them from the page. Refreshing the page will readjust the numbering of pronoun inputs.
+            Remember to select the "plural" option for they/them pronouns to get results with proper grammar.
+        </p>
+
+        <p class="text">
+            Pressing 'clear' on additional, already empty inputs will remove them from the page.
         </p>
 
         <button type="button" class="blue button" id="aria-button" onclick="disableAnimation()" aria-label="click before testing to disable writing animation, so your screen reader won't have problems with accesing test results">Disable animation</button>
@@ -3150,7 +3170,7 @@ async function deleteGroup(){
     </p>
 
     <p class="text">
-        Several poeople have pointed out that there are some grammatical errors on the site. We already corrected as many as we could find, but the rest slips under our radar (probably because English is our second language). So if you notice any mistake, please let us know through email or feedback form what it is, so we can correct it. Note that because of the way the data is currently stored, you won't see the changes we make to testing sentences, unless you reset your data to default or use incognito mode.
+        Several poeople have pointed out that there are some grammatical errors on the site. We already corrected as many as we could find, but the rest slips under our radar (probably because English is our second language). So if you notice any mistake, please let us know through email or feedback form what it is, so we can correct it. Note that because of the way the data is currently stored, you won't see changes we make to testing sentences, unless you reset your data to default or use incognito mode.
     </p>
 
     <p class="text">
@@ -3185,7 +3205,7 @@ async function deleteGroup(){
             </div>
         </div>
         <p class="text">
-            ©2022-2025 The Rainbow Chaos System. Content available under <a href="https://oql.avris.it/license/v1.1" target="_blank" rel="noopener noreferrer">Opinionated Queer License</a>.
+            ©2022-2025 <a href="https://przewodnikpomnogosci.pl/en/the-rainbow-chaos-system" target="_blank" rel="noopener noreferrer">The Rainbow Chaos System</a>. Content available under <a href="https://oql.avris.it/license/v1.1" target="_blank" rel="noopener noreferrer">Opinionated Queer License</a>.
         </p>
     </footer> 
 
